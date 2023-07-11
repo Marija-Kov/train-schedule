@@ -1,13 +1,13 @@
 // SOURCE: https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf  (page 1)
 
-const stop = ["Batajnica", "Kamendin", "Zemunsko polje", "Altina", "Zemun", "Tosin bunar", "Novi Beograd", "Beograd Centar", "Karadjordjev park", "Vukov spomenik", "Pancevacki most", "Krnjaca most", "Krnjaca ukr.", "Sebes", "Ovca"];
+export const stop = ["Batajnica", "Kamendin", "Zemunsko polje", "Altina", "Zemun", "Tosin bunar", "Novi Beograd", "Beograd centar", "Karadjordjev park", "Vukov spomenik", "Pancevacki most", "Krnjaca most", "Krnjaca ukr.", "Sebes", "Ovca"];
 
 const trainId = [7101, 7901, 8001, 8005, 8201, 8007, 8011, 8013, 8015, 8017, 8019, 8203, 8021, 8023, 8025, 8029, 8033, 8035, 8037, 8039, 7113, 8041, 8043, 7905, 8045, 8047, 8049, 8051, 8053];
 
 const trainIdRidesOnWeekendsAndHolidays = [true, true, true, false, false, true, false, true, false, true, false, false, true, true, true, true, true, false, true, false, true, true, false, false, true, true, true, false, true];
 
 // first and last stop for trainId[i]
-const terminal = [
+export const terminal = [
     ["Zemun", "Beograd centar"],
     ["Zemun", "Beograd centar"],
     ["Batajnica", "Ovca"],
@@ -40,7 +40,7 @@ const terminal = [
 ];
 
 // departureTimesAtStop[i] correspond to all departures from stop[i] in a day (weekday or weekend/holiday)
-const departureTimesAtStop = [
+export const departureTimesAtStop = [
     [
       '5.57',  '6.27',  '6.57',
       '7.27',  '7.57',  '8.10',
@@ -193,7 +193,7 @@ const departureTimesAtStop = [
     ]
   ];
 
-  // TODO: create a matrix that will include empty spaces (or something of similar meaning) where there are no departure times for a trainId[i]
+
 
 
 
