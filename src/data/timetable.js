@@ -1,6 +1,6 @@
 // SOURCE: https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf  (page 1)
 
-export const stop = ["Batajnica", "Kamendin", "Zemunsko polje", "Altina", "Zemun", "Tosin bunar", "Novi Beograd", "Beograd centar", "Karadjordjev park", "Vukov spomenik", "Pancevacki most", "Krnjaca most", "Krnjaca ukr.", "Sebes", "Ovca"];
+export const stop = ["batajnica", "kamendin", "zemunsko polje", "altina", "zemun", "tosin bunar", "novi beograd", "beograd centar", "karadjordjev park", "vukov spomenik", "pancevacki most", "krnjaca most", "krnjaca ukr", "sebes", "ovca"];
 
 export const trainId_direction1 = [7101, 7901, 8001, 8005, 8201, 8007, 8011, 8013, 8015, 8017, 8019, 8203, 8021, 8023, 8025, 8029, 8033, 8035, 8037, 8039, 7113, 8041, 8043, 7905, 8045, 8047, 8049, 8051, 8053];
 
