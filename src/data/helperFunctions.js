@@ -1,7 +1,7 @@
 import {
   trainId_direction1, 
   trainId_direction2, 
-  stop, 
+  stations, 
   theTimetable_direction1, 
   theTimetable_direction2
 } from './timetable.js'
@@ -34,7 +34,7 @@ function extractDepartureTimes(dataStr){
     
 }
 
-function createTimetableMatrix_d1(dts, stop, trainIdArr){
+function createTimetableMatrix_d1(dts, stationsArr, trainIdArr){
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -52,8 +52,8 @@ function createTimetableMatrix_d1(dts, stop, trainIdArr){
   j = 0;
   while(j < trainIdArr.length){
     if(dts[0][j] === "n/a"){
-      i = 8; // stop.indexOf the destination of shorter routes (Beograd centar)
-      while(i < stop.length){
+      i = 8; // stations.indexOf the destination of shorter routes (Beograd centar)
+      while(i < stationsArr.length){
         dts[i].splice(j, 0, "n/a")
         ++i
       }
@@ -63,7 +63,7 @@ function createTimetableMatrix_d1(dts, stop, trainIdArr){
   return dts
 }
 
-function createTimetableMatrix_d2(dts, stop, trainIdArr) {
+function createTimetableMatrix_d2(dts, stationsArr, trainIdArr) {
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -81,15 +81,15 @@ function createTimetableMatrix_d2(dts, stop, trainIdArr) {
   j = 0;
   while(j < trainIdArr.length){
     if(j===10){
-      i = 8; // stop.indexOf the stop right after the destination of second shortest routes (Novi Beograd)
-      while(i < stop.length){
+      i = 8; // stations.indexOf the stations right after the destination of second shortest routes (Novi Beograd)
+      while(i < stationsArr.length){
         dts[i].splice(j, 0, "n/a")
         ++i
       }
     }
     if(dts[0][j] === "n/a" || j===13 || j===26 || j===35){
-      i = 11; // stop.indexOf the stop right after the destination of shortest routes (Altina)
-      while(i < stop.length){
+      i = 11; // stations.indexOf the stations right after the destination of shortest routes (Altina)
+      while(i < stationsArr.length){
         dts[i].splice(j, 0, "n/a")
         ++i
       }
@@ -100,41 +100,41 @@ function createTimetableMatrix_d2(dts, stop, trainIdArr) {
   return dts
 }
 
-function getEndpoints(trains, timetable, stop){
+function getEndpoints(trains, timetable, stationsArr){
   const endpoints = {};
   for(let i = 0; i < trains.length; ++i){
-   const firstAndLastStop = [];
+   const firstAndLastStations = [];
    for(let j = 0; j < timetable.length; ++j){
     if(
       timetable[j][i] !== "n/a" && (
        j - 1 < 0 || timetable[j-1][i] === "n/a"
       )  
     ){
-      firstAndLastStop[0] = stop[j];
+      firstAndLastStations[0] = stationsArr[j];
      }
     if(
       timetable[j][i] !== "n/a" && (
-       j + 1 >= stop.length || timetable[j+1][i] === "n/a"
+       j + 1 >= stationsArr.length || timetable[j+1][i] === "n/a"
       )
     ){
-      firstAndLastStop[1] = stop[j];
+      firstAndLastStations[1] = stationsArr[j];
     }
    }
-   endpoints[trains[i]] = firstAndLastStop;
+   endpoints[trains[i]] = firstAndLastStations;
   }
   return endpoints
 }
 
-function getDepartures(start, finish, tTable1=theTimetable_direction1, tTable2=theTimetable_direction2, tIdArr1=trainId_direction1, tIdArr2=trainId_direction2, stops=stop){
+function getDepartures(start, finish, tTable1=theTimetable_direction1, tTable2=theTimetable_direction2, tIdArr1=trainId_direction1, tIdArr2=trainId_direction2, stationsArr=stations){
    let tTable;
    let tIdArr = tIdArr1;
-   let startIdx = stops.indexOf(start.toLowerCase());
-   let endIdx = stops.indexOf(finish.toLowerCase());
+   let startIdx = stationsArr.indexOf(start.toLowerCase());
+   let endIdx = stationsArr.indexOf(finish.toLowerCase());
    if(startIdx > endIdx){
      tTable = tTable2
-     const reverseStops = stops.reverse();
-     startIdx = reverseStops.indexOf(start.toLowerCase());
-     endIdx = reverseStops.indexOf(finish.toLowerCase());
+     const inverseStations = stationsArr.reverse();
+     startIdx = inverseStations.indexOf(start.toLowerCase());
+     endIdx = inverseStations.indexOf(finish.toLowerCase());
      tIdArr = tIdArr2
    }else{
      tTable = tTable1
@@ -150,15 +150,15 @@ function getDepartures(start, finish, tTable1=theTimetable_direction1, tTable2=t
 
 //console.log(getDepartures("zemun", "vukov spomenik"))
 
-// departureTimesAtStop[i] correspond to all departures from stop[i] in a day (weekday or weekend/holiday)
+// departureTimesAtStations[i] correspond to all departures from stations[i] in a day (weekday or weekend/holiday)
 
-//const departureTimesAtStop_direction1 = extractDepartureTimes(data_direction1);
-//const departureTimesAtStop_direction2 = extractDepartureTimes(data_direction2);
+//const departureTimesAtStations_direction1 = extractDepartureTimes(data_direction1);
+//const departureTimesAtStations_direction2 = extractDepartureTimes(data_direction2);
 
 // endpoints denote the endpoints of each train's route
 
-//const endpoints_direction1 = getEndpoints(trainId_direction1, theTimetable_direction1, stop);
-//const endpoints_direction2 = getEndpoints(trainId_direction2, theTimetable_direction2, stop.reverse());
+//const endpoints_direction1 = getEndpoints(trainId_direction1, theTimetable_direction1, stations);
+//const endpoints_direction2 = getEndpoints(trainId_direction2, theTimetable_direction2, stations.reverse());
 
-// console.log(createTimetableMatrix_d2(departureTimesAtStop_direction2, stop, trainId_direction2))
-// console.log(createTimetableMatrix_d1(departureTimesAtStop_direction1, stop, trainId_direction1))
+// console.log(createTimetableMatrix_d2(departureTimesAtStations_direction2, stations, trainId_direction2))
+// console.log(createTimetableMatrix_d1(departureTimesAtStations_direction1, stations, trainId_direction1))

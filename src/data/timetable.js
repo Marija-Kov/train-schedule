@@ -1,6 +1,6 @@
 // SOURCE: https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf  (page 1)
 
-export const stop = ["batajnica", "kamendin", "zemunsko polje", "altina", "zemun", "tosin bunar", "novi beograd", "beograd centar", "karadjordjev park", "vukov spomenik", "pancevacki most", "krnjaca most", "krnjaca ukr", "sebes", "ovca"];
+export const stations = ["batajnica", "kamendin", "zemunsko polje", "altina", "zemun", "tosin bunar", "novi beograd", "beograd centar", "karadjordjev park", "vukov spomenik", "pancevacki most", "krnjaca most", "krnjaca ukr", "sebes", "ovca"];
 
 export const trainId_direction1 = [7101, 7901, 8001, 8005, 8201, 8007, 8011, 8013, 8015, 8017, 8019, 8203, 8021, 8023, 8025, 8029, 8033, 8035, 8037, 8039, 7113, 8041, 8043, 7905, 8045, 8047, 8049, 8051, 8053];
 
@@ -10,9 +10,9 @@ export const trainId_direction2 = [8000, 7900, 8002, 8004, 8006, 8010, 8012, 801
 // false - train does not ride on weekends and holidays
 // "w&h_only" - train only rides on weekends and holidays
 
-const trainIdRidesOnWeekendsAndHolidays_direction1 = [ true, true, true, false, false, true, false, true, false, true, false, false, true, true, true, true, true, false, true, false, true, true, false, false, true, true, true, false, true ];
+export const trainIdRidesOnWeekendsAndHolidays_direction1 = [ true, true, true, false, false, true, false, true, false, true, false, false, true, true, true, true, true, false, true, false, true, true, false, false, true, true, true, false, true ];
 
-const trainIdRidesOnWeekendsAndHolidays_direction2 = [ false, false, true, false, true,  false, true, false, false, true, true, true, true, false, true, true, true, false, false, true, false, true, true, false, true, true, false, false, true,  true, true, false, false, 'w&h_only', true, true ];
+export const trainIdRidesOnWeekendsAndHolidays_direction2 = [ false, false, true, false, true,  false, true, false, false, true, true, true, true, false, true, true, true, false, false, true, false, true, true, false, true, true, false, false, true,  true, true, false, false, 'w&h_only', true, true ];
 
 
 export const theTimetable_direction1 =  
