@@ -27,7 +27,6 @@ const Form = ({ runSetDepartures }) => {
     setEmptyFields([]);
     runSetDepartures(getDepartures(input));
    }
-   
 
   }
 
@@ -84,6 +83,7 @@ const Form = ({ runSetDepartures }) => {
          ref={date} 
          name="date" 
          type="date" 
+         min="2023-06-06"
          max="2023-12-12"
          className={emptyFields.includes("date") ? "error" : ""}
          ></input>
