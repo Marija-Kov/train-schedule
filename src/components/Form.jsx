@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
+import useGetDepartures from "../hooks/useGetDepartures";
 
-
-const Form = ({ showRes }) => {
+const Form = ({ runSetDepartures }) => {
+  const { getDepartures } = useGetDepartures();
   const from = useRef();
   const to = useRef();
   const date = useRef();
@@ -24,9 +25,9 @@ const Form = ({ showRes }) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    showRes();
+    runSetDepartures(getDepartures(input));
    }
-   console.log("handleSubmit")
+   
 
   }
 
