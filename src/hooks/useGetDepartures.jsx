@@ -5,7 +5,8 @@ import {
   theTimetable_direction1, 
   theTimetable_direction2,
   trainIdRidesOnWeekendsAndHolidays_direction1,
-  trainIdRidesOnWeekendsAndHolidays_direction2
+  trainIdRidesOnWeekendsAndHolidays_direction2,
+  holidays
 } from '../data/timetable.js'
 
 const useGetDepartures = () => {
@@ -14,6 +15,7 @@ const useGetDepartures = () => {
      let trainIdArr;
      let weekendsAndHolidays;
      let s = stations;
+     let hDays = holidays;
      let fromIdx = s.indexOf(input.from);
      let toIdx = s.indexOf(input.to);
      const dayOfWeek = new Date(input.date).getDay();
@@ -39,7 +41,7 @@ const useGetDepartures = () => {
         departures.push({from: input.from, to: input.to, departureTime: departureTime, arrivalTime: arrivalTime, trainId: trainIdArr[i]})
       }
      }
-     if(dayOfWeek === 6 || dayOfWeek === 0) {
+     if(dayOfWeek === 6 || dayOfWeek === 0 || hDays.includes(input.date)) {
        return departures.filter(d => {
         const activeOnWeekendsAndHolidays = weekendsAndHolidays[trainIdArr.indexOf(d.trainId)];
         return activeOnWeekendsAndHolidays === true || activeOnWeekendsAndHolidays === "w&h_only";

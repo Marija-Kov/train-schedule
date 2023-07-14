@@ -14,6 +14,9 @@ export const trainIdRidesOnWeekendsAndHolidays_direction1 = [ true, true, true, 
 
 export const trainIdRidesOnWeekendsAndHolidays_direction2 = [ false, false, true, false, true,  false, true, false, false, true, true, true, true, false, true, true, true, false, false, true, false, true, true, false, true, true, false, false, true,  true, true, false, false, 'w&h_only', true, true ];
 
+const year = new Date().getFullYear();
+
+export const holidays = [`${year}-01-01`, `${year}-01-02`, `${year}-01-03`, `${year}-01-07`, `${year}-02-15`, `${year}-02-16`, `${year}-05-01`, `${year}-05-02`, `${year}-11-11`];
 
 export const theTimetable_direction1 =  
 [ 
