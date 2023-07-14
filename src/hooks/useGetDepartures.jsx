@@ -26,10 +26,11 @@ const useGetDepartures = () => {
      }
      const departures = [];
      const len = tTable[0].length;
+     const departureInputTime = input.time.split(':').join('.');
      for(let i = 0; i < len; ++i){
       const departureTime = tTable[fromIdx][i];
       const arrivalTime = tTable[toIdx][i];
-      if(departureTime !== "n/a" && arrivalTime !== "n/a"){
+      if(departureTime !== "n/a" && arrivalTime !== "n/a" && Number(departureTime) >= Number(departureInputTime)){
         departures.push({from: input.from, to: input.to, departureTime: departureTime, arrivalTime: arrivalTime, trainId: trainIdArr[i]})
       }
      }
