@@ -1,10 +1,10 @@
 
 const Departure = ({ from, to, departureTime, arrivalTime, trainId}) => {
   return (
-    <div className="departure">
-      <span>{departureTime}--</span>
-      <span>{arrivalTime}--</span>
-      <span>{trainId}</span>
+    <div aria-label="departure" className="departure">
+      <span aria-label="departure time">{departureTime}--</span>
+      <span aria-label="arrival time">{arrivalTime}--</span>
+      <span aria-label="train id number">{trainId}</span>
     </div>
   )
 }

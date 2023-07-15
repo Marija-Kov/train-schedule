@@ -31,10 +31,11 @@ const Form = ({ runSetDepartures }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form aria-label="form" onSubmit={handleSubmit}>
         <label htmlFor="from">Od/From:</label>
         <select 
-         ref={from} 
+         ref={from}
+         aria-label="select departure station" 
          name="from"
          className={emptyFields.includes("from") ? "error" : ""}
          >
@@ -58,6 +59,7 @@ const Form = ({ runSetDepartures }) => {
         <label htmlFor="to">Do/To:</label>
         <select 
          ref={to} 
+         aria-label="select arrival station"
          name="to"
          className={emptyFields.includes("to") ? "error" : ""}
          >
@@ -81,6 +83,7 @@ const Form = ({ runSetDepartures }) => {
         <label htmlFor="date">Datum/Date:</label>
         <input 
          ref={date} 
+         aria-label="select date of departure"
          name="date" 
          type="date" 
          min="2023-06-06"
@@ -89,12 +92,14 @@ const Form = ({ runSetDepartures }) => {
          ></input>
         <label htmlFor="time">Vreme/Time:</label>
         <input 
-         ref={time} 
+         ref={time}
+         aria-label="select time of departure" 
          name="time" 
          type="time"
          className={emptyFields.includes("time") ? "error" : ""}
          ></input>
         <button 
+         aria-label="search departures"
          className="search"
          >
           Pretraga

@@ -20,12 +20,16 @@ function App() {
        />}
       {departures.length && 
        <div className="departures--container">
-        <button onClick={() => runSetDepartures([])}>nazad</button>
-        <div>
+        <button 
+         aria-label="back to search form"
+         onClick={() => runSetDepartures([])}>
+          nazad
+        </button>
+        <h3>
           <span>polazak</span>--
           <span>dolazak</span>--
           <span>broj voza</span>
-        </div>
+        </h3>
         {departures.map(d => (
           <Departure
            key={d.trainId}
