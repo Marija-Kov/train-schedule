@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
 
-const Departure = ({ from, to, departureTime, arrivalTime, trainId}) => {
+const Departure = ({ departureTime, arrivalTime, trainId}) => {
   return (
     <div aria-label="departure" className="departure">
       <span aria-label="departure time">{departureTime}--</span>
@@ -7,6 +8,14 @@ const Departure = ({ from, to, departureTime, arrivalTime, trainId}) => {
       <span aria-label="train id number">{trainId}</span>
     </div>
   )
+}
+
+Departure.propTypes = {
+  from: PropTypes.string,
+  to: PropTypes.string,
+  departureTime: PropTypes.string.isRequired,
+  arrivalTime: PropTypes.string.isRequired,
+  trainId: PropTypes.number.isRequired
 }
 
 export default Departure;
