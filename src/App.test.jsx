@@ -35,14 +35,14 @@ describe("App", () => {
         const selectDateOfDeparture = screen.getByLabelText("select date of departure");
         const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
         const searchBtn = screen.getByLabelText("search departures");
-        await user.selectOptions(selectDepartureStation, "zemun");
-        await user.type(selectDateOfDeparture, "2023-10-11");
         await user.click(searchBtn);
         expect(selectArrivalStation).toHaveAttribute("class", "error");
+        expect(selectDepartureStation).toHaveAttribute("class", "error");
+        expect(selectDateOfDeparture).toHaveAttribute("class", "error");
         expect(selectTimeOfDeparture).toHaveAttribute("class", "error");
     });
 
-    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid", async () => {
+    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid for direction 1", async () => {
         user.setup();
         render(<App />);
         const selectDepartureStation = screen.getByLabelText("select departure station");
@@ -53,6 +53,46 @@ describe("App", () => {
         await user.selectOptions(selectDepartureStation, "zemun");
         await user.selectOptions(selectArrivalStation, "pancevacki most");
         await user.type(selectDateOfDeparture, "2023-10-11");
+        await user.type(selectTimeOfDeparture, "14:00");
+        await user.click(searchBtn);
+        const departureComponents = await screen.findAllByLabelText("departure");
+        const backBtn = await screen.findByLabelText("back to search form");
+        expect(searchBtn).not.toBeInTheDocument();
+        expect(departureComponents).toBeTruthy();
+        expect(backBtn).toBeInTheDocument();
+    });
+
+    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid for direction 2", async () => {
+        user.setup();
+        render(<App />);
+        const selectDepartureStation = screen.getByLabelText("select departure station");
+        const selectArrivalStation = screen.getByLabelText("select arrival station");
+        const selectDateOfDeparture = screen.getByLabelText("select date of departure");
+        const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
+        const searchBtn = screen.getByLabelText("search departures");
+        await user.selectOptions(selectDepartureStation, "pancevacki most");
+        await user.selectOptions(selectArrivalStation, "zemun");
+        await user.type(selectDateOfDeparture, "2023-10-11");
+        await user.type(selectTimeOfDeparture, "14:00");
+        await user.click(searchBtn);
+        const departureComponents = await screen.findAllByLabelText("departure");
+        const backBtn = await screen.findByLabelText("back to search form");
+        expect(searchBtn).not.toBeInTheDocument();
+        expect(departureComponents).toBeTruthy();
+        expect(backBtn).toBeInTheDocument();
+    });
+
+    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid - weekends and holidays", async () => {
+        user.setup();
+        render(<App />);
+        const selectDepartureStation = screen.getByLabelText("select departure station");
+        const selectArrivalStation = screen.getByLabelText("select arrival station");
+        const selectDateOfDeparture = screen.getByLabelText("select date of departure");
+        const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
+        const searchBtn = screen.getByLabelText("search departures");
+        await user.selectOptions(selectDepartureStation, "pancevacki most");
+        await user.selectOptions(selectArrivalStation, "zemun");
+        await user.type(selectDateOfDeparture, "2023-11-11");
         await user.type(selectTimeOfDeparture, "14:00");
         await user.click(searchBtn);
         const departureComponents = await screen.findAllByLabelText("departure");
