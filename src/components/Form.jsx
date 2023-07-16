@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
 
@@ -106,6 +107,10 @@ const Form = ({ runSetDepartures }) => {
         </button>
       </form>   
   )
+}
+
+Form.propTypes = {
+ runSetDepartures: PropTypes.func.isRequired
 }
 
 export default Form
