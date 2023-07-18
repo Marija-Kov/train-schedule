@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 const Departure = ({ departureTime, arrivalTime, trainId}) => {
   return (
     <div aria-label="departure" className="departure">
-      <span aria-label="departure time">{departureTime}--</span>
-      <span aria-label="arrival time">{arrivalTime}--</span>
+      <span aria-label="departure time">{departureTime}</span>
+      <span aria-label="arrival time">{arrivalTime}</span>
       <span aria-label="train id number">{trainId}</span>
     </div>
   )
