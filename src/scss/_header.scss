@@ -1,0 +1,38 @@
+@use 'variables';
+
+header {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    color: variables.$primary-2;
+    margin: 10px auto;
+    width: 85%;
+    span {
+        flex: 1;
+        text-align: center;
+        &:nth-child(1){
+         font-size: 1.7em;   
+        }    
+     }
+}
+
+
+.info {
+    flex: 1;
+    text-align: center;
+    background: variables.$primary-1;
+    border: solid 2px variables.$primary-2;
+    color: variables.$primary-2; 
+    font-size: 1.2em;
+    border-radius: 2em;
+    width: 1.7em;
+    height: 1.7em;
+}
+
+
+.train-icon {
+    flex: 1;
+    text-align: center;
+    width: 30px;
+}
+
