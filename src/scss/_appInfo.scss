@@ -1,0 +1,33 @@
+@use 'variables';
+
+.info--content {
+ z-index: 2;
+ position: absolute;
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+ height: 90%;
+ top: 8%;
+ background: variables.$primary-1;
+ color: variables.$primary-2;
+ font-size: 1.2em;
+ padding: 10% 15%;
+ text-align: center;
+ p {
+     margin-bottom: 5%;
+     &:nth-child(2) {
+        margin-top: 10%;
+     }
+ }
+ a {
+     color: variables.$primary-2;
+ }
+ img {
+     height: 40px;
+     margin-top: 50px;
+ }
+ button {
+    font-size: 1em;
+ }
+}
+

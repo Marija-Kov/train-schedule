@@ -7,7 +7,9 @@ describe("App", () => {
     it("should render App component in its initial state", () => {
       render(<App />);
       const form = screen.getByRole("form");
+      const appInfoBtn = screen.getByText("?");
       expect(form).toBeInTheDocument();
+      expect(appInfoBtn).toBeInTheDocument();
     });
 
     it("should update input/selection value when user types/selects it", async () => {
@@ -120,6 +122,17 @@ describe("App", () => {
         expect(backBtn).not.toBeInTheDocument();
         searchBtn = await screen.findByLabelText("search departures"); // ⟢ if you just use element from the old render (line 72), the test will fail
         expect(searchBtn).toBeInTheDocument();
+    });
+
+    it("should show app info when question mark button is clicked", async () => {
+        user.setup();
+        render(<App />);
+        const appInfoBtn = screen.getByText("?");
+        await user.click(appInfoBtn);
+        const linkToRepo = await screen.findByLabelText("repo");
+        const backBtn = await screen.findByLabelText("close app info");
+        expect(linkToRepo).toBeInTheDocument();
+        expect(backBtn).toBeInTheDocument();
     })
 })
 
