@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
 
-const Form = ({ runSetDepartures }) => {
+const Form = ({ runSetDepartures, runSetRoute }) => {
   const { getDepartures } = useGetDepartures();
   const from = useRef();
   const to = useRef();
@@ -26,6 +26,7 @@ const Form = ({ runSetDepartures }) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
+    runSetRoute(input.from, input.to);
     runSetDepartures(getDepartures(input));
    }
 
@@ -110,7 +111,8 @@ const Form = ({ runSetDepartures }) => {
 }
 
 Form.propTypes = {
- runSetDepartures: PropTypes.func.isRequired
+ runSetDepartures: PropTypes.func.isRequired,
+ runSetRoute: PropTypes.func.isRequired
 }
 
 export default Form
