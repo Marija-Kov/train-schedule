@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import Form from './components/Form'
 import Departure from './components/Departure'
+import Info from './components/Info'
 
 function App() {
  const [departures, setDepartures] = useState([]);
- const [route, setRoute] = useState(null)
+ const [route, setRoute] = useState(null);
+ const [appInfo, setAppInfo] = useState(false);
 
  const runSetDepartures = (d) => {
   setDepartures(() => d)
@@ -12,6 +14,10 @@ function App() {
 
  const runSetRoute = (from, to) => {
   setRoute({from: from, to: to})
+ }
+
+ const runSetAppInfo = () => {
+  setAppInfo(prev => !prev)
  }
 
   return (
@@ -24,9 +30,17 @@ function App() {
         src="src/assets/train-icon.png"/>
        </a> 
        <span>
-        <button className="info">?</button>
+        <button 
+        aria-label="more info"
+        onClick={runSetAppInfo}
+        className="info"
+        >
+          ?
+        </button>
        </span>
       </header>
+
+      {appInfo && <Info runSetAppInfo={runSetAppInfo}/>}
       
       {!departures.length && 
       <Form 
