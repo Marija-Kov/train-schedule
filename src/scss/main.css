@@ -1,3 +1,150 @@
+@charset "UTF-8";
+header {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  color: white;
+  margin: 10px auto;
+  width: 85%;
+}
+header span {
+  flex: 1;
+  text-align: center;
+}
+header span:nth-child(1) {
+  font-size: 1.7em;
+}
+
+.info {
+  flex: 1;
+  text-align: center;
+  background: steelblue;
+  border: solid 2px white;
+  color: white;
+  font-size: 1.2em;
+  border-radius: 2em;
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.train-icon {
+  flex: 1;
+  text-align: center;
+  width: 30px;
+}
+
+form {
+  margin-top: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.search {
+  width: 10em;
+  height: 2em;
+  background: steelblue;
+  border-radius: 2em;
+  border: solid 3px white;
+  color: white;
+  font-size: 1.5em;
+  margin: 1em;
+}
+
+label {
+  font-size: 1.5em;
+}
+
+select,
+input {
+  margin-bottom: 1.2em;
+  border: solid 3px transparent;
+  padding: 1px 3px;
+  font-size: 1.5em;
+}
+
+select,
+button,
+input {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+select option {
+  font-size: 2em;
+}
+
+.error {
+  border: solid 3px rgb(255, 21, 0);
+}
+
+.departures--container,
+.departure,
+h2,
+h3 {
+  color: white;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  justify-content: center;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+h2 span {
+  flex: 1;
+  text-align: center;
+}
+h2 span:nth-child(1)::after {
+  position: absolute;
+  content: "➞";
+  left: 49%;
+}
+
+h3 {
+  justify-content: center;
+}
+h3 span {
+  border: solid 1px white;
+  flex: 1;
+  text-align: center;
+}
+
+.departures--container {
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  width: 100%;
+}
+
+.departure span {
+  flex: 1;
+  text-align: center;
+  border-bottom: solid 1px white;
+}
+
+.back {
+  background: steelblue;
+  color: white;
+  font-size: 1.2em;
+  border: solid 2px white;
+  border-radius: 2em;
+  padding: 4px 8px;
+  margin: 2em auto;
+}
+.back::before {
+  content: "< ";
+  font-weight: 600;
+  position: relative;
+  top: 1px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,41 +152,18 @@
 }
 
 body {
+  font-family: system-ui;
   min-width: 320px;
   max-width: 100vw;
   height: 100vh;
+  background: steelblue;
 }
 
-.container,
-form {
-  font-size: 1.5em;
+.container {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
   align-items: center;
   width: 100%;
   height: 100%;
-}
-
-select,
-button,
-input {
-  font-size: 0.75em;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-select,
-input {
-  margin-bottom: 0.75em;
-  border: solid 3px rgb(145, 145, 145);
-}
-
-.error {
-  border: solid 3px red;
-}
-
-button.search {
-  width: 10em;
-  height: 2em;
 }/*# sourceMappingURL=main.css.map */
