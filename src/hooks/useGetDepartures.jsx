@@ -47,7 +47,7 @@ const useGetDepartures = () => {
         return activeOnWeekendsAndHolidays === true || activeOnWeekendsAndHolidays === "w&h_only";
       })
      }
-      return departures
+      return departures.length ? departures : "no departures"
     }
   return {getDepartures}
 }

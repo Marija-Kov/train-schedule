@@ -1,12 +1,12 @@
 @use 'variables';
 
 .info--content {
- z-index: 2;
+ z-index: 5;
  position: absolute;
  display: flex;
  flex-direction: column;
  width: 100%;
- height: 90%;
+ height: 100%;
  top: 8%;
  background: variables.$primary-1;
  color: variables.$primary-2;

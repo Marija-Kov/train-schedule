@@ -27,5 +27,14 @@ body {
     height: 100%; 
 }
 
+.no-departures {
+    text-align: center;
+    color: variables.$primary-2;
+    font-size: 1.2em;
+    p {
+        font-size: 1.5em;
+    }
+}
+
 
 

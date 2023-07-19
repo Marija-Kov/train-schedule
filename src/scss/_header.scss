@@ -18,6 +18,7 @@ header {
 
 
 .info {
+    z-index: 5;
     flex: 1;
     text-align: center;
     background: variables.$primary-1;
