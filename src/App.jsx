@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Form from './components/Form'
 import Departure from './components/Departure'
 import Info from './components/Info'
+import { stations, stationsFormatted } from './data/timetable'
 
 function App() {
  const [departures, setDepartures] = useState([]);
@@ -13,7 +14,7 @@ function App() {
  }
 
  const runSetRoute = (from, to) => {
-  setRoute({from: from, to: to})
+  setRoute({from: stationsFormatted[stations.indexOf(from)], to: stationsFormatted[stations.indexOf(to)]})
  }
 
  const runSetAppInfo = () => {
