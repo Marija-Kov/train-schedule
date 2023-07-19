@@ -1,6 +1,17 @@
 @use 'variables';
 
-.departures--container,
+.departures--container {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    min-height: 100%;
+    top: 10%;
+    background: variables.$primary-1;
+    color: variables.$primary-2;
+    display: flex;
+    align-items: center;
+}
+
 .departure,
 h2,
 h3 {
