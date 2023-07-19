@@ -45,7 +45,7 @@ function App() {
        runSetRoute={runSetRoute}
        runSetDepartures={runSetDepartures}
        />
-      {departures.length ? 
+      {typeof departures === "object" && departures.length ?      
        <div className="departures--container">
         <h2>
           <span>
@@ -76,7 +76,14 @@ function App() {
           onClick={() => runSetDepartures([])}>
            nazad na pretragu
          </button> 
-        </div> : null
+        </div> : (
+          typeof departures === "string" ?
+        <div className="no-departures">
+          <p>⚠</p>
+          Nema polazaka po tim parametrima!
+        </div> : null     
+        )
+
       }
 
     </div>
