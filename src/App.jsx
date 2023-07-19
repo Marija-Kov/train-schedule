@@ -40,13 +40,11 @@ function App() {
        </span>
       </header>
 
-      {appInfo && <Info runSetAppInfo={runSetAppInfo}/>}
-      
-      {!departures.length && 
+      {appInfo && <Info runSetAppInfo={runSetAppInfo}/>}     
       <Form 
        runSetRoute={runSetRoute}
        runSetDepartures={runSetDepartures}
-       />}
+       />
       {departures.length ? 
        <div className="departures--container">
         <h2>
