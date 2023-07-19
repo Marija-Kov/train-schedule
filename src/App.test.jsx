@@ -44,7 +44,7 @@ describe("App", () => {
         expect(selectTimeOfDeparture).toHaveAttribute("class", "error");
     });
 
-    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid for direction 1", async () => {
+    it("should render Departure components when search button is clicked given that all input/selection values are valid for direction 1", async () => {
         user.setup();
         render(<App />);
         const selectDepartureStation = screen.getByLabelText("select departure station");
@@ -59,12 +59,11 @@ describe("App", () => {
         await user.click(searchBtn);
         const departureComponents = await screen.findAllByLabelText("departure");
         const backBtn = await screen.findByLabelText("back to search form");
-        expect(searchBtn).not.toBeInTheDocument();
         expect(departureComponents).toBeTruthy();
         expect(backBtn).toBeInTheDocument();
     });
 
-    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid for direction 2", async () => {
+    it("should render Departure components when search button is clicked given that all input/selection values are valid for direction 2", async () => {
         user.setup();
         render(<App />);
         const selectDepartureStation = screen.getByLabelText("select departure station");
@@ -79,12 +78,11 @@ describe("App", () => {
         await user.click(searchBtn);
         const departureComponents = await screen.findAllByLabelText("departure");
         const backBtn = await screen.findByLabelText("back to search form");
-        expect(searchBtn).not.toBeInTheDocument();
         expect(departureComponents).toBeTruthy();
         expect(backBtn).toBeInTheDocument();
     });
 
-    it("should unmount Form component and render Departure components when search button is clicked given that all input/selection values are valid - weekends and holidays", async () => {
+    it("should render Departure components when search button is clicked given that all input/selection values are valid - weekends and holidays", async () => {
         user.setup();
         render(<App />);
         const selectDepartureStation = screen.getByLabelText("select departure station");
@@ -99,19 +97,18 @@ describe("App", () => {
         await user.click(searchBtn);
         const departureComponents = await screen.findAllByLabelText("departure");
         const backBtn = await screen.findByLabelText("back to search form");
-        expect(searchBtn).not.toBeInTheDocument();
         expect(departureComponents).toBeTruthy();
         expect(backBtn).toBeInTheDocument();
     });
 
-    it("should run a function to change departures state to [] and remove Departure components when 'back' button is clicked", async () => {
+    it("should remove Departure components when 'back' button is clicked", async () => {
         user.setup();
         render(<App />);
         const selectDepartureStation = screen.getByLabelText("select departure station");
         const selectArrivalStation = screen.getByLabelText("select arrival station");
         const selectDateOfDeparture = screen.getByLabelText("select date of departure");
         const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
-        let searchBtn = screen.getByLabelText("search departures");
+        const searchBtn = screen.getByLabelText("search departures");
         await user.selectOptions(selectDepartureStation, "zemun");
         await user.selectOptions(selectArrivalStation, "pancevacki most");
         await user.type(selectDateOfDeparture, "2023-10-11");
@@ -120,9 +117,24 @@ describe("App", () => {
         const backBtn = await screen.findByLabelText("back to search form");
         await user.click(backBtn);
         expect(backBtn).not.toBeInTheDocument();
-        searchBtn = await screen.findByLabelText("search departures"); // ⟢ if you just use element from the old render (line 72), the test will fail
-        expect(searchBtn).toBeInTheDocument();
     });
+
+    it("should show message when no departures were found by search criteria", async () => {
+        user.setup();
+        render(<App />);
+        const selectDepartureStation = screen.getByLabelText("select departure station");
+        const selectArrivalStation = screen.getByLabelText("select arrival station");
+        const selectDateOfDeparture = screen.getByLabelText("select date of departure");
+        const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
+        const searchBtn = screen.getByLabelText("search departures");
+        await user.selectOptions(selectDepartureStation, "zemun");
+        await user.selectOptions(selectArrivalStation, "pancevacki most");
+        await user.type(selectDateOfDeparture, "2023-10-11");
+        await user.type(selectTimeOfDeparture, "23:23");
+        await user.click(searchBtn);
+        const noDeparturesMessage = await screen.findByText("⚠");
+        expect(noDeparturesMessage).toBeInTheDocument();
+    })
 
     it("should show app info when question mark button is clicked", async () => {
         user.setup();
