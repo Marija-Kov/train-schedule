@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+::selection {
+    color: variables.$primary-2;
+    background-color: variables.$selection;
+}
+
 body {
     font-family: system-ui;
     min-width: 320px;
