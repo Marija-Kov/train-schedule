@@ -21,7 +21,7 @@ const Info = ({ runSetAppInfo }) => {
      href="https://github.com/Marija-Kov/train-schedule">
       <img 
       className="github-icon"
-      src="src/assets/github.png"/>
+      src="/github.png"/>
     </a>
 
     <button 
