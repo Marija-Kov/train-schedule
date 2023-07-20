@@ -28,7 +28,7 @@ function App() {
        <a href="">
         <img 
         className="train-icon"
-        src="src/assets/train-icon.png"/>
+        src="/train-icon.png"/>
        </a> 
        <span>
         <button 
