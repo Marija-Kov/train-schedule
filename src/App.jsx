@@ -8,7 +8,6 @@ function App() {
  const [departures, setDepartures] = useState([]);
  const [route, setRoute] = useState(null);
  const [appInfo, setAppInfo] = useState(false);
-
  const runSetDepartures = (d) => {
   setDepartures(() => d)
  }
@@ -49,10 +48,10 @@ function App() {
       {typeof departures === "object" && departures.length ?      
        <div className="departures--container">
         <h2>
-          <span>
+          <span aria-label="route start">
            {route.from}
           </span>
-          <span>
+          <span aria-label="route end">
            {route.to}
           </span>
         </h2> 
