@@ -146,6 +146,30 @@ describe("App", () => {
         expect(linkToRepo).toBeInTheDocument();
         expect(backBtn).toBeInTheDocument();
     })
+
+    it("should display same station names in the departures heading displaying a direction 2 route when the user goes back to the form and repeats the search without altering the selection of stations", async () => {
+        user.setup();
+        render(<App />);
+        const selectDepartureStation = screen.getByLabelText("select departure station");
+        const selectArrivalStation = screen.getByLabelText("select arrival station");
+        const selectDateOfDeparture = screen.getByLabelText("select date of departure");
+        const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
+        const searchBtn = screen.getByLabelText("search departures");
+        await user.selectOptions(selectDepartureStation, "sebes");
+        await user.selectOptions(selectArrivalStation, "zemun");
+        await user.type(selectDateOfDeparture, "2023-10-11");
+        await user.type(selectTimeOfDeparture, "14:00");
+        await user.click(searchBtn);
+        const routeStart = (await screen.findByLabelText("route start")).innerHTML;
+        const routeEnd = (await screen.findByLabelText("route end")).innerHTML;
+        const backBtn = await screen.findByLabelText("back to search form");
+        await user.click(backBtn);
+        await user.click(searchBtn);
+        const routeStart2 = (await screen.findByLabelText("route start")).innerHTML;
+        const routeEnd2 = (await screen.findByLabelText("route end")).innerHTML;
+        expect(routeStart2).toBe(routeStart);
+        expect(routeEnd2).toBe(routeEnd);
+    })
 })
 
 

@@ -6,7 +6,7 @@ import { stations } from '../data/timetable.js';
 
 describe("<Form />", () => {
     it("should render Form component properly", () => {
-      render(<Form />);
+      render(<Form runSetDepartures={() => {}} runSetRoute={() => {}}/>);
       const selectDepartureStation = screen.getByLabelText("select departure station");
       const selectArrivalStation = screen.getByLabelText("select arrival station");
       const selectDateOfDeparture = screen.getByLabelText("select date of departure");
@@ -27,7 +27,7 @@ describe("<Form />", () => {
 
     it("should focus Form component elements in the right order", async () => {
       user.setup();
-      render(<Form />);
+      render(<Form runSetDepartures={() => {}} runSetRoute={() => {}}/>);
       const selectDepartureStation = screen.getByLabelText("select departure station");
       const selectArrivalStation = screen.getByLabelText("select arrival station");
       const selectDateOfDeparture = screen.getByLabelText("select date of departure");

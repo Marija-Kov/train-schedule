@@ -20,10 +20,9 @@ const useGetDepartures = () => {
      let toIdx = s.indexOf(input.to);
      const dayOfWeek = new Date(input.date).getDay();
      if(fromIdx > toIdx){
-      tTable = theTimetable_direction2;
-      const revS = s.reverse();
-      fromIdx = revS.indexOf(input.from);
-      toIdx = revS.indexOf(input.to);
+       tTable = theTimetable_direction2; 
+       fromIdx = s.length - 1 - fromIdx;
+       toIdx = s.length - 1 - toIdx;
       trainIdArr = trainId_direction2;
       weekendsAndHolidays = trainIdRidesOnWeekendsAndHolidays_direction2;
      } else {
