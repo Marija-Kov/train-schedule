@@ -1,7 +1,7 @@
 <h1 align="center"><a href="https://bgdvoz1.web.app/">Local train schedule</a></h1>
 <h3 align="center">Find Belgrade(RS) train departures by time, date and station</h3>
 <br>
-<div align="center"><img src="" alt="app preview" /></div> 
+<div align="center"><img src="/bgdvoz-preview.gif" alt="app preview" /></div> 
 <br>
 
 ## Table of Contents
