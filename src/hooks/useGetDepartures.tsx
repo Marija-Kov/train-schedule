@@ -9,11 +9,18 @@ import {
   holidays
 } from '../data/timetable.js'
 
+interface Input {
+  from: string,
+  to: string,
+  date: string,
+  time: string
+}
+
 const useGetDepartures = () => {
-    const getDepartures = (input) => {
+    const getDepartures = (input: Input): any[] | string => {
      let tTable;
-     let trainIdArr;
-     let weekendsAndHolidays;
+     let trainIdArr: any;
+     let weekendsAndHolidays: any;
      let s = stations;
      let hDays = holidays;
      let fromIdx = s.indexOf(input.from);

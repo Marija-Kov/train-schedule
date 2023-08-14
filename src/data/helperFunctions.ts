@@ -11,10 +11,10 @@ import {
   data_direction2
 } from './rawData.js'
 
-function extractDepartureTimes(dataStr){
+function extractDepartureTimes(dataStr: string): string[][]{
       const len = dataStr.length + 1;
       let index = 0; // there's always a char at position 0
-      const arr = [];
+      const arr: string[] = [];
       for(let i = 1; i < len - 1; ++i){
         const prev = dataStr.charAt(i-1);
         const curr = dataStr.charAt(i);
@@ -34,7 +34,7 @@ function extractDepartureTimes(dataStr){
     
 }
 
-function createTimetableMatrix_d1(dts, stationsArr, trainIdArr){
+function createTimetableMatrix_d1(dts:string[][], stationsArr: string[], trainIdArr: number[]): string[][]{
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -63,7 +63,7 @@ function createTimetableMatrix_d1(dts, stationsArr, trainIdArr){
   return dts
 }
 
-function createTimetableMatrix_d2(dts, stationsArr, trainIdArr) {
+function createTimetableMatrix_d2(dts:string[][], stationsArr:string[], trainIdArr:number[]):string[][] {
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -100,8 +100,10 @@ function createTimetableMatrix_d2(dts, stationsArr, trainIdArr) {
   return dts
 }
 
-function getEndpoints(trains, timetable, stationsArr){
-  const endpoints = {};
+// TODO: interface that can be {} or { (trainId: number): string[] } ?
+
+function getEndpoints(trains:number[], timetable:string[][], stationsArr:string[]){
+  const endpoints: any = {};
   for(let i = 0; i < trains.length; ++i){
    const firstAndLastStations = [];
    for(let j = 0; j < timetable.length; ++j){
@@ -125,7 +127,7 @@ function getEndpoints(trains, timetable, stationsArr){
   return endpoints
 }
 
-function getDepartures(start, finish, tTable1=theTimetable_direction1, tTable2=theTimetable_direction2, tIdArr1=trainId_direction1, tIdArr2=trainId_direction2, stationsArr=stations){
+function getDepartures(start:string, finish:string, tTable1=theTimetable_direction1, tTable2=theTimetable_direction2, tIdArr1=trainId_direction1, tIdArr2=trainId_direction2, stationsArr=stations){
    let tTable;
    let tIdArr = tIdArr1;
    let startIdx = stationsArr.indexOf(start.toLowerCase());

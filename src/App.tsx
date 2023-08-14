@@ -5,14 +5,15 @@ import Info from './components/Info'
 import { stations, stationsFormatted } from './data/timetable'
 
 function App() {
- const [departures, setDepartures] = useState([]);
- const [route, setRoute] = useState(null);
+ const [departures, setDepartures] = useState<any[] | string>([]);
+ const [route, setRoute] = useState({from: "", to: ""});
  const [appInfo, setAppInfo] = useState(false);
- const runSetDepartures = (d) => {
+ // runSetDepartures can accept string[] or f(input: Input)
+ const runSetDepartures = (d: any) => {
   setDepartures(() => d)
  }
 
- const runSetRoute = (from, to) => {
+ const runSetRoute = (from: string, to: string) => {
   setRoute({from: stationsFormatted[stations.indexOf(from)], to: stationsFormatted[stations.indexOf(to)]})
  }
 

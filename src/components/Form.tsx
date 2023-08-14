@@ -1,17 +1,21 @@
-import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
 
-const Form = ({ runSetDepartures, runSetRoute }) => {
+interface FormProps {
+  runSetDepartures: (d: string | any[]) => void,
+  runSetRoute: (from: string, to: string) => void
+}
+
+const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
-  const from = useRef();
-  const to = useRef();
-  const date = useRef();
-  const time = useRef();
+  const from = useRef<any>();
+  const to = useRef<any>();
+  const date = useRef<any>();
+  const time = useRef<any>();
 
-  const [emptyFields, setEmptyFields] = useState([]);
+  const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
    e.preventDefault();
    const input = {
     from: from.current.value,
@@ -26,8 +30,8 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    runSetRoute(input.from, input.to);
-    runSetDepartures(getDepartures(input));
+    props.runSetRoute(input.from, input.to);
+    props.runSetDepartures(getDepartures(input)); // Where did I set parameter of type string[] for getDepartures?
    }
 
   }
@@ -108,11 +112,6 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
         </button>
       </form>   
   )
-}
-
-Form.propTypes = {
- runSetDepartures: PropTypes.func.isRequired,
- runSetRoute: PropTypes.func.isRequired
 }
 
 export default Form
