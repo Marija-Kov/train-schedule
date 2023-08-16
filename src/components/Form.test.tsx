@@ -2,7 +2,7 @@ import {describe, it, expect} from 'vitest';
 import user from "@testing-library/user-event";
 import {render, screen} from '@testing-library/react';
 import Form from './Form';
-import { stations } from '../data/timetable.js';
+import { stations } from '../data/timetable';
 
 describe("<Form />", () => {
     it("should render Form component properly", () => {
@@ -13,7 +13,8 @@ describe("<Form />", () => {
       const selectTimeOfDeparture = screen.getByLabelText("select time of departure");
       const searchBtn = screen.getByLabelText("search departures");
       const departureAndArrivalOptions = ["", ...stations, "", ...stations];
-      const options = screen.getAllByRole("option").map(o => o.value);
+      const HTMLInputElements: HTMLInputElement[] = screen.getAllByRole("option");
+      const options = HTMLInputElements.map(o => o.value);
       expect(selectDepartureStation).toBeInTheDocument();
       expect(selectArrivalStation).toBeInTheDocument();
       expect(selectDateOfDeparture).toBeInTheDocument();
