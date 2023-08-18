@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import Form from './components/Form'
 import Departure from './components/Departure'
 import Info from './components/Info'
 import { stations, stationsFormatted } from './data/timetable'
+import { Departure as DepartureType } from './types'
 
 function App() {
- const [departures, setDepartures] = useState<any[] | string>([]);
+ const [departures, setDepartures] = useState<DepartureType[] | string>([]);
  const [route, setRoute] = useState({from: "", to: ""});
  const [appInfo, setAppInfo] = useState(false);
- // runSetDepartures can accept string[] or f(input: Input)
- const runSetDepartures = (d: any) => {
-  setDepartures(() => d)
+
+ const runSetDepartures = (d: SetStateAction<DepartureType[] | string>) => {
+  setDepartures(d)
  }
 
  const runSetRoute = (from: string, to: string) => {
@@ -64,8 +65,6 @@ function App() {
         {departures.map(d => (
           <Departure
            key={d.trainId}
-           from={d.from}
-           to={d.to}
            departureTime={d.departureTime}
            arrivalTime={d.arrivalTime}
            trainId={d.trainId}
