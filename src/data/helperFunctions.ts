@@ -11,6 +11,7 @@ import {
   data_direction2
 } from './rawData.js'
 
+import { Station, TrainId } from '../types'
 function extractDepartureTimes(dataStr: string): string[][]{
       const len = dataStr.length + 1;
       let index = 0; // there's always a char at position 0
@@ -34,7 +35,7 @@ function extractDepartureTimes(dataStr: string): string[][]{
     
 }
 
-function createTimetableMatrix_d1(dts:string[][], stationsArr: string[], trainIdArr: number[]): string[][]{
+function createTimetableMatrix_d1(dts:string[][], stationsArr: Station[], trainIdArr: TrainId[]): string[][]{
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -63,7 +64,7 @@ function createTimetableMatrix_d1(dts:string[][], stationsArr: string[], trainId
   return dts
 }
 
-function createTimetableMatrix_d2(dts:string[][], stationsArr:string[], trainIdArr:number[]):string[][] {
+function createTimetableMatrix_d2(dts:string[][], stationsArr: Station[], trainIdArr: TrainId[]): string[][] {
   let j = 0;
   let i = 1; 
   while (j < trainIdArr.length){
@@ -102,7 +103,7 @@ function createTimetableMatrix_d2(dts:string[][], stationsArr:string[], trainIdA
 
 // TODO: interface that can be {} or { (trainId: number): string[] } ?
 
-function getEndpoints(trains:number[], timetable:string[][], stationsArr:string[]){
+function getEndpoints(trains: TrainId[], timetable: string[][], stationsArr: Station[]){
   const endpoints: any = {};
   for(let i = 0; i < trains.length; ++i){
    const firstAndLastStations = [];
@@ -126,31 +127,6 @@ function getEndpoints(trains:number[], timetable:string[][], stationsArr:string[
   }
   return endpoints
 }
-
-function getDepartures(start:string, finish:string, tTable1=theTimetable_direction1, tTable2=theTimetable_direction2, tIdArr1=trainId_direction1, tIdArr2=trainId_direction2, stationsArr=stations){
-   let tTable;
-   let tIdArr = tIdArr1;
-   let startIdx = stationsArr.indexOf(start.toLowerCase());
-   let endIdx = stationsArr.indexOf(finish.toLowerCase());
-   if(startIdx > endIdx){
-     tTable = tTable2
-     const inverseStations = stationsArr.reverse();
-     startIdx = inverseStations.indexOf(start.toLowerCase());
-     endIdx = inverseStations.indexOf(finish.toLowerCase());
-     tIdArr = tIdArr2
-   }else{
-     tTable = tTable1
-   }
-   const departuresArr = [];
-   for( let i = 0; i < tTable[0].length; ++i){
-    if(tTable[startIdx][i] !== "n/a" && tTable[endIdx][i] !== "n/a"){
-     departuresArr.push({departure: tTable[startIdx][i], trainId: tIdArr[i]})
-    }
-   }
-   return departuresArr
-}
-
-//console.log(getDepartures("zemun", "vukov spomenik"))
 
 // departureTimesAtStations[i] correspond to all departures from stations[i] in a day (weekday or weekend/holiday)
 
