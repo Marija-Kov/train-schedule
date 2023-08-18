@@ -1,11 +1,4 @@
-
-interface DepartureProps {
-  from?: string,
-  to?: string,
-  departureTime: string,
-  arrivalTime: string,
-  trainId: number
-}
+import { DepartureProps } from "../types";
  
 const Departure = (props: DepartureProps) => {
   const { departureTime, arrivalTime, trainId } = props;
