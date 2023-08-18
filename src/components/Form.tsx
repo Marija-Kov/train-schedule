@@ -1,23 +1,23 @@
-import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
+import { FormProps, Input } from "../types";
 
-const Form = ({ runSetDepartures, runSetRoute }) => {
+const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
-  const from = useRef();
-  const to = useRef();
-  const date = useRef();
-  const time = useRef();
+  const from = useRef<HTMLSelectElement>();
+  const to = useRef<HTMLSelectElement>();
+  const date = useRef<HTMLInputElement>();
+  const time = useRef<HTMLInputElement>();
 
-  const [emptyFields, setEmptyFields] = useState([]);
+  const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
-   const input = {
-    from: from.current.value,
-    to: to.current.value,
-    date: date.current.value,
-    time: time.current.value,
+   const input : Input = {
+    from: from.current?.value,
+    to: to.current?.value,
+    date: date.current?.value,
+    time: time.current?.value,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);
    if(!input.to) setEmptyFields(prev => ["to", ...prev]);
@@ -26,8 +26,8 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    runSetRoute(input.from, input.to);
-    runSetDepartures(getDepartures(input));
+    props.runSetRoute(input.from, input.to);
+    props.runSetDepartures(getDepartures(input));
    }
 
   }
@@ -36,7 +36,7 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
     <form aria-label="form" onSubmit={handleSubmit}>
         <label htmlFor="from">Od/From:</label>
         <select 
-         ref={from}
+         ref={from as React.MutableRefObject<HTMLSelectElement>}
          aria-label="select departure station" 
          name="from"
          className={emptyFields.includes("from") ? "error" : ""}
@@ -60,7 +60,7 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
         </select>
         <label htmlFor="to">Do/To:</label>
         <select 
-         ref={to} 
+         ref={to as React.MutableRefObject<HTMLSelectElement>} 
          aria-label="select arrival station"
          name="to"
          className={emptyFields.includes("to") ? "error" : ""}
@@ -84,7 +84,7 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
         </select>
         <label htmlFor="date">Datum/Date:</label>
         <input 
-         ref={date} 
+         ref={date as React.MutableRefObject<HTMLInputElement>} 
          aria-label="select date of departure"
          name="date" 
          type="date" 
@@ -94,7 +94,7 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
          ></input>
         <label htmlFor="time">Vreme/Time:</label>
         <input 
-         ref={time}
+         ref={time as React.MutableRefObject<HTMLInputElement>}
          aria-label="select time of departure" 
          name="time" 
          type="time"
@@ -108,11 +108,6 @@ const Form = ({ runSetDepartures, runSetRoute }) => {
         </button>
       </form>   
   )
-}
-
-Form.propTypes = {
- runSetDepartures: PropTypes.func.isRequired,
- runSetRoute: PropTypes.func.isRequired
 }
 
 export default Form

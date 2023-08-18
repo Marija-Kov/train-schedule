@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import Form from './components/Form'
 import Departure from './components/Departure'
 import Info from './components/Info'
 import { stations, stationsFormatted } from './data/timetable'
+import { Departure as DepartureType } from './types'
 
 function App() {
- const [departures, setDepartures] = useState([]);
- const [route, setRoute] = useState(null);
+ const [departures, setDepartures] = useState<DepartureType[] | string>([]);
+ const [route, setRoute] = useState({from: "", to: ""});
  const [appInfo, setAppInfo] = useState(false);
- const runSetDepartures = (d) => {
-  setDepartures(() => d)
+
+ const runSetDepartures = (d: SetStateAction<DepartureType[] | string>) => {
+  setDepartures(d)
  }
 
- const runSetRoute = (from, to) => {
+ const runSetRoute = (from: string, to: string) => {
   setRoute({from: stationsFormatted[stations.indexOf(from)], to: stationsFormatted[stations.indexOf(to)]})
  }
 
@@ -63,8 +65,6 @@ function App() {
         {departures.map(d => (
           <Departure
            key={d.trainId}
-           from={d.from}
-           to={d.to}
            departureTime={d.departureTime}
            arrivalTime={d.arrivalTime}
            trainId={d.trainId}

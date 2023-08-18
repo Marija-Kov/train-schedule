@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
+import { InfoProps } from "../types";
 
-const Info = ({ runSetAppInfo }) => {
+const Info = (props: InfoProps) => {
+  const { runSetAppInfo } = props;
   return (
     <div className="info--content">
      <p>
@@ -35,9 +36,5 @@ const Info = ({ runSetAppInfo }) => {
    </div>
   )
 }
-
-Info.propTypes = {
-    runSetAppInfo: PropTypes.func.isRequired,
-   }
 
 export default Info;

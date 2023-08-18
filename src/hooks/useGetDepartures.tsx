@@ -7,18 +7,20 @@ import {
   trainIdRidesOnWeekendsAndHolidays_direction1,
   trainIdRidesOnWeekendsAndHolidays_direction2,
   holidays
-} from '../data/timetable.js'
+} from '../data/timetable'
+
+import { Departure, Input } from '../types'
 
 const useGetDepartures = () => {
-    const getDepartures = (input) => {
+    const getDepartures = (input: Input): Departure[] | string => {
      let tTable;
-     let trainIdArr;
-     let weekendsAndHolidays;
-     let s = stations;
+     let trainIdArr: any;
+     let weekendsAndHolidays: any;
+     let s: (string | undefined)[] = stations;
      let hDays = holidays;
      let fromIdx = s.indexOf(input.from);
      let toIdx = s.indexOf(input.to);
-     const dayOfWeek = new Date(input.date).getDay();
+     const dayOfWeek = input.date ? new Date(input.date).getDay() : undefined;
      if(fromIdx > toIdx){
        tTable = theTimetable_direction2; 
        fromIdx = s.length - 1 - fromIdx;
@@ -32,7 +34,7 @@ const useGetDepartures = () => {
      }
      const departures = [];
      const len = tTable[0].length;
-     const departureInputTime = input.time.split(':').join('.');
+     const departureInputTime = input.time ? input.time.split(':').join('.') : undefined;
      for(let i = 0; i < len; ++i){
       const departureTime = tTable[fromIdx][i];
       const arrivalTime = tTable[toIdx][i];
@@ -40,7 +42,7 @@ const useGetDepartures = () => {
         departures.push({from: input.from, to: input.to, departureTime: departureTime, arrivalTime: arrivalTime, trainId: trainIdArr[i]})
       }
      }
-     if(dayOfWeek === 6 || dayOfWeek === 0 || hDays.includes(input.date)) {
+     if(dayOfWeek === 6 || dayOfWeek === 0 || (input.date && hDays.includes(input.date))) {
        return departures.filter(d => {
         const activeOnWeekendsAndHolidays = weekendsAndHolidays[trainIdArr.indexOf(d.trainId)];
         return activeOnWeekendsAndHolidays === true || activeOnWeekendsAndHolidays === "w&h_only";
