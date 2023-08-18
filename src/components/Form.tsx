@@ -1,27 +1,23 @@
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
-
-interface FormProps {
-  runSetDepartures: (d: string | any[]) => void,
-  runSetRoute: (from: string, to: string) => void
-}
+import { FormProps, Input } from "../types";
 
 const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
-  const from = useRef<any>();
-  const to = useRef<any>();
-  const date = useRef<any>();
-  const time = useRef<any>();
+  const from = useRef<HTMLSelectElement>();
+  const to = useRef<HTMLSelectElement>();
+  const date = useRef<HTMLInputElement>();
+  const time = useRef<HTMLInputElement>();
 
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
-   const input = {
-    from: from.current.value,
-    to: to.current.value,
-    date: date.current.value,
-    time: time.current.value,
+   const input : Input = {
+    from: from.current?.value,
+    to: to.current?.value,
+    date: date.current?.value,
+    time: time.current?.value,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);
    if(!input.to) setEmptyFields(prev => ["to", ...prev]);
@@ -31,7 +27,7 @@ const Form = (props: FormProps) => {
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
     props.runSetRoute(input.from, input.to);
-    props.runSetDepartures(getDepartures(input)); // Where did I set parameter of type string[] for getDepartures?
+    props.runSetDepartures(getDepartures(input));
    }
 
   }
@@ -40,7 +36,7 @@ const Form = (props: FormProps) => {
     <form aria-label="form" onSubmit={handleSubmit}>
         <label htmlFor="from">Od/From:</label>
         <select 
-         ref={from}
+         ref={from as React.MutableRefObject<HTMLSelectElement>}
          aria-label="select departure station" 
          name="from"
          className={emptyFields.includes("from") ? "error" : ""}
@@ -64,7 +60,7 @@ const Form = (props: FormProps) => {
         </select>
         <label htmlFor="to">Do/To:</label>
         <select 
-         ref={to} 
+         ref={to as React.MutableRefObject<HTMLSelectElement>} 
          aria-label="select arrival station"
          name="to"
          className={emptyFields.includes("to") ? "error" : ""}
@@ -88,7 +84,7 @@ const Form = (props: FormProps) => {
         </select>
         <label htmlFor="date">Datum/Date:</label>
         <input 
-         ref={date} 
+         ref={date as React.MutableRefObject<HTMLInputElement>} 
          aria-label="select date of departure"
          name="date" 
          type="date" 
@@ -98,7 +94,7 @@ const Form = (props: FormProps) => {
          ></input>
         <label htmlFor="time">Vreme/Time:</label>
         <input 
-         ref={time}
+         ref={time as React.MutableRefObject<HTMLInputElement>}
          aria-label="select time of departure" 
          name="time" 
          type="time"
