@@ -31,3 +31,26 @@ export type FormProps = {
 export type InfoProps = {
     runSetAppInfo: () => void
   }
+
+export type Station1 = {
+  name: string,
+  formatted: string,
+  departures: DepartureFromStation[]
+}
+
+export type Train = {
+  trainId: TrainId,
+  directionId: number,
+  activeOnWeekendsAndHolidays: boolean,
+  route: [string, string],
+  departures: DepartureOfTrain[]
+}
+
+export type DepartureFromStation = {
+  time: string, trainId: TrainId
+}
+
+export type DepartureOfTrain = {
+  station: string, time: string
+}
+
