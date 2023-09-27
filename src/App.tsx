@@ -2,20 +2,14 @@ import { SetStateAction, useState } from 'react'
 import Form from './components/Form'
 import Departure from './components/Departure'
 import Info from './components/Info'
-import { stations, stationsFormatted } from './data/timetable'
-import { Departure as DepartureType } from './types'
+import { DepartureReturned } from './types'
 
 function App() {
- const [departures, setDepartures] = useState<DepartureType[] | string>([]);
- const [route, setRoute] = useState({from: "", to: ""});
+ const [departures, setDepartures] = useState<DepartureReturned[] | string>([]);
  const [appInfo, setAppInfo] = useState(false);
 
- const runSetDepartures = (d: SetStateAction<DepartureType[] | string>) => {
+ const runSetDepartures = (d: SetStateAction<DepartureReturned[] | string>) => {
   setDepartures(d)
- }
-
- const runSetRoute = (from: string, to: string) => {
-  setRoute({from: stationsFormatted[stations.indexOf(from)], to: stationsFormatted[stations.indexOf(to)]})
  }
 
  const runSetAppInfo = () => {
@@ -44,17 +38,16 @@ function App() {
 
       {appInfo && <Info runSetAppInfo={runSetAppInfo}/>}     
       <Form 
-       runSetRoute={runSetRoute}
        runSetDepartures={runSetDepartures}
        />
       {typeof departures === "object" && departures.length ?      
        <div className="departures--container">
         <h2>
           <span aria-label="route start">
-           {route.from}
+           {departures[0].from}
           </span>
           <span aria-label="route end">
-           {route.to}
+           {departures[0].to}
           </span>
         </h2> 
         <h3>

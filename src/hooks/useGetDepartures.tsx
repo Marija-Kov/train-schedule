@@ -1,54 +1,67 @@
-import {
-  stations,
-  trainId_direction1, 
-  trainId_direction2, 
-  theTimetable_direction1, 
-  theTimetable_direction2,
-  trainIdRidesOnWeekendsAndHolidays_direction1,
-  trainIdRidesOnWeekendsAndHolidays_direction2,
-  holidays
-} from '../data/timetable'
-
-import { Departure, Input } from '../types'
+import { DepartureReturned, Input, StationDeparture, StationDetails } from '../types'
 
 const useGetDepartures = () => {
-    const getDepartures = (input: Input): Departure[] | string => {
-     let tTable;
-     let trainIdArr: any;
-     let weekendsAndHolidays: any;
-     let s: (string | undefined)[] = stations;
-     let hDays = holidays;
-     let fromIdx = s.indexOf(input.from);
-     let toIdx = s.indexOf(input.to);
-     const dayOfWeek = input.date ? new Date(input.date).getDay() : undefined;
-     if(fromIdx > toIdx){
-       tTable = theTimetable_direction2; 
-       fromIdx = s.length - 1 - fromIdx;
-       toIdx = s.length - 1 - toIdx;
-      trainIdArr = trainId_direction2;
-      weekendsAndHolidays = trainIdRidesOnWeekendsAndHolidays_direction2;
-     } else {
-      tTable = theTimetable_direction1;
-      trainIdArr = trainId_direction1;
-      weekendsAndHolidays = trainIdRidesOnWeekendsAndHolidays_direction1;
+    const getDepartures = async (input: Input): Promise<DepartureReturned[] | string> => {
+     if(!input.from || !input.to || !input.date || !input.time) return "All fields must be filled";
+     const response = await fetch("https://marija-kov.github.io/train-schedule-23-api/data.json");
+     const data = await response.json();
+     const holidays = data.holidays;
+     const stations = data.stations;
+     
+     const day = new Date(input.date).getDay();
+     const activity = day === 0 || day === 6 || holidays.includes(input.date) ? [true, "w&h_only"] : [true, false];
+     const inputTime = input.time.split(':').join('.');
+     let [ indexFrom ] = stations.filter((station: StationDetails) => station.name === input.from).map((station: StationDetails) => stations.indexOf(station));
+     let [ indexTo ] = stations.filter((station: StationDetails) => station.name === input.to).map((station: StationDetails) => stations.indexOf(station));
+     const from = stations[indexFrom].nameFormatted;
+     const to = stations[indexTo].nameFormatted;
+
+     const direction = indexFrom > indexTo ? 2 : 1;
+     
+     if(direction === 2){
+      indexFrom = stations.length - 1 - indexFrom;
+      indexTo = stations.length - 1 - indexTo;
      }
+
+     const fromResults = 
+      stations[indexFrom].departures
+      .filter((d: StationDeparture) => {
+       return d.time >= Number(inputTime)
+          && d.trainDetails.directionId === direction
+          && activity.includes(d.trainDetails.activeOnWeekendsAndHolidays)
+      });
+
+     if(!fromResults.length) return "no departures";
+
+     const allDepartures = // not all of these departures (trainIds) end up on input.to station
+      fromResults.map((d: StationDeparture) => { 
+        return {
+          departureTime: d.time.toFixed(2),
+          trainId: d.trainDetails.id,
+          from: from,
+          to: to
+        }
+      });
+    
+     const allArrivals = // not all of these arrivals (trainIds) start on input.from station
+      stations[indexTo].departures
+      .filter((d: StationDeparture) => {
+       return d.time >= Number(inputTime) 
+          && d.trainDetails.directionId === direction
+          && activity.includes(d.trainDetails.activeOnWeekendsAndHolidays)
+      });
+
      const departures = [];
-     const len = tTable[0].length;
-     const departureInputTime = input.time ? input.time.split(':').join('.') : undefined;
-     for(let i = 0; i < len; ++i){
-      const departureTime = tTable[fromIdx][i];
-      const arrivalTime = tTable[toIdx][i];
-      if(departureTime !== "n/a" && arrivalTime !== "n/a" && Number(departureTime) >= Number(departureInputTime)){
-        departures.push({from: input.from, to: input.to, departureTime: departureTime, arrivalTime: arrivalTime, trainId: trainIdArr[i]})
+   
+     for(let i = 0; i < allDepartures.length; ++i){
+      for(let j = 0; j < allArrivals.length; ++j){
+        if(allDepartures[i].trainId === allArrivals[j].trainDetails.id){
+          allDepartures[i].arrivalTime = allArrivals[j].time
+          departures.push(allDepartures[i])
+        }
       }
-     }
-     if(dayOfWeek === 6 || dayOfWeek === 0 || (input.date && hDays.includes(input.date))) {
-       return departures.filter(d => {
-        const activeOnWeekendsAndHolidays = weekendsAndHolidays[trainIdArr.indexOf(d.trainId)];
-        return activeOnWeekendsAndHolidays === true || activeOnWeekendsAndHolidays === "w&h_only";
-      })
-     }
-      return departures.length ? departures : "no departures"
+     } 
+      return departures
     }
   return {getDepartures}
 }

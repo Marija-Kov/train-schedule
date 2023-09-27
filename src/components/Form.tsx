@@ -11,7 +11,7 @@ const Form = (props: FormProps) => {
 
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
    const input : Input = {
     from: from.current?.value,
@@ -26,8 +26,8 @@ const Form = (props: FormProps) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    props.runSetRoute(input.from, input.to);
-    props.runSetDepartures(getDepartures(input));
+    const departures = await getDepartures(input);
+    props.runSetDepartures(departures);
    }
 
   }

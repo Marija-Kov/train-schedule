@@ -2,11 +2,16 @@ import {describe, it, expect} from 'vitest';
 import user from "@testing-library/user-event";
 import {render, screen} from '@testing-library/react';
 import Form from './Form';
-import { stations } from '../data/timetable';
 
 describe("<Form />", () => {
     it("should render Form component properly", () => {
-      render(<Form runSetDepartures={() => {}} runSetRoute={() => {}}/>);
+      const stations = [
+      "batajnica", "kamendin", "zemunsko polje", "altina", 
+      "zemun", "tosin bunar", "novi beograd", "beograd centar", 
+      "karadjordjev park", "vukov spomenik", "pancevacki most", 
+      "krnjaca most", "krnjaca ukr", "sebes", "ovca"
+      ];
+      render(<Form runSetDepartures={() => {}}/>);
       const selectDepartureStation = screen.getByLabelText("select departure station");
       const selectArrivalStation = screen.getByLabelText("select arrival station");
       const selectDateOfDeparture = screen.getByLabelText("select date of departure");
@@ -28,7 +33,7 @@ describe("<Form />", () => {
 
     it("should focus Form component elements in the right order", async () => {
       user.setup();
-      render(<Form runSetDepartures={() => {}} runSetRoute={() => {}}/>);
+      render(<Form runSetDepartures={() => {}}/>);
       const selectDepartureStation = screen.getByLabelText("select departure station");
       const selectArrivalStation = screen.getByLabelText("select arrival station");
       const selectDateOfDeparture = screen.getByLabelText("select date of departure");
