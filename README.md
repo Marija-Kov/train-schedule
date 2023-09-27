@@ -21,10 +21,9 @@
 The app was built out of need for a more accessible and readable alternative to the official <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf">local train schedule in PDF</a>.
 </p>
 <p> 
-The database was created from scratch (as there is no api) by passing raw, copy-pasted data to a few functions written for that particular purpose.
-Since the size of the database is so limited, it is allowed to live in the app itself, which conveniently guarantees its availability to the app.
-Given the predictability of possible local train routes over years, the database will be easily updated after the schedule validity expires (Dec 9 2023) 
-by reusing the helper functions with the string of new raw data passed in.
+The <a href="https://github.com/Marija-Kov/train-schedule-23-api">API</a> was created from scratch by passing raw data strings copied from the PDF - as well as some manually entered "starter data" - through a series of functions.
+Given the predictability of possible local train routes over years, the API will be, hopefully, easily updated after the schedule validity expires (Dec 9 2023) 
+by reusing the helper functions with the new string of data passed in.
 </p>
 
 <br>
@@ -46,7 +45,7 @@ by reusing the helper functions with the string of new raw data passed in.
 
 - [React](https://reactjs.org/) - User interface
 - [Vite](https://vitejs.dev/) - Build tooling
-- [Vitest](https://vitest.dev/) - Build tooling
+- [Vitest](https://vitest.dev/) - Testing
 - [Sass](https://sass-lang.com/) - Style
 
 
@@ -62,9 +61,7 @@ All files              |     100 |      100 |     100 |     100 |
  src/components        |     100 |      100 |     100 |     100 |                   
   Departure.jsx        |     100 |      100 |     100 |     100 |                   
   Form.jsx             |     100 |      100 |     100 |     100 |                   
-  Info.jsx             |     100 |      100 |     100 |     100 |                   
- src/data              |     100 |      100 |     100 |     100 |                   
-  timetable.js         |     100 |      100 |     100 |     100 |                   
+  Info.jsx             |     100 |      100 |     100 |     100 |                                    
  src/hooks             |     100 |      100 |     100 |     100 |                   
   useGetDepartures.jsx |     100 |      100 |     100 |     100 |              
   
