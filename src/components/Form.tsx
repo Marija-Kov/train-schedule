@@ -26,7 +26,6 @@ const Form = (props: FormProps) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    props.runSetRoute(input.from, input.to);
     const departures = await getDepartures(input);
     props.runSetDepartures(departures);
    }
