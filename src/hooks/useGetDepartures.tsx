@@ -3,6 +3,7 @@ import { DepartureReturned, Input, StationDeparture, StationDetails } from '../t
 const useGetDepartures = () => {
     const getDepartures = async (input: Input): Promise<DepartureReturned[] | string> => {
      if(!input.from || !input.to || !input.date || !input.time) return "All fields must be filled";
+     if(input.from === input.to) return "That is not a route";
      const response = await fetch("https://marija-kov.github.io/train-schedule-23-api/data.json");
      const data = await response.json();
      const holidays = data.holidays;
