@@ -42,6 +42,5 @@ export type TrainDetails = {
   id: TrainId,
   directionId: 1 | 2,
   activeOnWeekendsAndHolidays: boolean | "w&h_only",
-  itinerary: { station: string, time: number }[]
 }
 
