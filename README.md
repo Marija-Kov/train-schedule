@@ -21,8 +21,8 @@
 The app was built out of need for a more accessible and readable alternative to the official <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf">local train schedule in PDF</a>.
 </p>
 <p> 
-The <a href="https://github.com/Marija-Kov/train-schedule-23-api">API</a> was created from scratch by passing data strings extracted from the PDF - as well as some manually entered "starter data" - through a series of functions.
-Given the predictability of possible local train routes over years, the API will be, hopefully, easily updated after the schedule validity expires (Dec 9 2023) 
+The <a href="https://github.com/Marija-Kov/train-schedule-23-api">source of data</a> was created from scratch by passing data extracted from the PDF through a series of functions.
+Given the predictability of possible local train routes over years, the data will be, hopefully, easily updated after the schedule validity expires (Dec 9 2023) 
 by reusing the helper functions with the new string of data passed in.
 </p>
 
