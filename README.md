@@ -1,29 +1,38 @@
 <h1 align="center"><a href="https://bgdvoz1.web.app/">Local train schedule</a></h1>
 <h3 align="center">Find Belgrade(RS) train departures by time, date and station</h3>
 <br>
-<div align="center"><img src="https://i.imgur.com/Qwv798j.gif" alt="app preview" /></div> 
+<div align="center"><img src="https://i.imgur.com/Qwv798j.gif" alt="Belgrade train schedule app" /></div> 
 <br>
 
 ## Table of Contents
 
-1. [How did it come about?](#motivation)
+1. [Motivation](#motivation)
 2. [App Features](#features)
 3. [Tools and Dependencies](#tools)
-4. [Test coverage](#test)
+4. [Local Usage](#localUsage)
 5. [Todos](#todos)
 6. [Author](#author)
 
 ---
 <br>
 
-## How did it come about? <a name = "motivation"></a>
+## Motivation <a name = "motivation"></a>
+ <div align="center"> 
+  <p align="left">
+   This app was built out of need for a more accessible and readable alternative to the official <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf">local train schedule in PDF</a>. 
+   <br>
+   In order to find a departure in the PDF version of the schedule on mobile, the user has to zoom in, then go over a lot of unnecessary information while putting extra effort not to lose track of the row, just to find a departure.
+  </p>
+  <img src="https://i.imgur.com/4Xa2ktQ.gif" alt="skimming through PDF table desperately to find a departure" height="400px"/>
+  <br>
+  <span><i> Nope.</i></span>
+  <br>
+  <br>
+ </div>
 <p> 
-The app was built out of need for a more accessible and readable alternative to the official <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf">local train schedule in PDF</a>.
-</p>
-<p> 
-The <a href="https://github.com/Marija-Kov/train-schedule-23-api">source of data</a> was created from scratch by passing data extracted from the PDF through a series of functions.
-Given the predictability of possible local train routes over years, the data will be, hopefully, easily updated after the schedule validity expires (Dec 9 2023) 
-by reusing the helper functions with the new string of data passed in.
+The app uses data from a <a href="https://github.com/Marija-Kov/train-schedule-23-api/blob/main/stations.json">JSON file</a> that was created specifically for the app by running a <a href="https://github.com/Marija-Kov/train-schedule-23-api/blob/main/helpers/runFunctions.ts">program</a>.
+ <br>
+The JSON file can be easily updated after the schedule becomes obsolete - which usually happens once a year - by reusing the helper functions with most recent data passed in.
 </p>
 
 <br>
@@ -51,24 +60,18 @@ by reusing the helper functions with the new string of data passed in.
 
 <br>
 
-## Test coverage <a name = "test"></a>
+## Local Usage <a name = "localUsage"></a>
 
-File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
------------------------|---------|----------|---------|---------|-------------------
-All files              |     100 |      100 |     100 |     100 |                   
- src                   |     100 |      100 |     100 |     100 |                   
-  App.jsx              |     100 |      100 |     100 |     100 |                   
- src/components        |     100 |      100 |     100 |     100 |                   
-  Departure.jsx        |     100 |      100 |     100 |     100 |                   
-  Form.jsx             |     100 |      100 |     100 |     100 |                   
-  Info.jsx             |     100 |      100 |     100 |     100 |                                    
- src/hooks             |     100 |      100 |     100 |     100 |                   
-  useGetDepartures.jsx |     100 |      100 |     100 |     100 |              
-  
+In the root folder of the cloned repo, run:
+1. ```npm install``` to install the dependencies;
+2. ```npm run dev``` to run the app in development mode;
+3. ```npm run test``` to test;
+            
 <br>
 
 ## Todos <a name = "todos"></a>
-☕
+ - Enable users to save and quickly access their most frequent departures;
+ - Enable sharing search results;
 <br>
 
 ## Author <a name = "author"></a>
