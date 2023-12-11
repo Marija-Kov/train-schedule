@@ -11,10 +11,11 @@ const Info = (props: InfoProps) => {
             reda vožnje za BG voz 
         </a>
         <br></br>
-        na potezu Batajnica-Ovča (u oba smera) koji važi do 9. decembra 2023.
+        na potezu Batajnica-Ovča (u oba smera) koji važi do 14. decembra 2024.
      </p>
      <p>
-       Autorka aplikacije nema veze sa JKP-om niti je JKP naručilac usluge izrade aplikacije. 
+       Aplikacija je izrađena za lične potrebe fizičkog lica. 
+       Autorka aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge izrade aplikacije. 
      </p>     
 
     <a
