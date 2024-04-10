@@ -2,7 +2,7 @@ import { SetStateAction, useState } from "react";
 import Form from "./components/Form";
 import Departure from "./components/Departure";
 import Info from "./components/Info";
-import { DepartureReturned } from "./types";
+import { DepartureReturned } from "./typeDefinitions/types";
 
 function App() {
   const [departures, setDepartures] = useState<DepartureReturned[] | string>(

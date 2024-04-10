@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
-import { FormProps, Input } from "../types";
+import { StationName } from "../typeDefinitions/boringTypes";
+import { FormProps, Input, YyMmDd, Time } from "../typeDefinitions/types";
 
 const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
@@ -14,10 +15,10 @@ const Form = (props: FormProps) => {
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
    const input : Input = {
-    from: from.current?.value,
-    to: to.current?.value,
-    date: date.current?.value,
-    time: time.current?.value,
+    from: from.current?.value as StationName,
+    to: to.current?.value as StationName,
+    date: date.current?.value as YyMmDd,
+    time: time.current?.value as Time,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);
    if(!input.to) setEmptyFields(prev => ["to", ...prev]);

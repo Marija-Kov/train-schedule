@@ -1,4 +1,4 @@
-import { InfoProps } from "../types";
+import { InfoProps } from "../typeDefinitions/types";
 
 const Info = (props: InfoProps) => {
   const { runSetAppInfo } = props;
