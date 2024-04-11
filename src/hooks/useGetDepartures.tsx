@@ -19,15 +19,15 @@ const useGetDepartures = () => {
     );
     const data: { holidays: YyyyMmDd[]; stations: StationDetails[] } =
       await response.json();
-    const holidays: YyyyMmDd[] = data.holidays as YyyyMmDd[];
-    const stations: StationDetails[] = data.stations as StationDetails[];
+    const holidays = data.holidays;
+    const stations = data.stations;
 
     const day = new Date(input.date).getDay();
     const activity =
-      day === 0 || day === 6 || holidays.includes(input.date as YyyyMmDd)
+      day === 0 || day === 6 || holidays.includes(input.date)
         ? [true, "w&h_only"]
         : [true, false];
-    const inputTime: Time = input.time.split(":").join(".") as Time;
+    const inputTime = input.time.split(":").join(".") as Time;
     let [indexFrom] = stations
       .filter((station: StationDetails) => station.name === input.from)
       .map((station: StationDetails) => stations.indexOf(station));
