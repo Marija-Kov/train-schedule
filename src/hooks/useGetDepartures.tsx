@@ -4,7 +4,7 @@ import {
   StationDeparture,
   StationDetails,
   YyyyMmDd,
-  Time
+  Time,
 } from "../typeDefinitions/types";
 
 const useGetDepartures = () => {
@@ -17,7 +17,8 @@ const useGetDepartures = () => {
     const response = await fetch(
       "https://marija-kov.github.io/train-schedule-23-api/stations.json"
     );
-    const data = await response.json();
+    const data: { holidays: YyyyMmDd[]; stations: StationDetails[] } =
+      await response.json();
     const holidays: YyyyMmDd[] = data.holidays as YyyyMmDd[];
     const stations: StationDetails[] = data.stations as StationDetails[];
 
@@ -63,7 +64,7 @@ const useGetDepartures = () => {
           trainId: d.trainDetails.id,
           from: from,
           to: to,
-        } as DepartureReturned ;
+        } as DepartureReturned;
       });
 
     const allArrivals = // not all of these arrivals (trainIds) start on input.from station
