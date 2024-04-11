@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures";
 import { StationName } from "../typeDefinitions/boringTypes";
-import { FormProps, Input, YyMmDd, Time } from "../typeDefinitions/types";
+import { FormProps, Input, YyyyMmDd, Time } from "../typeDefinitions/types";
 
 const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
@@ -17,7 +17,7 @@ const Form = (props: FormProps) => {
    const input : Input = {
     from: from.current?.value as StationName,
     to: to.current?.value as StationName,
-    date: date.current?.value as YyMmDd,
+    date: date.current?.value as YyyyMmDd,
     time: time.current?.value as Time,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);

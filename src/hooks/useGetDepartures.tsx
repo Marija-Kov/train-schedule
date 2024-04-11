@@ -3,7 +3,7 @@ import {
   Input,
   StationDeparture,
   StationDetails,
-  YyMmDd,
+  YyyyMmDd,
   Time
 } from "../typeDefinitions/types";
 
@@ -18,12 +18,12 @@ const useGetDepartures = () => {
       "https://marija-kov.github.io/train-schedule-23-api/stations.json"
     );
     const data = await response.json();
-    const holidays: YyMmDd[] = data.holidays as YyMmDd[];
+    const holidays: YyyyMmDd[] = data.holidays as YyyyMmDd[];
     const stations: StationDetails[] = data.stations as StationDetails[];
 
     const day = new Date(input.date).getDay();
     const activity =
-      day === 0 || day === 6 || holidays.includes(input.date as YyMmDd)
+      day === 0 || day === 6 || holidays.includes(input.date as YyyyMmDd)
         ? [true, "w&h_only"]
         : [true, false];
     const inputTime: Time = input.time.split(":").join(".") as Time;

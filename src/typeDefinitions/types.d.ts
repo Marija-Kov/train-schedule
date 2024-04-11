@@ -13,11 +13,11 @@ import {
 export type Input = {
   from: StationName | undefined;
   to: StationName | undefined;
-  date: YyMmDd | undefined;
+  date: YyyyMmDd | undefined;
   time: Time | undefined;
 };
 
-export type YyMmDd = `${Year}-${Month}-${Day}`;
+export type YyyyMmDd = `${Year}-${Month}-${Day}`;
 
 export type Time = `${Hours}.${Minutes}` | "n/a";
 
