@@ -1,5 +1,5 @@
 import { DepartureProps } from "../typeDefinitions/types";
- 
+
 const Departure = (props: DepartureProps) => {
   const { departureTime, arrivalTime, trainId } = props;
   return (
@@ -8,7 +8,7 @@ const Departure = (props: DepartureProps) => {
       <span aria-label="arrival time">{arrivalTime}</span>
       <span aria-label="train id number">{trainId}</span>
     </div>
-  )
-}
+  );
+};
 
 export default Departure;
