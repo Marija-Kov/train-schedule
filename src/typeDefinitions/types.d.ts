@@ -19,7 +19,7 @@ export type Input = {
 
 export type YyyyMmDd = `${Year}-${Month}-${Day}`;
 
-export type Time = `${Hours}.${Minutes}` | "n/a";
+export type Time = `${Hours}:${Minutes}` | "n/a";
 
 export type DepartureProps = {
   departureTime: Time;

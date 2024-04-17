@@ -23,7 +23,7 @@ const useGetDepartures = () => {
       day === 0 || day === 6 || holidays.includes(input.date)
         ? [true, "w&h_only"]
         : [true, false];
-    const inputTime = input.time.split(":").join(".") as Time;
+    const inputTimeNum = Number(input.time.split(":").join("."));
     let [indexFrom] = stations
       .filter((station: StationDetails) => station.name === input.from)
       .map((station: StationDetails) => stations.indexOf(station));
@@ -43,7 +43,7 @@ const useGetDepartures = () => {
     const fromResults = stations[indexFrom].departures.filter(
       (d: StationDeparture) => {
         return (
-          d.time >= Number(inputTime) &&
+          d.time >= inputTimeNum &&
           d.trainDetails.directionId === direction &&
           activity.includes(d.trainDetails.activeOnWeekendsAndHolidays)
         );
@@ -55,8 +55,8 @@ const useGetDepartures = () => {
     const allDepartures = // not all of these departures (trainIds) end up on input.to station
       fromResults.map((d: StationDeparture) => {
         return {
-          departureTime: d.time.toFixed(2),
-          arrivalTime: "0.10", // placeholder
+          departureTime: d.time.toFixed(2).split(".").join(":"),
+          arrivalTime: "0:10", // placeholder
           trainId: d.trainDetails.id,
           from: from,
           to: to,
@@ -66,7 +66,7 @@ const useGetDepartures = () => {
     const allArrivals = // not all of these arrivals (trainIds) start on input.from station
       stations[indexTo].departures.filter((d: StationDeparture) => {
         return (
-          d.time >= Number(inputTime) &&
+          d.time >= inputTimeNum &&
           d.trainDetails.directionId === direction &&
           activity.includes(d.trainDetails.activeOnWeekendsAndHolidays)
         );
@@ -77,7 +77,10 @@ const useGetDepartures = () => {
     for (let i = 0; i < allDepartures.length; ++i) {
       for (let j = 0; j < allArrivals.length; ++j) {
         if (allDepartures[i].trainId === allArrivals[j].trainDetails.id) {
-          const time: Time = allArrivals[j].time.toFixed(2) as Time;
+          const time = allArrivals[j].time
+            .toFixed(2)
+            .split(".")
+            .join(":") as Time;
           allDepartures[i].arrivalTime = time;
           departures.push(allDepartures[i]);
         }
