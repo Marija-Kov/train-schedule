@@ -77,7 +77,7 @@ const useGetDepartures = () => {
     for (let i = 0; i < allDepartures.length; ++i) {
       for (let j = 0; j < allArrivals.length; ++j) {
         if (allDepartures[i].trainId === allArrivals[j].trainDetails.id) {
-          const time: Time = String(allArrivals[j].time) as Time;
+          const time: Time = allArrivals[j].time.toFixed(2) as Time;
           allDepartures[i].arrivalTime = time;
           departures.push(allDepartures[i]);
         }
