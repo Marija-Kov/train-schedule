@@ -2,18 +2,19 @@ import { SetStateAction, useState } from "react";
 import Form from "./components/Form";
 import Departure from "./components/Departure";
 import Info from "./components/Info";
-import { DepartureReturned } from "./typeDefinitions/types";
+import { DepartureProps, Result } from "./typeDefinitions/types";
+import { hasError } from "./typeDefinitions/typeGuards";
 
 function App() {
-  const [departures, setDepartures] = useState<DepartureReturned[] | string>(
-    []
-  );
+  const [result, setResult] = useState<Result>({
+    departureStation: "Batajnica",
+    arrivalStation: "Altina",
+    departures: [],
+  });
   const [appInfo, setAppInfo] = useState(false);
 
-  const runSetDepartures = (
-    d: SetStateAction<DepartureReturned[] | string>
-  ) => {
-    setDepartures(d);
+  const runSetDepartures = (d: SetStateAction<Result>) => {
+    setResult(d);
   };
 
   const runSetAppInfo = () => {
@@ -21,19 +22,42 @@ function App() {
   };
 
   const showData = () => {
-    if (typeof departures === "object" && departures.length) {
+    if (hasError(result)) {
+      return (
+        <div className="no-departures">
+          <p>⚠</p>
+          <p>Nema polazaka po tim parametrima</p>
+          <p>/</p>
+          <p>No departures found</p>
+          <button
+            aria-label="back to search form"
+            className="back"
+            onClick={() =>
+              runSetDepartures({
+                departureStation: "Batajnica",
+                arrivalStation: "Altina",
+                departures: [],
+              })
+            }
+          >
+            nazad
+          </button>
+        </div>
+      );
+    } else if (result.departures.length) {
+      const departures = result.departures;
       return (
         <div className="departures--container">
           <h2>
-            <span aria-label="route start">{departures[0].from}</span>
-            <span aria-label="route end">{departures[0].to}</span>
+            <span aria-label="route start">{result.departureStation}</span>
+            <span aria-label="route end">{result.arrivalStation}</span>
           </h2>
           <h3>
             <span>polazak</span>
             <span>dolazak</span>
             <span>br. voza</span>
           </h3>
-          {departures.map((d) => (
+          {departures.map((d: DepartureProps) => (
             <Departure
               key={d.trainId}
               departureTime={d.departureTime}
@@ -44,31 +68,21 @@ function App() {
           <button
             aria-label="back to search form"
             className="back"
-            onClick={() => runSetDepartures([])}
+            onClick={() =>
+              runSetDepartures({
+                departureStation: "Batajnica",
+                arrivalStation: "Altina",
+                departures: [],
+              })
+            }
           >
             nazad
           </button>
         </div>
       );
+    } else {
+      return "";
     }
-    if (typeof departures === "string") {
-      return (
-        <div className="no-departures">
-          <p>⚠</p>
-          <p>Nema polazaka po tim parametrima</p>
-          <p>/</p>
-          <p>No departures found</p>
-          <button
-            aria-label="back to search form"
-            className="back"
-            onClick={() => runSetDepartures([])}
-          >
-            nazad
-          </button>
-        </div>
-      );
-    }
-    return "";
   };
 
   return (

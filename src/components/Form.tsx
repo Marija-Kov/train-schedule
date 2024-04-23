@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import useGetDepartures from "../hooks/useGetDepartures";
+import useFetchTrainsAPI from "../hooks/useFetchTrainsAPI";
 import { StationName } from "../typeDefinitions/boringTypes";
 import { FormProps, Input, YyyyMmDd, Time } from "../typeDefinitions/types";
 
 const Form = (props: FormProps) => {
-  const { getDepartures } = useGetDepartures();
+  const { fetchTrainsAPI } = useFetchTrainsAPI();
   const from = useRef<HTMLSelectElement>();
   const to = useRef<HTMLSelectElement>();
   const date = useRef<HTMLInputElement>();
@@ -27,7 +27,7 @@ const Form = (props: FormProps) => {
    
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
-    const departures = await getDepartures(input);
+    const departures = await fetchTrainsAPI(input);
     props.runSetDepartures(departures);
    }
 
