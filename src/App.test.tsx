@@ -219,7 +219,7 @@ describe("App", () => {
       "select time of departure"
     );
     const searchBtn = screen.getByLabelText("search departures");
-    await user.selectOptions(selectDepartureStation, "sebes");
+    await user.selectOptions(selectDepartureStation, "pancevacki most");
     await user.selectOptions(selectArrivalStation, "zemun");
     await user.type(selectDateOfDeparture, "2024-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
