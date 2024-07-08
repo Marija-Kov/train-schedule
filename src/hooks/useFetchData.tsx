@@ -11,6 +11,7 @@ const useFetchData = () => {
     const scheduleCached = localStorage.getItem(cachedStationsData);
     const cachedScheduleValid = localStorage.getItem(cacheExpiration);
     if (
+      process.env.NODE_ENV === "production" &&
       scheduleCached &&
       cachedScheduleValid &&
       Number(cachedScheduleValid) > new Date().getTime() &&

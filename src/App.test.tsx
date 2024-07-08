@@ -234,4 +234,58 @@ describe("App", () => {
     expect(routeStart2).toBe(routeStart);
     expect(routeEnd2).toBe(routeEnd);
   });
+
+  it("should return correct departures in direction 1", async () => {
+    user.setup();
+    render(<App />);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.selectOptions(selectDepartureStation, "batajnica");
+    await user.selectOptions(selectArrivalStation, "novi beograd");
+    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectTimeOfDeparture, "14:00");
+    await user.click(searchBtn);
+    const trainId = (await screen.findByText("8027"));
+    const departureTime = (await screen.findByText("14:42"));
+    expect(trainId).toBeInTheDocument();
+    expect(departureTime).toBeInTheDocument();
+  });
+
+  it("should return correct departures in direction 2", async () => {
+    user.setup();
+    render(<App />);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.selectOptions(selectDepartureStation, "novi beograd");
+    await user.selectOptions(selectArrivalStation, "batajnica");
+    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectTimeOfDeparture, "14:00");
+    await user.click(searchBtn);
+    const trainId = (await screen.findByText("8026"));
+    const departureTime = (await screen.findByText("14:29"));
+    expect(trainId).toBeInTheDocument();
+    expect(departureTime).toBeInTheDocument();
+  });
 });

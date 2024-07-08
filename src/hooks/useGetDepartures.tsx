@@ -35,11 +35,6 @@ const useGetDepartures = () => {
 
     const direction = indexFrom > indexTo ? 2 : 1;
 
-    if (direction === 2) {
-      indexFrom = stations.length - 1 - indexFrom;
-      indexTo = stations.length - 1 - indexTo;
-    }
-
     const fromResults = stations[indexFrom].departures.filter(
       (d: StationDeparture) => {
         return (
@@ -66,7 +61,7 @@ const useGetDepartures = () => {
     const allArrivals = // not all of these arrivals (trainIds) start on input.from station
       stations[indexTo].departures.filter((d: StationDeparture) => {
         return (
-          d.time >= inputTimeNum &&
+          d.time > inputTimeNum &&
           d.trainDetails.directionId === direction &&
           activity.includes(d.trainDetails.activeOnWeekendsAndHolidays)
         );
