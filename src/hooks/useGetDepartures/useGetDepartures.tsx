@@ -1,4 +1,4 @@
-import { DepartureReturned, Input } from "../../typeDefinitions/types";
+import { ResultDeparture, Input } from "../../typeDefinitions/types";
 import useFetchData from "../useFetchData/useFetchData";
 import {
   frequencyOnDate,
@@ -15,7 +15,7 @@ const useGetDepartures = () => {
 
   const getDepartures = async (
     input: Input
-  ): Promise<DepartureReturned[] | string> => {
+  ): Promise<ResultDeparture[] | string> => {
     if (!input.from || !input.to || !input.date || !input.time)
       return "All fields must be filled";
 

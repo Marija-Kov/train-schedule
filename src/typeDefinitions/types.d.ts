@@ -27,13 +27,13 @@ export type DepartureProps = {
   trainId: TrainIdDirection1 | TrainIdDirection2;
 };
 
-export type DepartureReturned = DepartureProps & {
+export type ResultDeparture = DepartureProps & {
   from: StationNameFormatted;
   to: StationNameFormatted;
 };
 
 export type FormProps = {
-  runSetDepartures: (d: string | DepartureReturned[]) => void;
+  runSetDepartures: (d: string | ResultDeparture[]) => void;
 };
 
 export type InfoProps = {
@@ -43,10 +43,10 @@ export type InfoProps = {
 export type StationDetails = {
   name: StationName;
   nameFormatted: StationNameFormatted;
-  departures: StationDeparture[];
+  departures: StationDetailsDeparture[];
 };
 
-export type StationDeparture = {
+export type StationDetailsDeparture = {
   time: number;
   trainDetails: TrainDetails;
 };

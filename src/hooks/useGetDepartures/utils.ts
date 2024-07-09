@@ -1,6 +1,6 @@
 import {
-  DepartureReturned,
-  StationDeparture,
+  ResultDeparture,
+  StationDetailsDeparture,
   StationDetails,
   Time,
 } from "../../typeDefinitions/types";
@@ -10,10 +10,10 @@ import {
  * @returns An array of departures with all teh necessary response information.
  */
 export function getResult(
-  possibleDepartures: DepartureReturned[],
-  possibleArrivals: StationDeparture[]
+  possibleDepartures: ResultDeparture[],
+  possibleArrivals: StationDetailsDeparture[]
 ) {
-  const result: DepartureReturned[] = [];
+  const result: ResultDeparture[] = [];
   for (let departure of possibleDepartures) {
     result.push(matchADepartureWithAnArrival(departure, possibleArrivals));
   }
@@ -27,11 +27,11 @@ export function getResult(
  * @returns A departure object with all the necessary response information or undefined.
  */
 function matchADepartureWithAnArrival(
-  departure: DepartureReturned,
-  possibleArrivals: StationDeparture[]
+  departure: ResultDeparture,
+  possibleArrivals: StationDetailsDeparture[]
 ) {
   const matchingArrival = possibleArrivals.filter(
-    (arrival: StationDeparture) => arrival.trainDetails.id === departure.trainId
+    (arrival: StationDetailsDeparture) => arrival.trainDetails.id === departure.trainId
   )[0];
   return matchingArrival && writeArrivalTime(departure, matchingArrival);
 }
@@ -41,8 +41,8 @@ function matchADepartureWithAnArrival(
  * @returns A departure with a matching arrival time.
  */
 function writeArrivalTime(
-  departure: DepartureReturned,
-  arrival: StationDeparture
+  departure: ResultDeparture,
+  arrival: StationDetailsDeparture
 ) {
   departure.arrivalTime = timeToString(arrival.time);
   return departure;
@@ -54,19 +54,19 @@ function writeArrivalTime(
  * @returns Array of enriched departure objects.
  */
 export function transformToReturnFormat(
-  departures: StationDeparture[],
+  departures: StationDetailsDeparture[],
   stations: StationDetails[],
   departureStationIndex: number,
   arrivalStationIndex: number
 ) {
-  return departures.map((departure: StationDeparture) => {
+  return departures.map((departure: StationDetailsDeparture) => {
     return {
       departureTime: timeToString(departure.time),
       arrivalTime: "0:10", // placeholder
       trainId: departure.trainDetails.id,
       from: formatName(stations, departureStationIndex),
       to: formatName(stations, arrivalStationIndex),
-    } as DepartureReturned;
+    } as ResultDeparture;
   });
 }
 
@@ -75,12 +75,12 @@ export function transformToReturnFormat(
  * @returns Narrowed down selection of departures that are to be processed further.
  */
 export function filterDepartures(
-  departures: StationDeparture[],
+  departures: StationDetailsDeparture[],
   time: number,
   direction: number,
   frequency: (boolean | string)[]
 ) {
-  return departures.filter((departure: StationDeparture) => {
+  return departures.filter((departure: StationDetailsDeparture) => {
     return (
       departure.time >= time &&
       departure.trainDetails.directionId === direction &&
