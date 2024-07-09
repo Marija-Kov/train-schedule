@@ -1,5 +1,5 @@
 import { DepartureReturned, Input } from "../../typeDefinitions/types";
-import useFetchData from "../useFetchData";
+import useFetchData from "../useFetchData/useFetchData";
 import {
   frequencyOnDate,
   stationIndex,
