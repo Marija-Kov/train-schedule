@@ -1,4 +1,4 @@
-import { StationDetails, YyyyMmDd } from "../typeDefinitions/types";
+import { StationDetails, YyyyMmDd } from "../../typeDefinitions/types";
 
 const useFetchData = () => {
   const url =
