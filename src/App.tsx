@@ -2,16 +2,16 @@ import { SetStateAction, useState } from "react";
 import Form from "./components/Form";
 import Departure from "./components/Departure";
 import Info from "./components/Info";
-import { DepartureReturned } from "./typeDefinitions/types";
+import { ResultDeparture } from "./typeDefinitions/types";
 
 function App() {
-  const [departures, setDepartures] = useState<DepartureReturned[] | string>(
+  const [departures, setDepartures] = useState<ResultDeparture[] | string>(
     []
   );
   const [appInfo, setAppInfo] = useState(false);
 
   const runSetDepartures = (
-    d: SetStateAction<DepartureReturned[] | string>
+    d: SetStateAction<ResultDeparture[] | string>
   ) => {
     setDepartures(d);
   };
