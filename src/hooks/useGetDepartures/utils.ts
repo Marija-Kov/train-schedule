@@ -1,13 +1,15 @@
+import { StationName } from "../../typeDefinitions/boringTypes";
 import {
   ResultDeparture,
   StationDetailsDeparture,
   StationDetails,
   Time,
+  YyyyMmDd,
 } from "../../typeDefinitions/types";
 
 /**
  * Creates an array out of departure objects with found arrival matches; filters out the undefined.
- * @returns An array of departures with all teh necessary response information.
+ * @returns An array of departures with all the necessary response information.
  */
 export function getResult(
   possibleDepartures: ResultDeparture[],
@@ -31,7 +33,8 @@ function matchADepartureWithAnArrival(
   possibleArrivals: StationDetailsDeparture[]
 ) {
   const matchingArrival = possibleArrivals.filter(
-    (arrival: StationDetailsDeparture) => arrival.trainDetails.id === departure.trainId
+    (arrival: StationDetailsDeparture) =>
+      arrival.trainDetails.id === departure.trainId
   )[0];
   return matchingArrival && writeArrivalTime(departure, matchingArrival);
 }
@@ -77,7 +80,7 @@ export function transformToReturnFormat(
 export function filterDepartures(
   departures: StationDetailsDeparture[],
   time: number,
-  direction: number,
+  direction: 1 | 2,
   frequency: (boolean | string)[]
 ) {
   return departures.filter((departure: StationDetailsDeparture) => {
@@ -91,8 +94,6 @@ export function filterDepartures(
 
 /**
  * Converts a number into a time string.
- * @param time number (example: 10.3)
- * @returns string (example: "10.30")
  */
 function timeToString(time: number) {
   return time.toFixed(2).split(".").join(":") as Time;
@@ -100,10 +101,8 @@ function timeToString(time: number) {
 
 /**
  * Converts time string into a number.
- * @param time string (example: "10:30")
- * @returns number (example: 10.3)
  */
-export function timeToNumber(time: string) {
+export function timeToNumber(time: Time) {
   return Number(time.split(":").join("."));
 }
 
@@ -113,7 +112,7 @@ export function timeToNumber(time: string) {
  * or weekends and holidays only ("w&h_only");
  * They serve as departure filtering criteria.
  */
-export function frequencyOnDate(date: string, holidays: string[]) {
+export function frequencyOnDate(date: YyyyMmDd, holidays: YyyyMmDd[]) {
   const day = new Date(date).getDay();
   return day === 0 || day === 6 || holidays.includes(date)
     ? [true, "w&h_only"]
@@ -123,7 +122,10 @@ export function frequencyOnDate(date: string, holidays: string[]) {
 /**
  * @returns Index of station in the list of stations (starting with Batajnica, ending with Ovca).
  */
-export function stationIndex(stations: StationDetails[], endpoint: string) {
+export function stationIndex(
+  stations: StationDetails[],
+  endpoint: StationName
+) {
   return stations
     .filter((station: StationDetails) => station.name === endpoint)
     .map((station: StationDetails) => stations.indexOf(station))[0];
