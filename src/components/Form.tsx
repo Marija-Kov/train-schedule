@@ -89,8 +89,8 @@ const Form = (props: FormProps) => {
          aria-label="select date of departure"
          name="date" 
          type="date" 
-         min="2023-12-10"
-         max="2024-12-14"
+         min="2024-12-15"
+         max="2025-12-13"
          className={emptyFields.includes("date") ? "error" : ""}
          ></input>
         <label htmlFor="time">Vreme/Time:</label>

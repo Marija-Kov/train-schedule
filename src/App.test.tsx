@@ -29,11 +29,11 @@ describe("App", () => {
     );
     await user.selectOptions(selectDepartureStation, "zemun");
     await user.selectOptions(selectArrivalStation, "pancevacki most");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     expect(selectDepartureStation).toHaveValue("zemun");
     expect(selectArrivalStation).toHaveValue("pancevacki most");
-    expect(selectDateOfDeparture).toHaveValue("2024-10-11");
+    expect(selectDateOfDeparture).toHaveValue("2025-10-11");
     expect(selectTimeOfDeparture).toHaveValue("14:00");
   });
 
@@ -78,7 +78,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "zemun");
     await user.selectOptions(selectArrivalStation, "pancevacki most");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const departureComponents = await screen.findAllByLabelText("departure");
@@ -105,7 +105,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "pancevacki most");
     await user.selectOptions(selectArrivalStation, "zemun");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const departureComponents = await screen.findAllByLabelText("departure");
@@ -132,7 +132,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "pancevacki most");
     await user.selectOptions(selectArrivalStation, "zemun");
-    await user.type(selectDateOfDeparture, "2024-11-11");
+    await user.type(selectDateOfDeparture, "2025-11-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const departureComponents = await screen.findAllByLabelText("departure");
@@ -159,7 +159,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "zemun");
     await user.selectOptions(selectArrivalStation, "pancevacki most");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const backBtn = await screen.findByLabelText("back to search form");
@@ -185,7 +185,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "zemun");
     await user.selectOptions(selectArrivalStation, "pancevacki most");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "23:23");
     await user.click(searchBtn);
     const noDeparturesMessage = await screen.findByText("⚠");
@@ -221,7 +221,7 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "sebes");
     await user.selectOptions(selectArrivalStation, "zemun");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const routeStart = (await screen.findByLabelText("route start")).innerHTML;
@@ -253,11 +253,11 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "batajnica");
     await user.selectOptions(selectArrivalStation, "novi beograd");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
-    const trainId = (await screen.findByText("8027"));
-    const departureTime = (await screen.findByText("14:42"));
+    const trainId = (await screen.findByText("8025"));
+    const departureTime = (await screen.findByText("14:19"));
     expect(trainId).toBeInTheDocument();
     expect(departureTime).toBeInTheDocument();
   });
@@ -280,11 +280,11 @@ describe("App", () => {
     const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, "novi beograd");
     await user.selectOptions(selectArrivalStation, "batajnica");
-    await user.type(selectDateOfDeparture, "2024-10-11");
+    await user.type(selectDateOfDeparture, "2025-10-11");
     await user.type(selectTimeOfDeparture, "14:00");
     await user.click(searchBtn);
     const trainId = (await screen.findByText("8026"));
-    const departureTime = (await screen.findByText("14:29"));
+    const departureTime = (await screen.findByText("14:38"));
     expect(trainId).toBeInTheDocument();
     expect(departureTime).toBeInTheDocument();
   });

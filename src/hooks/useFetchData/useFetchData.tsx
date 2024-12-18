@@ -6,7 +6,7 @@ const useFetchData = () => {
   const fetchData = async () => {
     const cacheExpiration = "cacheExpiration";
     const cachedStationsData = "cachedStationsData";
-    const scheduleValid = new Date("December 14, 2024").getTime();
+    const scheduleValid = new Date("December 13, 2025").getTime();
     let data: { holidays: YyyyMmDd[]; stations: StationDetails[] };
     const scheduleCached = localStorage.getItem(cachedStationsData);
     const cachedScheduleValid = localStorage.getItem(cacheExpiration);
