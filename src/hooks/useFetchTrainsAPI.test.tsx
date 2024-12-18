@@ -15,7 +15,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "" as StationName,
-      date: "2024-04-04",
+      date: "2025-04-04",
       time: "16:04",
     });
     expect(response).toHaveProperty("error");
@@ -28,7 +28,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "novibeograd" as StationName,
-      date: "2024-04-04",
+      date: "2025-04-04",
       time: "16:04",
     });
     expect(response).toHaveProperty("error");
@@ -43,7 +43,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "novi beograd",
-      date: "20240404" as YyyyMmDd,
+      date: "20250404" as YyyyMmDd,
       time: "16:04",
     });
     expect(response).toHaveProperty("error");
@@ -56,7 +56,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "novi beograd",
-      date: "2024-04-04",
+      date: "2025-04-04",
       time: "1604" as Time,
     });
     expect(response).toHaveProperty("error");
@@ -69,7 +69,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "novi beograd",
-      date: "2024-04-04",
+      date: "2025-04-04",
       time: "23.04" as Time,
     });
     expect(response).toHaveProperty("error");
@@ -82,7 +82,7 @@ describe("useFetchTrainsAPI", () => {
     const response = await result.current.fetchTrainsAPI({
       from: "altina",
       to: "novi beograd",
-      date: "2024-04-04",
+      date: "2025-04-04",
       time: "16:04",
     });
     expect(response).toHaveProperty("departureStation");
