@@ -1,4 +1,4 @@
-import { StationName } from "../../typeDefinitions/boringTypes";
+import { StationName } from "../../typeDefinitions/aliases";
 import {
   ResultDeparture,
   StationDetailsDeparture,

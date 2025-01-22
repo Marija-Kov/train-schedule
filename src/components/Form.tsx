@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures/useGetDepartures";
-import { StationName } from "../typeDefinitions/boringTypes";
+import { StationName } from "../typeDefinitions/aliases";
 import { FormProps, Input, YyyyMmDd, Time } from "../typeDefinitions/types";
 
 const Form = (props: FormProps) => {
