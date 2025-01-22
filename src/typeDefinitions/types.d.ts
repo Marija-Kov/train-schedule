@@ -8,7 +8,7 @@ import {
   Day,
   Hours,
   Minutes,
-} from "./boringTypes";
+} from "./aliases";
 
 export type Input = {
   from: StationName | undefined;
@@ -54,7 +54,7 @@ export type StationDeparture = {
 
 export type TrainDetails = {
   id: TrainIdDirection1 | TrainIdDirection2;
-  directionId: GetDirectionId<
+  directionId: DirectionId<
     TrainIdDirection1,
     TrainIdDirection2,
     TrainDetails["id"]
@@ -62,4 +62,4 @@ export type TrainDetails = {
   activeOnWeekendsAndHolidays: boolean | "w&h_only";
 };
 
-type GetDirectionId<T1, T2, Id extends T1 | T2> = Id extends T1 ? 1 : 2;
+type DirectionId<T1, T2, Id extends T1 | T2> = Id extends T1 ? 1 : 2;

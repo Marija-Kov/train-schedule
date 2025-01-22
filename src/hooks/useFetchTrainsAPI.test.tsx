@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { renderHook } from "@testing-library/react";
 import useFetchTrainsAPI from "./useFetchTrainsAPI";
-import { StationName } from "../typeDefinitions/boringTypes";
+import { StationName } from "../typeDefinitions/aliases";
 import { Time, YyyyMmDd } from "../typeDefinitions/types";
 import { hasError } from "../typeDefinitions/typeGuards";
 
