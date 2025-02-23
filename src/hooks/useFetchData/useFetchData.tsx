@@ -1,33 +1,42 @@
-import { StationDetails, YyyyMmDd } from "../../typeDefinitions/types";
-
 const useFetchData = () => {
   const url =
     "https://marija-kov.github.io/train-schedule-23-api/stations.json";
-  const fetchData = async () => {
-    const cacheExpiration = "cacheExpiration";
-    const cachedStationsData = "cachedStationsData";
-    const scheduleValid = new Date("December 13, 2025").getTime();
-    let data: { holidays: YyyyMmDd[]; stations: StationDetails[] };
-    const scheduleCached = localStorage.getItem(cachedStationsData);
-    const cachedScheduleValid = localStorage.getItem(cacheExpiration);
-    if (
-      process.env.NODE_ENV === "production" &&
-      scheduleCached &&
-      cachedScheduleValid &&
-      Number(cachedScheduleValid) > new Date().getTime() &&
-      Number(cachedScheduleValid) < scheduleValid
-    ) {
-      data = JSON.parse(scheduleCached);
+
+  const version = 1;
+  const cacheName = `trainScheduleBgd-${version}`;   
+  
+  const fetchData = async () => { 
+    if (process.env.NODE_ENV === "test") {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          console.error(`Could not fetch from url: ${url}`);
+          return;
+        }
+        return await response.json();  
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+    }
+    
+    const cache = await caches.open(cacheName);
+    let data = await cache.match(cacheName);
+    if (data) {
+      return await data.json();
     } else {
       const response = await fetch(url);
+      if (!response.ok) {
+        console.error(`Could not fetch from url: ${url}`);
+        return "Data not available";
+      }
+      const oldVersions = await caches.keys();
+      oldVersions.forEach(v => v !== cacheName && caches.delete(v));
+      cache.put(cacheName, response.clone());
       data = await response.json();
-      localStorage.setItem(cachedStationsData, JSON.stringify(data));
-      const expirationDateTime = new Date(
-        new Date().getTime() + 6 * 30 * 24 * 60 * 60 * 1000
-      ).getTime();
-      localStorage.setItem(cacheExpiration, String(expirationDateTime));
+
+      return data;
     }
-    return data;
   };
   return { fetchData };
 };
