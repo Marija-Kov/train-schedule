@@ -16,7 +16,7 @@ export function getResult(
   possibleArrivals: StationDetailsDeparture[]
 ) {
   const result: ResultDeparture[] = [];
-  for (let departure of possibleDepartures) {
+  for (const departure of possibleDepartures) {
     result.push(matchADepartureWithAnArrival(departure, possibleArrivals));
   }
   return result.filter((r) => r !== undefined);
