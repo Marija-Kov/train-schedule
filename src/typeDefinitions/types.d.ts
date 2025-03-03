@@ -34,11 +34,11 @@ export type Result = {
 } | { error: string };
 
 export type FormProps = {
-  runSetDepartures: (d: Result) => void;
+  handleSetDepartures: (d: Result) => void;
 };
 
 export type InfoProps = {
-  runSetAppInfo: () => void;
+  toggleAppInfoVisibility: () => void;
 };
 
 export type StationDetails = {

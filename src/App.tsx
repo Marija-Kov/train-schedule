@@ -13,15 +13,15 @@ function App() {
   });
   const [appInfo, setAppInfo] = useState(false);
 
-  const runSetDepartures = (d: SetStateAction<Result>) => {
+  const handleSetDepartures = (d: SetStateAction<Result>) => {
     setResult(d);
   };
 
-  const runSetAppInfo = () => {
+  const toggleAppInfoVisibility = () => {
     setAppInfo((prev) => !prev);
   };
 
-  const showData = () => {
+  const showDepartures = () => {
     if (hasError(result)) {
       return (
         <div className="no-departures">
@@ -33,7 +33,7 @@ function App() {
             aria-label="back to search form"
             className="back"
             onClick={() =>
-              runSetDepartures({
+              handleSetDepartures({
                 departureStation: "Batajnica",
                 arrivalStation: "Altina",
                 departures: [],
@@ -69,7 +69,7 @@ function App() {
             aria-label="back to search form"
             className="back"
             onClick={() =>
-              runSetDepartures({
+              handleSetDepartures({
                 departureStation: "Batajnica",
                 arrivalStation: "Altina",
                 departures: [],
@@ -95,16 +95,16 @@ function App() {
         <span>
           <button
             aria-label="more info"
-            onClick={runSetAppInfo}
+            onClick={toggleAppInfoVisibility}
             className="info"
           >
             ?
           </button>
         </span>
       </header>
-      {appInfo && <Info runSetAppInfo={runSetAppInfo} />}
-      <Form runSetDepartures={runSetDepartures} />
-      {showData()}
+      {appInfo && <Info toggleAppInfoVisibility={toggleAppInfoVisibility} />}
+      <Form handleSetDepartures={handleSetDepartures} />
+      {showDepartures()}
     </div>
   );
 }

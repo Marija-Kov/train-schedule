@@ -4,7 +4,7 @@ import Info from "./Info";
 
 describe("<Info/>", () => {
   it("should render Info component properly", () => {
-    render(<Info runSetAppInfo={() => {}} />);
+    render(<Info toggleAppInfoVisibility={() => {}} />);
     const linkToPdf = screen.getByText("reda vožnje za BG voz");
     const linkToRepo = screen.getByLabelText("repo");
     const closeAppInfoBtn = screen.getByLabelText("close app info");

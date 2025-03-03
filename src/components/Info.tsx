@@ -1,7 +1,7 @@
 import { InfoProps } from "../typeDefinitions/types";
 
 const Info = (props: InfoProps) => {
-  const { runSetAppInfo } = props;
+  const { toggleAppInfoVisibility } = props;
   return (
     <div className="info--content">
       <p>
@@ -30,7 +30,7 @@ const Info = (props: InfoProps) => {
       <button
         aria-label="close app info"
         className="back"
-        onClick={runSetAppInfo}
+        onClick={toggleAppInfoVisibility}
       >
         nazad
       </button>
