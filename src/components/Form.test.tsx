@@ -22,7 +22,7 @@ describe("<Form />", () => {
       "sebes",
       "ovca",
     ];
-    render(<Form runSetDepartures={() => {}} />);
+    render(<Form handleSetDepartures={() => {}} />);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );
@@ -52,7 +52,7 @@ describe("<Form />", () => {
 
   it("should focus Form component elements in the right order", async () => {
     user.setup();
-    render(<Form runSetDepartures={() => {}} />);
+    render(<Form handleSetDepartures={() => {}} />);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );

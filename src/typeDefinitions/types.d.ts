@@ -33,11 +33,11 @@ export type ResultDeparture = DepartureProps & {
 };
 
 export type FormProps = {
-  runSetDepartures: (d: string | ResultDeparture[]) => void;
+  handleSetDepartures: (d: string | ResultDeparture[]) => void;
 };
 
 export type InfoProps = {
-  runSetAppInfo: () => void;
+  toggleAppInfoVisibility: () => void;
 };
 
 export type StationDetails = {
