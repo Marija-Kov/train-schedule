@@ -26,6 +26,7 @@ function App() {
         <div className="departures--container">
           <h2>
             <span aria-label="route start">{departures[0].from}</span>
+            <span>➞</span>
             <span aria-label="route end">{departures[0].to}</span>
           </h2>
           <h3>
