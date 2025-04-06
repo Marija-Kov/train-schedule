@@ -1,4 +1,4 @@
-import { ResultDeparture, Input } from "../../typeDefinitions/types";
+import { DepartureOutput, FormInputData } from "train-schedule-types";
 import useFetchData from "../useFetchData/useFetchData";
 import {
   frequencyOnDate,
@@ -14,8 +14,8 @@ const useGetDepartures = () => {
   const { fetchData } = useFetchData();
 
   const getDepartures = async (
-    input: Input
-  ): Promise<ResultDeparture[] | string> => {
+    input: FormInputData
+  ): Promise<DepartureOutput[] | string> => {
     if (!input.from || !input.to || !input.date || !input.time)
       return "All fields must be filled";
 

@@ -2,16 +2,16 @@ import { SetStateAction, useState } from "react";
 import Form from "./components/Form";
 import Departure from "./components/Departure";
 import Info from "./components/Info";
-import { ResultDeparture } from "./typeDefinitions/types";
+import { DepartureDetails } from "train-schedule-types";
 
 function App() {
-  const [departures, setDepartures] = useState<ResultDeparture[] | string>(
+  const [departures, setDepartures] = useState<DepartureDetails[] | string>(
     []
   );
   const [appInfo, setAppInfo] = useState(false);
 
   const handleSetDepartures = (
-    d: SetStateAction<ResultDeparture[] | string>
+    d: SetStateAction<DepartureDetails[] | string>
   ) => {
     setDepartures(d);
   };

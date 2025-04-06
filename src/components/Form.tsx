@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import useGetDepartures from "../hooks/useGetDepartures/useGetDepartures";
-import { StationName } from "../typeDefinitions/aliases";
-import { FormProps, Input, YyyyMmDd, Time } from "../typeDefinitions/types";
+import { FormInputData, FormProps, YyyyMmDd, TimeOutput, StationName, DepartureDetails } from "train-schedule-types";
 
 const Form = (props: FormProps) => {
   const { getDepartures } = useGetDepartures();
@@ -14,11 +13,11 @@ const Form = (props: FormProps) => {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
-   const input : Input = {
+   const input : FormInputData = {
     from: from.current?.value as StationName,
     to: to.current?.value as StationName,
     date: date.current?.value as YyyyMmDd,
-    time: time.current?.value as Time,
+    time: time.current?.value as TimeOutput,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);
    if(!input.to) setEmptyFields(prev => ["to", ...prev]);
@@ -28,7 +27,7 @@ const Form = (props: FormProps) => {
    if(input.from && input.to && input.date && input.time){
     setEmptyFields([]);
     const departures = await getDepartures(input);
-    props.handleSetDepartures(departures);
+    props.handleSetDepartures(departures as string | DepartureDetails[]);
    }
 
   }

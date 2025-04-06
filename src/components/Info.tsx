@@ -1,4 +1,4 @@
-import { InfoProps } from "../typeDefinitions/types";
+import { InfoProps } from "train-schedule-types";
 
 const Info = (props: InfoProps) => {
   const { toggleAppInfoVisibility } = props;

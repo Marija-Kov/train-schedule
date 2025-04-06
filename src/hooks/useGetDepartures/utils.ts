@@ -1,21 +1,14 @@
-import { StationName } from "../../typeDefinitions/aliases";
-import {
-  ResultDeparture,
-  StationDetailsDeparture,
-  StationDetails,
-  Time,
-  YyyyMmDd,
-} from "../../typeDefinitions/types";
+import { TimeOutput, YyyyMmDd, DepartureOutput, StationDepartureDetails, Station, StationName } from "train-schedule-types";
 
 /**
  * Creates an array out of departure objects with found arrival matches; filters out the undefined.
  * @returns An array of departures with all the necessary response information.
  */
 export function getResult(
-  possibleDepartures: ResultDeparture[],
-  possibleArrivals: StationDetailsDeparture[]
+  possibleDepartures: DepartureOutput[],
+  possibleArrivals: StationDepartureDetails[]
 ) {
-  const result: ResultDeparture[] = [];
+  const result: DepartureOutput[] = [];
   for (const departure of possibleDepartures) {
     result.push(matchADepartureWithAnArrival(departure, possibleArrivals));
   }
@@ -29,11 +22,11 @@ export function getResult(
  * @returns A departure object with all the necessary response information or undefined.
  */
 function matchADepartureWithAnArrival(
-  departure: ResultDeparture,
-  possibleArrivals: StationDetailsDeparture[]
+  departure: DepartureOutput,
+  possibleArrivals: StationDepartureDetails[]
 ) {
   const matchingArrival = possibleArrivals.filter(
-    (arrival: StationDetailsDeparture) =>
+    (arrival: StationDepartureDetails) =>
       arrival.trainDetails.id === departure.trainId
   )[0];
   return matchingArrival && writeArrivalTime(departure, matchingArrival);
@@ -44,8 +37,8 @@ function matchADepartureWithAnArrival(
  * @returns A departure with a matching arrival time.
  */
 function writeArrivalTime(
-  departure: ResultDeparture,
-  arrival: StationDetailsDeparture
+  departure: DepartureOutput,
+  arrival: StationDepartureDetails
 ) {
   departure.arrivalTime = timeToString(arrival.time);
   return departure;
@@ -57,19 +50,19 @@ function writeArrivalTime(
  * @returns Array of enriched departure objects.
  */
 export function transformToReturnFormat(
-  departures: StationDetailsDeparture[],
-  stations: StationDetails[],
+  departures: StationDepartureDetails[],
+  stations: Station[],
   departureStationIndex: number,
   arrivalStationIndex: number
 ) {
-  return departures.map((departure: StationDetailsDeparture) => {
+  return departures.map((departure: StationDepartureDetails) => {
     return {
       departureTime: timeToString(departure.time),
       arrivalTime: "0:10", // placeholder
       trainId: departure.trainDetails.id,
       from: formatName(stations, departureStationIndex),
       to: formatName(stations, arrivalStationIndex),
-    } as ResultDeparture;
+    } as DepartureOutput;
   });
 }
 
@@ -78,12 +71,12 @@ export function transformToReturnFormat(
  * @returns Narrowed down selection of departures that are to be processed further.
  */
 export function filterDepartures(
-  departures: StationDetailsDeparture[],
+  departures: StationDepartureDetails[],
   time: number,
   direction: 1 | 2,
   frequency: (boolean | string)[]
 ) {
-  return departures.filter((departure: StationDetailsDeparture) => {
+  return departures.filter((departure: StationDepartureDetails) => {
     return (
       departure.time >= time &&
       departure.trainDetails.directionId === direction &&
@@ -96,13 +89,13 @@ export function filterDepartures(
  * Converts a number into a time string.
  */
 function timeToString(time: number) {
-  return time.toFixed(2).split(".").join(":") as Time;
+  return time.toFixed(2).split(".").join(":") as TimeOutput;
 }
 
 /**
  * Converts time string into a number.
  */
-export function timeToNumber(time: Time) {
+export function timeToNumber(time: TimeOutput) {
   return Number(time.split(":").join("."));
 }
 
@@ -123,18 +116,18 @@ export function frequencyOnDate(date: YyyyMmDd, holidays: YyyyMmDd[]) {
  * @returns Index of station in the list of stations (starting with Batajnica, ending with Ovca).
  */
 export function stationIndex(
-  stations: StationDetails[],
+  stations: Station[],
   endpoint: StationName
 ) {
   return stations
-    .filter((station: StationDetails) => station.name === endpoint)
-    .map((station: StationDetails) => stations.indexOf(station))[0];
+    .filter((station: Station) => station.name === endpoint)
+    .map((station: Station) => stations.indexOf(station))[0];
 }
 
 /**
  * @returns A station name with correct spacing and capitalization.
  */
-function formatName(stations: StationDetails[], stationIndex: number) {
+function formatName(stations: Station[], stationIndex: number) {
   return stations[stationIndex].nameFormatted;
 }
 
