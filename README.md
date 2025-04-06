@@ -69,11 +69,6 @@ In the root folder of the cloned repo, run:
             
 <br>
 
-## Todos <a name = "todos"></a>
- - Enable users to save and quickly access their most frequent departures;
- - Enable sharing search results;
-<br>
-
 ## Author <a name = "author"></a>
 
 [@marija-kov](https://github.com/Marija-Kov) 
