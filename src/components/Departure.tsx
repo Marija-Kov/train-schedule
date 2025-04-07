@@ -1,4 +1,4 @@
-import { DepartureProps } from "../typeDefinitions/types";
+import { DepartureProps } from "train-schedule-types";
 
 const Departure = (props: DepartureProps) => {
   const { departureTime, arrivalTime, trainId } = props;

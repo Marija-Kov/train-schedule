@@ -1,8 +1,8 @@
-import { Input, Result } from "../typeDefinitions/types";
+import { FormInputData, DeparturesResponseBody } from "train-schedule-types";
 
 const useFetchTrainsAPI = () => {
   const url = "http://localhost:3003"; // default port for locally run train api
-  const fetchTrainsAPI = async (input: Input): Promise<Result> => {
+  const fetchTrainsAPI = async (input: FormInputData): Promise<DeparturesResponseBody> => {
     const { from, to, date, time } = input;
     if (!from || !to || !date || !time) {
       return { error: "Please specify all parameters" };

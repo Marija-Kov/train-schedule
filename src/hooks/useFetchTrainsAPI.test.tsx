@@ -1,9 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { renderHook } from "@testing-library/react";
 import useFetchTrainsAPI from "./useFetchTrainsAPI";
-import { StationName } from "../typeDefinitions/aliases";
-import { Time, YyyyMmDd } from "../typeDefinitions/types";
-import { hasError } from "../typeDefinitions/typeGuards";
+import { StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
+import { hasError } from "../types/typeGuards";
 
 describe("useFetchTrainsAPI", () => {
   it("should return fetchTrainsAPI() function", () => {
@@ -57,7 +56,7 @@ describe("useFetchTrainsAPI", () => {
       from: "altina",
       to: "novi beograd",
       date: "2025-04-04",
-      time: "1604" as Time,
+      time: "1604" as TimeOutput,
     });
     expect(response).toHaveProperty("error");
     if (hasError(response)) {
@@ -70,7 +69,7 @@ describe("useFetchTrainsAPI", () => {
       from: "altina",
       to: "novi beograd",
       date: "2025-04-04",
-      time: "23.04" as Time,
+      time: "23.04" as TimeOutput,
     });
     expect(response).toHaveProperty("error");
     if (hasError(response)) {

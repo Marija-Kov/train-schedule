@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 import useFetchTrainsAPI from "../hooks/useFetchTrainsAPI";
-import { StationName } from "../typeDefinitions/aliases";
-import { FormProps, Input, YyyyMmDd, Time } from "../typeDefinitions/types";
+import { StationName, FormPropsAPIResponse, FormInputData, TimeOutput, YyyyMmDd } from "train-schedule-types";
 
-const Form = (props: FormProps) => {
+const Form = (props: FormPropsAPIResponse) => {
   const { fetchTrainsAPI } = useFetchTrainsAPI();
   const from = useRef<HTMLSelectElement>();
   const to = useRef<HTMLSelectElement>();
@@ -14,11 +13,11 @@ const Form = (props: FormProps) => {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
    e.preventDefault();
-   const input : Input = {
+   const input : FormInputData = {
     from: from.current?.value as StationName,
     to: to.current?.value as StationName,
     date: date.current?.value as YyyyMmDd,
-    time: time.current?.value as Time,
+    time: time.current?.value as TimeOutput,
    }
    if(!input.from) setEmptyFields(prev => ["from", ...prev]);
    if(!input.to) setEmptyFields(prev => ["to", ...prev]);

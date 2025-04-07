@@ -2,18 +2,18 @@ import { SetStateAction, useState } from "react";
 import Form from "./components/Form";
 import Departure from "./components/Departure";
 import Info from "./components/Info";
-import { DepartureProps, Result } from "./typeDefinitions/types";
-import { hasError } from "./typeDefinitions/typeGuards";
+import { DepartureProps, DeparturesResponseBody } from "train-schedule-types";
+import { hasError } from "./types/typeGuards";
 
 function App() {
-  const [result, setResult] = useState<Result>({
+  const [result, setResult] = useState<DeparturesResponseBody>({
     departureStation: "Batajnica",
     arrivalStation: "Altina",
     departures: [],
   });
   const [appInfo, setAppInfo] = useState(false);
 
-  const handleSetDepartures = (d: SetStateAction<Result>) => {
+  const handleSetDepartures = (d: SetStateAction<DeparturesResponseBody>) => {
     setResult(d);
   };
 
