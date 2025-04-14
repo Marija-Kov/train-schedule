@@ -5,13 +5,11 @@ import Info from "./components/Info";
 import { DepartureDetails } from "train-schedule-types";
 
 function App() {
-  const [departures, setDepartures] = useState<DepartureDetails[] | string>(
-    []
-  );
+  const [departures, setDepartures] = useState<DepartureDetails[] | null>(null);
   const [appInfo, setAppInfo] = useState(false);
 
   const handleSetDepartures = (
-    d: SetStateAction<DepartureDetails[] | string>
+    d: SetStateAction<DepartureDetails[] | null>
   ) => {
     setDepartures(d);
   };
@@ -21,7 +19,7 @@ function App() {
   };
 
   const showDepartures = () => {
-    if (typeof departures === "object" && departures.length) {
+    if (departures && departures.length) {
       return (
         <div className="departures--container">
           <h2>
@@ -45,14 +43,14 @@ function App() {
           <button
             aria-label="back to search form"
             className="back"
-            onClick={() => handleSetDepartures([])}
+            onClick={() => handleSetDepartures(null)}
           >
             nazad
           </button>
         </div>
       );
     }
-    if (typeof departures === "string") {
+    if (departures && !departures.length) {
       return (
         <div className="no-departures">
           <p>⚠</p>
@@ -62,7 +60,7 @@ function App() {
           <button
             aria-label="back to search form"
             className="back"
-            onClick={() => handleSetDepartures([])}
+            onClick={() => handleSetDepartures(null)}
           >
             nazad
           </button>

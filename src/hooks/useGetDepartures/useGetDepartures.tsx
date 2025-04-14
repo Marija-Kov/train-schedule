@@ -19,7 +19,7 @@ const useGetDepartures = () => {
     if (!input.from || !input.to || !input.date || !input.time)
       return "All fields must be filled";
 
-    if (input.from === input.to) return "That is not a route";
+    if (input.from === input.to) return [];
 
     const data = await fetchData();
     const stations = data.stations;
@@ -34,7 +34,7 @@ const useGetDepartures = () => {
       frequency
     );
 
-    if (!possibleDepartures.length) return "no departures";
+    if (!possibleDepartures.length) return [];
 
     const possibleDeparturesEnriched = transformToReturnFormat(
       possibleDepartures,
