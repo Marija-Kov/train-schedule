@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import user from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import Form from "./Form";
+import { BrowserRouter } from "react-router";
 
 describe("<Form />", () => {
   it("should render Form component properly", () => {
@@ -22,7 +23,10 @@ describe("<Form />", () => {
       "sebes",
       "ovca",
     ];
-    render(<Form handleSetDepartures={() => {}} />);
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );
@@ -52,7 +56,10 @@ describe("<Form />", () => {
 
   it("should focus Form component elements in the right order", async () => {
     user.setup();
-    render(<Form handleSetDepartures={() => {}} />);
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );
@@ -76,5 +83,69 @@ describe("<Form />", () => {
     expect(selectTimeOfDeparture).toHaveFocus();
     await user.tab();
     expect(searchBtn).toHaveFocus();
+  });
+
+  it("should highlight input/selection elements with red border on submit given that values are invalid", async () => {
+    user.setup();
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.click(searchBtn);
+    expect(selectArrivalStation).toHaveAttribute("class", "error");
+    expect(selectDepartureStation).toHaveAttribute("class", "error");
+    expect(selectDateOfDeparture).toHaveAttribute("class", "error");
+    expect(selectTimeOfDeparture).toHaveAttribute("class", "error");
+  });
+  // TODO: how do we make this work?
+  it("should call navigate() with correct parameters when search button is clicked given that all input/selection values are provided", async () => {
+    user.setup();
+    vi.mock(import("react-router"), async (importOriginal) => {
+      const actual = await importOriginal();
+      return {
+        ...actual,
+        useNavigate: () => {
+          const navigate = vi.fn();
+          return navigate;
+        }
+      }
+    });
+    const mockNavigate = (await import("react-router")).useNavigate();
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.selectOptions(selectDepartureStation, "zemun");
+    await user.selectOptions(selectArrivalStation, "pancevacki most");
+    await user.type(selectDateOfDeparture, "2025-10-11");
+    await user.type(selectTimeOfDeparture, "14:00");
+    await user.click(searchBtn);
+    expect(mockNavigate).toHaveBeenCalledWith('departures/zemun/pancevacki%20most/2025-10-11/14:00');
   });
 });

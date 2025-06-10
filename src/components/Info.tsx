@@ -1,7 +1,4 @@
-import { InfoProps } from "train-schedule-types";
-
-const Info = (props: InfoProps) => {
-  const { toggleAppInfoVisibility } = props;
+const Info = () => {
   return (
     <div className="info--content">
       <p>
@@ -19,21 +16,13 @@ const Info = (props: InfoProps) => {
        <br></br>
        Saobraćaj vozova je podložan vanrednim izmenama. 
        Pogledajte 
-        <a href="https://srbijavoz.rs/informacije/"><strong> ovu stranicu </strong></a>
+        <a aria-label="schedule change announcements" href="https://srbijavoz.rs/informacije/"><strong> ovu stranicu </strong></a>
         za informacije.
       </p>
 
       <a aria-label="repo" href="https://github.com/Marija-Kov/train-schedule">
         <img className="github-icon" src="/github.png" />
       </a>
-
-      <button
-        aria-label="close app info"
-        className="back"
-        onClick={toggleAppInfoVisibility}
-      >
-        nazad
-      </button>
     </div>
   );
 };
