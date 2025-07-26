@@ -148,4 +148,7 @@ describe("<Form />", () => {
     await user.click(searchBtn);
     expect(mockNavigate).toHaveBeenCalledWith('departures/zemun/pancevacki%20most/2025-10-11/14:00');
   });
+
+  // TODO: should store last submitted input in sessionStorage and show it in the form
+  // when the user navigates back to the form view
 });

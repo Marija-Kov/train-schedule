@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FormInputData } from "train-schedule-types";
+import { useEffect, useState } from "react";
+import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
 import { useNavigate } from "react-router";
 
 const Form = () => {
@@ -14,6 +14,23 @@ const Form = () => {
 
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
+  useEffect(() => {
+    const lastQueryJSON = sessionStorage.getItem("lastQuery");
+    if (lastQueryJSON) {
+      const lastQuery = JSON.parse(lastQueryJSON);
+      document.querySelectorAll("select")[0].value = lastQuery.from as StationName || "";
+      document.querySelectorAll("select")[1].value = lastQuery.to as StationName || "";
+      document.querySelectorAll("input")[0].value = lastQuery.date as YyyyMmDd
+      document.querySelectorAll("input")[1].value = lastQuery.time as TimeOutput
+      setInput({
+        from: lastQuery.from as StationName,
+        to: lastQuery.to as StationName,
+        date: lastQuery.date as YyyyMmDd,
+        time: lastQuery.time as TimeOutput
+      })
+    }
+  }, [])
+
   const handleChange = (e: React.FormEvent) => {
     const { name } = e.target as HTMLSelectElement;
     const { value } = e.target as HTMLSelectElement;
@@ -22,7 +39,7 @@ const Form = () => {
       [name]: value
     }))
   }
-  
+
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.from) setEmptyFields(prev => ["from", ...prev]);
@@ -31,6 +48,7 @@ const Form = () => {
     if (!input.time) setEmptyFields(prev => ["time", ...prev]);
 
     if (input.from && input.to && input.date && input.time) {
+      sessionStorage.setItem("lastQuery", JSON.stringify(input));
       navigate(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
       setEmptyFields([]);
     }
