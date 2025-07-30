@@ -9,6 +9,7 @@ import AppLayout from "./AppLayout";
 import Info from "./components/Info";
 import Form from "./components/Form";
 import DeparturesLayout from "./components/DeparturesLayout";
+import PageNotFound from "./components/PageNotFound";
 import "./scss/main.scss";
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "*", element: <div>Page Does Not Exist</div>
+    path: "*", Component: PageNotFound
   }
 ]);
 
