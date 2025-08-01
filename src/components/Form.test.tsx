@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import user from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import Form from "./Form";
+import { BrowserRouter } from "react-router";
 
 describe("<Form />", () => {
   it("should render Form component properly", () => {
@@ -22,7 +23,10 @@ describe("<Form />", () => {
       "sebes",
       "ovca",
     ];
-    render(<Form handleSetDepartures={() => {}} />);
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );
@@ -52,7 +56,10 @@ describe("<Form />", () => {
 
   it("should focus Form component elements in the right order", async () => {
     user.setup();
-    render(<Form handleSetDepartures={() => {}} />);
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
     const selectDepartureStation = screen.getByLabelText(
       "select departure station"
     );
@@ -77,4 +84,73 @@ describe("<Form />", () => {
     await user.tab();
     expect(searchBtn).toHaveFocus();
   });
+
+  it("should highlight input/selection elements with red border on submit given that values are invalid", async () => {
+    user.setup();
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.click(searchBtn);
+    expect(selectArrivalStation).toHaveAttribute("class", "error");
+    expect(selectDepartureStation).toHaveAttribute("class", "error");
+    expect(selectDateOfDeparture).toHaveAttribute("class", "error");
+    expect(selectTimeOfDeparture).toHaveAttribute("class", "error");
+  });
+
+  it("should navigate away when search button is clicked given that all input/selection values are provided", async () => {
+    user.setup();
+    vi.mock(import("react-router"), async (importOriginal) => {
+      const actual = await importOriginal();
+      return {
+        ...actual,
+        useNavigate: () => vi.fn()
+      }
+    });
+    using spy = vi.spyOn((await import("react-router")), "useNavigate");
+    render(
+      <BrowserRouter>
+        <Form />
+      </BrowserRouter>);
+    const selectDepartureStation = screen.getByLabelText(
+      "select departure station"
+    );
+    const selectArrivalStation = screen.getByLabelText(
+      "select arrival station"
+    );
+    const selectDateOfDeparture = screen.getByLabelText(
+      "select date of departure"
+    );
+    const selectTimeOfDeparture = screen.getByLabelText(
+      "select time of departure"
+    );
+    const input = { from: "zemun", to: "ovca", date: "2025-10-11", time: "14:00"};
+    const searchBtn = screen.getByLabelText("search departures");
+    await user.selectOptions(selectDepartureStation, input.from);
+    await user.selectOptions(selectArrivalStation, input.to);
+    await user.type(selectDateOfDeparture, input.date);
+    await user.type(selectTimeOfDeparture, input.time);
+    await user.click(searchBtn);
+    expect(spy).toHaveBeenCalled();
+    /*
+      TODO: Ideally, we want to grab the navigate function and test whether it has been called with the right argument.
+      expect(navigate, "Error Calling navigate with").toHaveBeenCalledWith(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
+    */
+  });
+
+  // TODO: should store last submitted input in sessionStorage and show it in the form
+  // when the user navigates back to the form view
 });

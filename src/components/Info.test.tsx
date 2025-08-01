@@ -4,10 +4,12 @@ import Info from "./Info";
 
 describe("<Info/>", () => {
   it("should render Info component properly", () => {
-    render(<Info toggleAppInfoVisibility={() => {}} />);
+    render(<Info />);
     const linkToPdf = screen.getByText("reda vožnje za BG voz");
     const linkToRepo = screen.getByLabelText("repo");
-    const closeAppInfoBtn = screen.getByLabelText("close app info");
+    const note = screen.getByText(/podložan vanrednim izmenama/i);
+    const linkToScheduleChangeAnnouncements = screen.getByLabelText("schedule change announcements");
+
     expect(linkToPdf).toHaveAttribute(
       "href",
       "https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf"
@@ -16,6 +18,10 @@ describe("<Info/>", () => {
       "href",
       "https://github.com/Marija-Kov/train-schedule"
     );
-    expect(closeAppInfoBtn).toBeInTheDocument();
+    expect(note).toBeInTheDocument();
+    expect(linkToScheduleChangeAnnouncements).toHaveAttribute(
+      "href", 
+      "https://srbijavoz.rs/informacije/"
+    );
   });
 });

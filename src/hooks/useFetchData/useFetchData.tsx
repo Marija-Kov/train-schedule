@@ -3,7 +3,7 @@ const useFetchData = () => {
     "https://marija-kov.github.io/train-schedule-23-api/stations.json";
 
   const version = 2;
-  const cacheName = `trainScheduleBgd-${version}`;   
+  const cacheName = `/trainScheduleBgd-${version}`;   
   
   const fetchData = async () => { 
     if (process.env.NODE_ENV === "test") {
