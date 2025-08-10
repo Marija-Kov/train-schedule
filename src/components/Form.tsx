@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
 import { useNavigate } from "react-router";
+import { LanguageContext } from "../context/LanguageContext";
 
 const Form = () => {
   const navigate = useNavigate();
+  const { formLanguage } = useContext(LanguageContext);
 
   const [input, setInput] = useState<FormInputData>({
     from: undefined,
@@ -56,14 +58,14 @@ const Form = () => {
 
   return (
     <form aria-label="form" onSubmit={handleSubmit}>
-      <label htmlFor="from">Od/From:</label>
+      <label htmlFor="from">{formLanguage.from}:</label>
       <select
         onChange={handleChange}
         aria-label="select departure station"
         name="from"
         className={emptyFields.includes("from") ? "error" : ""}
       >
-        <option value="">Početna stanica</option>
+        <option value="">{formLanguage.from_title}</option>
         <option value="batajnica">Batajnica</option>
         <option value="kamendin">Kamendin</option>
         <option value="zemunsko polje">Zemunsko polje</option>
@@ -80,14 +82,14 @@ const Form = () => {
         <option value="sebes">Sebeš</option>
         <option value="ovca">Ovča</option>
       </select>
-      <label htmlFor="to">Do/To:</label>
+      <label htmlFor="to">{formLanguage.to}:</label>
       <select
         onChange={handleChange}
         aria-label="select arrival station"
         name="to"
         className={emptyFields.includes("to") ? "error" : ""}
       >
-        <option value="">Završna stanica</option>
+        <option value="">{formLanguage.to_title}</option>
         <option value="batajnica">Batajnica</option>
         <option value="kamendin">Kamendin</option>
         <option value="zemunsko polje">Zemunsko polje</option>
@@ -104,7 +106,7 @@ const Form = () => {
         <option value="sebes">Sebeš</option>
         <option value="ovca">Ovča</option>
       </select>
-      <label htmlFor="date">Datum/Date:</label>
+      <label htmlFor="date">{formLanguage.date}:</label>
       <input
         onChange={handleChange}
         aria-label="select date of departure"
@@ -114,7 +116,7 @@ const Form = () => {
         max="2025-12-13"
         className={emptyFields.includes("date") ? "error" : ""}
       ></input>
-      <label htmlFor="time">Vreme/Time:</label>
+      <label htmlFor="time">{formLanguage.time}:</label>
       <input
         onChange={handleChange}
         aria-label="select time of departure"
@@ -126,7 +128,7 @@ const Form = () => {
         aria-label="search departures"
         className="search"
       >
-        Pretraga
+        {formLanguage.searchBtnText}
       </button>
     </form>
   )

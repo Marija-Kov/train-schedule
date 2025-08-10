@@ -11,6 +11,7 @@ import Form from "./components/Form";
 import DeparturesLayout from "./components/DeparturesLayout";
 import PageNotFound from "./components/PageNotFound";
 import "./scss/main.scss";
+import { LanguageContextProvider } from "./context/LanguageContext";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <LanguageContextProvider>
+      <RouterProvider router={router} />
+    </LanguageContextProvider>
   </React.StrictMode>
 );
