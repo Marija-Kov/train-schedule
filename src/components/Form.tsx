@@ -128,7 +128,7 @@ const Form = () => {
         aria-label="search departures"
         className="search"
       >
-        {formLanguage.searchBtnText}
+        {formLanguage.search_btn_text}
       </button>
     </form>
   )
