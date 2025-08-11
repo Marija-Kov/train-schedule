@@ -44,18 +44,42 @@ const translation = JSON.stringify({
             schedule_change_announcements_link: "this page",
             for_info: "for more information.",
         },
-    }
+    },
+    departures_layout: {
+        sr: {
+            departure_time_title: "polazak",
+            arrival_time_title: "dolazak",
+            train_number_title: "br. voza",
+            loading_message: "Učitavanje",
+            back_btn_text: "nazad"
+        },
+        en: {
+            departure_time_title: "departure",
+            arrival_time_title: "arrival",
+            train_number_title: "train no.",
+            loading_message: "Loading",
+            back_btn_text: "back"
+        },
+    },
+    no_departures: {
+        sr: {
+            no_departures_message: "Nema polazaka po tim parametrima",
+        },
+        en: {
+            no_departures_message: "No departures found",
+        },
+    },
 });
 
 type Language = "SR" | "EN";
 
 type FormContent = {
-    from: string, 
-    from_title: string, 
-    to: string, 
-    to_title: string, 
-    date: string, 
-    time: string, 
+    from: string,
+    from_title: string,
+    to: string,
+    to_title: string,
+    date: string,
+    time: string,
     search_btn_text: string
 }
 
@@ -70,15 +94,27 @@ type InfoPageContent = {
     for_info: string,
 }
 
+type DeparturesLayoutContent = {
+    departure_time_title: string,
+    arrival_time_title: string,
+    train_number_title: string,
+    loading_message: string
+    back_btn_text: string
+}
+
 const LanguageContext = createContext<{
     languageFlag: Language,
     formLanguage: FormContent,
     infoLanguage: InfoPageContent,
+    departuresLayoutLanguage: DeparturesLayoutContent,
+    noDeparturesLanguage: { no_departures_message: string },
     changeLanguage: (language: Language) => void
 }>({
     languageFlag: "SR",
     formLanguage: JSON.parse(translation).form.sr,
     infoLanguage: JSON.parse(translation).info.sr,
+    departuresLayoutLanguage: JSON.parse(translation).departures_layout.sr,
+    noDeparturesLanguage: JSON.parse(translation).no_departures.sr,
     changeLanguage: (_) => { }
 });
 
@@ -86,17 +122,23 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({ children }
     const [languageFlag, setLanguageFlag] = useState<Language>("SR");
     const [formLanguage, setFormLanguage] = useState(JSON.parse(translation).form.sr);
     const [infoLanguage, setInfoLanguage] = useState(JSON.parse(translation).info.sr);
+    const [departuresLayoutLanguage, setDeparturesLayoutLanguage] = useState(JSON.parse(translation).departures_layout.sr);
+    const [noDeparturesLanguage, setNoDeparturesLanguage] = useState(JSON.parse(translation).no_departures.sr);
 
     function changeLanguage(l: Language) {
         setLanguageFlag(l);
         const formTranslation = JSON.parse(translation).form[l.toLowerCase()];
         const infoTranslation = JSON.parse(translation).info[l.toLowerCase()];
+        const departuresLayoutTranslation = JSON.parse(translation).departures_layout[l.toLowerCase()];
+        const noDeparturesTranslation = JSON.parse(translation).no_departures[l.toLowerCase()];
         setFormLanguage(formTranslation);
         setInfoLanguage(infoTranslation);
+        setDeparturesLayoutLanguage(departuresLayoutTranslation);
+        setNoDeparturesLanguage(noDeparturesTranslation);
     }
 
     return (
-        <LanguageContext.Provider value={{ languageFlag, changeLanguage, formLanguage, infoLanguage }}>
+        <LanguageContext.Provider value={{ languageFlag, changeLanguage, formLanguage, infoLanguage, departuresLayoutLanguage, noDeparturesLanguage }}>
             {children}
         </LanguageContext.Provider>
     )

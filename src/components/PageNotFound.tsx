@@ -2,9 +2,12 @@ const PageNotFound = () => {
     return (
         <div className="container">
             <br></br>
-            <h1>404<p>Stranica ne postoji</p></h1>
+            <h1>404
+                <p>Stranica ne postoji</p>
+                <p>Page not found</p>
+            </h1>
             <a href="/" aria-label="home" className="back">
-                    nazad na početnu
+                    početna / home
             </a>
         </div>
     )

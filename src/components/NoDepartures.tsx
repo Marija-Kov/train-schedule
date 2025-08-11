@@ -1,10 +1,12 @@
+import { useContext } from "react"
+import { LanguageContext } from "../context/LanguageContext"
+
 const NoDepartures = () => {
+  const { noDeparturesLanguage } = useContext(LanguageContext);
   return (
     <>
       <p>⚠</p>
-      <p>Nema polazaka po tim parametrima</p>
-      <p>/</p>
-      <p>No departures found</p>
+      <p>{noDeparturesLanguage.no_departures_message}</p>
     </>
   )
 }
