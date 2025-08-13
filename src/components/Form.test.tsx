@@ -27,19 +27,19 @@ describe("<Form />", () => {
       <BrowserRouter>
         <Form />
       </BrowserRouter>);
-    const selectDepartureStation = screen.getByLabelText(
-      "select departure station"
+    const selectDepartureStation = screen.getByTestId(
+      "select-departure-station"
     );
-    const selectArrivalStation = screen.getByLabelText(
-      "select arrival station"
+    const selectArrivalStation = screen.getByTestId(
+      "select-arrival-station"
     );
-    const selectDateOfDeparture = screen.getByLabelText(
-      "select date of departure"
+    const selectDateOfDeparture = screen.getByTestId(
+      "select-departure-date"
     );
-    const selectTimeOfDeparture = screen.getByLabelText(
-      "select time of departure"
+    const selectTimeOfDeparture = screen.getByTestId(
+      "select-departure-time"
     );
-    const searchBtn = screen.getByLabelText("search departures");
+    const searchBtn = screen.getByTestId("search-departures-btn");
     const departureAndArrivalOptions = ["", ...stations, "", ...stations];
     const HTMLInputElements: HTMLInputElement[] = screen.getAllByRole("option");
     const options = HTMLInputElements.map((o) => o.value);
@@ -60,19 +60,19 @@ describe("<Form />", () => {
       <BrowserRouter>
         <Form />
       </BrowserRouter>);
-    const selectDepartureStation = screen.getByLabelText(
-      "select departure station"
+    const selectDepartureStation = screen.getByTestId(
+      "select-departure-station"
     );
-    const selectArrivalStation = screen.getByLabelText(
-      "select arrival station"
+    const selectArrivalStation = screen.getByTestId(
+      "select-arrival-station"
     );
-    const selectDateOfDeparture = screen.getByLabelText(
-      "select date of departure"
+    const selectDateOfDeparture = screen.getByTestId(
+      "select-departure-date"
     );
-    const selectTimeOfDeparture = screen.getByLabelText(
-      "select time of departure"
+    const selectTimeOfDeparture = screen.getByTestId(
+      "select-departure-time"
     );
-    const searchBtn = screen.getByLabelText("search departures");
+    const searchBtn = screen.getByTestId("search-departures-btn");
     await user.tab();
     expect(selectDepartureStation).toHaveFocus();
     await user.tab();
@@ -91,19 +91,19 @@ describe("<Form />", () => {
       <BrowserRouter>
         <Form />
       </BrowserRouter>);
-    const selectDepartureStation = screen.getByLabelText(
-      "select departure station"
+    const selectDepartureStation = screen.getByTestId(
+      "select-departure-station"
     );
-    const selectArrivalStation = screen.getByLabelText(
-      "select arrival station"
+    const selectArrivalStation = screen.getByTestId(
+      "select-arrival-station"
     );
-    const selectDateOfDeparture = screen.getByLabelText(
-      "select date of departure"
+    const selectDateOfDeparture = screen.getByTestId(
+      "select-departure-date"
     );
-    const selectTimeOfDeparture = screen.getByLabelText(
-      "select time of departure"
+    const selectTimeOfDeparture = screen.getByTestId(
+      "select-departure-time"
     );
-    const searchBtn = screen.getByLabelText("search departures");
+    const searchBtn = screen.getByTestId("search-departures-btn");
     await user.click(searchBtn);
     expect(selectArrivalStation).toHaveAttribute("class", "error");
     expect(selectDepartureStation).toHaveAttribute("class", "error");
@@ -125,20 +125,20 @@ describe("<Form />", () => {
       <BrowserRouter>
         <Form />
       </BrowserRouter>);
-    const selectDepartureStation = screen.getByLabelText(
-      "select departure station"
+    const selectDepartureStation = screen.getByTestId(
+      "select-departure-station"
     );
-    const selectArrivalStation = screen.getByLabelText(
-      "select arrival station"
+    const selectArrivalStation = screen.getByTestId(
+      "select-arrival-station"
     );
-    const selectDateOfDeparture = screen.getByLabelText(
-      "select date of departure"
+    const selectDateOfDeparture = screen.getByTestId(
+      "select-departure-date"
     );
-    const selectTimeOfDeparture = screen.getByLabelText(
-      "select time of departure"
+    const selectTimeOfDeparture = screen.getByTestId(
+      "select-departure-time"
     );
+    const searchBtn = screen.getByTestId("search-departures-btn");
     const input = { from: "zemun", to: "ovca", date: "2025-10-11", time: "14:00"};
-    const searchBtn = screen.getByLabelText("search departures");
     await user.selectOptions(selectDepartureStation, input.from);
     await user.selectOptions(selectArrivalStation, input.to);
     await user.type(selectDateOfDeparture, input.date);

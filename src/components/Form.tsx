@@ -57,11 +57,11 @@ const Form = () => {
   }
 
   return (
-    <form aria-label="form" onSubmit={handleSubmit}>
+    <form data-testid="search-form" onSubmit={handleSubmit}>
       <label htmlFor="from">{formLanguage.from}:</label>
       <select
         onChange={handleChange}
-        aria-label="select departure station"
+        data-testid="select-departure-station"
         name="from"
         className={emptyFields.includes("from") ? "error" : ""}
       >
@@ -85,7 +85,7 @@ const Form = () => {
       <label htmlFor="to">{formLanguage.to}:</label>
       <select
         onChange={handleChange}
-        aria-label="select arrival station"
+        data-testid="select-arrival-station"
         name="to"
         className={emptyFields.includes("to") ? "error" : ""}
       >
@@ -109,7 +109,7 @@ const Form = () => {
       <label htmlFor="date">{formLanguage.date}:</label>
       <input
         onChange={handleChange}
-        aria-label="select date of departure"
+        data-testid="select-departure-date"
         name="date"
         type="date"
         min="2024-12-15"
@@ -119,13 +119,13 @@ const Form = () => {
       <label htmlFor="time">{formLanguage.time}:</label>
       <input
         onChange={handleChange}
-        aria-label="select time of departure"
+        data-testid="select-departure-time"
         name="time"
         type="time"
         className={emptyFields.includes("time") ? "error" : ""}
       ></input>
       <button
-        aria-label="search departures"
+        data-testid="search-departures-btn"
         className="search"
       >
         {formLanguage.search_btn_text}

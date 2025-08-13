@@ -27,12 +27,12 @@ function AppLayout() {
     <div className="container">
       <header>
         <span>&#10210;</span>
-        <NavLink to="/" aria-label="home">
+        <NavLink to="/" data-testid="home-link">
           <img className="train-icon" src="/train-icon.png" alt="train icon" />
         </NavLink>
         <span>
           <button
-            aria-label="more info"
+            data-testid="app-info"
             onClick={handleInfoClick}
             className="info"
           >

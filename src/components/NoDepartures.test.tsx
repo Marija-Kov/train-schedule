@@ -5,7 +5,7 @@ import NoDepartures from "./NoDepartures";
 describe("<NoDepartures/>", () => {
     it("should render no departures message", () => {
         render(<NoDepartures />);
-        const message = screen.getByText("No departures found");
+        const message = screen.getByTestId("no-departures-message");
         expect(message).toBeInTheDocument();
     })
 })

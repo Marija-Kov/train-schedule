@@ -7,9 +7,9 @@ describe("<Departure />", () => {
     render(
       <Departure departureTime={"12:0"} arrivalTime={"12:15"} trainId={8000} />
     );
-    const departureTime = screen.getByLabelText("departure time");
-    const arrivalTime = screen.getByLabelText("arrival time");
-    const trainId = screen.getByLabelText("train id number");
+    const departureTime = screen.getByTestId("departure-time-cell");
+    const arrivalTime = screen.getByTestId("arrival-time-cell");
+    const trainId = screen.getByTestId("train-no-cell");
     expect(departureTime).toBeInTheDocument();
     expect(arrivalTime).toBeInTheDocument();
     expect(trainId).toBeInTheDocument();

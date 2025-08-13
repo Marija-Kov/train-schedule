@@ -6,7 +6,7 @@ describe("<PageNotFound/>", () => {
   it("should render PageNotFound component properly", () => {
     render(<PageNotFound />);
     const statusCode = screen.getByText("404");
-    const backToHome = screen.getByText(/nazad na početnu/i);
+    const backToHome = screen.getByTestId("home-link");
     expect(statusCode).toBeInTheDocument();
     expect(backToHome).toBeInTheDocument();
     expect(backToHome).toHaveAttribute("href", "/");

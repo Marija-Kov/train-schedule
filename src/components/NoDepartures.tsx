@@ -6,7 +6,7 @@ const NoDepartures = () => {
   return (
     <>
       <p>⚠</p>
-      <p>{noDeparturesLanguage.no_departures_message}</p>
+      <p data-testid="no-departures-message">{noDeparturesLanguage.no_departures_message}</p>
     </>
   )
 }

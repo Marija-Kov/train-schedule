@@ -6,7 +6,7 @@ const PageNotFound = () => {
                 <p>Stranica ne postoji</p>
                 <p>Page not found</p>
             </h1>
-            <a href="/" aria-label="home" className="back">
+            <a href="/" data-testid="home-link" className="back">
                     početna / home
             </a>
         </div>
