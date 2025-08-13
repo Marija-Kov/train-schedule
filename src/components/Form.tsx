@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
 import { useNavigate } from "react-router";
 import { LanguageContext } from "../context/LanguageContext";
+import useBrowserStorage from "../hooks/useBrowserStorage/useBrowserStorage";
 
 const Form = () => {
   const navigate = useNavigate();
+  const { browserStorage, session } = useBrowserStorage();
   const { formLanguage } = useContext(LanguageContext);
 
   const [input, setInput] = useState<FormInputData>({
@@ -17,7 +19,7 @@ const Form = () => {
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
   useEffect(() => {
-    const lastQueryJSON = sessionStorage.getItem("lastQuery");
+    const lastQueryJSON = browserStorage(session, "lastQuery");
     if (lastQueryJSON) {
       const lastQuery = JSON.parse(lastQueryJSON);
       document.querySelectorAll("select")[1].value = lastQuery.from as StationName || "";
@@ -50,7 +52,7 @@ const Form = () => {
     if (!input.time) setEmptyFields(prev => ["time", ...prev]);
 
     if (input.from && input.to && input.date && input.time) {
-      sessionStorage.setItem("lastQuery", JSON.stringify(input));
+      browserStorage(session, "lastQuery", JSON.stringify(input));
       navigate(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
       setEmptyFields([]);
     }

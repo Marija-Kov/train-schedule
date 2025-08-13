@@ -2,16 +2,18 @@ import { NavLink, Outlet, useNavigate, useLocation } from "react-router"
 import { DeparturesContextProvider } from "./context/DeparturesContext";
 import { LanguageContext } from "./context/LanguageContext";
 import { useContext, useEffect } from "react";
+import useBrowserStorage from "./hooks/useBrowserStorage/useBrowserStorage";
 
 type Language = "SR" | "EN";
 
 function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { browserStorage, local } = useBrowserStorage();
   const { changeLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
-    const lastPickedLanguage = localStorage.getItem("language");
+    const lastPickedLanguage = browserStorage(local, "language");
     if (lastPickedLanguage) {
       changeLanguage(lastPickedLanguage as Language);
       const languageMenu = document.querySelector("#language-menu") as HTMLSelectElement;
@@ -30,7 +32,7 @@ function AppLayout() {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target as HTMLSelectElement;
     changeLanguage(value as Language);
-    localStorage.setItem("language", value);
+    browserStorage(local, "language", value);
   }
 
   return (
