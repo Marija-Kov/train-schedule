@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router"
 import { DeparturesContextProvider } from "./context/DeparturesContext";
 import { LanguageContext } from "./context/LanguageContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 type Language = "SR" | "EN";
 
@@ -9,6 +9,15 @@ function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { changeLanguage } = useContext(LanguageContext);
+
+  useEffect(() => {
+    const lastPickedLanguage = localStorage.getItem("language");
+    if (lastPickedLanguage) {
+      changeLanguage(lastPickedLanguage as Language);
+      const languageMenu = document.querySelector("#language-menu") as HTMLSelectElement;
+      languageMenu.value = lastPickedLanguage || "SR";
+    }
+  }, [])
 
   function handleInfoClick() {
     if (location.pathname === "/info") {
@@ -21,6 +30,7 @@ function AppLayout() {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target as HTMLSelectElement;
     changeLanguage(value as Language);
+    localStorage.setItem("language", value);
   }
 
   return (
