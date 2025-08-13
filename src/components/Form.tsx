@@ -20,8 +20,8 @@ const Form = () => {
     const lastQueryJSON = sessionStorage.getItem("lastQuery");
     if (lastQueryJSON) {
       const lastQuery = JSON.parse(lastQueryJSON);
-      document.querySelectorAll("select")[0].value = lastQuery.from as StationName || "";
-      document.querySelectorAll("select")[1].value = lastQuery.to as StationName || "";
+      document.querySelectorAll("select")[1].value = lastQuery.from as StationName || "";
+      document.querySelectorAll("select")[2].value = lastQuery.to as StationName || "";
       document.querySelectorAll("input")[0].value = lastQuery.date as YyyyMmDd
       document.querySelectorAll("input")[1].value = lastQuery.time as TimeOutput
       setInput({
