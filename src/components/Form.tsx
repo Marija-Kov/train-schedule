@@ -12,8 +12,8 @@ const Form = () => {
   const [input, setInput] = useState<FormInputData>({
     from: undefined,
     to: undefined,
-    date: undefined,
-    time: undefined
+    date: (new Date()).toISOString().split('T')[0] as YyyyMmDd,
+    time: (new Date()).toTimeString().split(' ')[0].substring(0, 5) as TimeOutput
   })
 
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
@@ -114,6 +114,7 @@ const Form = () => {
         data-testid="select-departure-date"
         name="date"
         type="date"
+        value={input.date}
         min="2024-12-15"
         max="2025-12-13"
         className={emptyFields.includes("date") ? "error" : ""}
@@ -124,6 +125,7 @@ const Form = () => {
         data-testid="select-departure-time"
         name="time"
         type="time"
+        value={input.time}
         className={emptyFields.includes("time") ? "error" : ""}
       ></input>
       <button

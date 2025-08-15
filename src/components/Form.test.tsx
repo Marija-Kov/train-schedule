@@ -97,18 +97,10 @@ describe("<Form />", () => {
     const selectArrivalStation = screen.getByTestId(
       "select-arrival-station"
     );
-    const selectDateOfDeparture = screen.getByTestId(
-      "select-departure-date"
-    );
-    const selectTimeOfDeparture = screen.getByTestId(
-      "select-departure-time"
-    );
     const searchBtn = screen.getByTestId("search-departures-btn");
     await user.click(searchBtn);
     expect(selectArrivalStation).toHaveAttribute("class", "error");
     expect(selectDepartureStation).toHaveAttribute("class", "error");
-    expect(selectDateOfDeparture).toHaveAttribute("class", "error");
-    expect(selectTimeOfDeparture).toHaveAttribute("class", "error");
   });
 
   it("should navigate away when search button is clicked given that all input/selection values are provided", async () => {
