@@ -103,14 +103,12 @@ type DeparturesLayoutContent = {
 }
 
 const LanguageContext = createContext<{
-    languageFlag: Language,
     formLanguage: FormContent,
     infoLanguage: InfoPageContent,
     departuresLayoutLanguage: DeparturesLayoutContent,
     noDeparturesLanguage: { no_departures_message: string },
     changeLanguage: (language: Language) => void
 }>({
-    languageFlag: "SR",
     formLanguage: JSON.parse(translation).form.sr,
     infoLanguage: JSON.parse(translation).info.sr,
     departuresLayoutLanguage: JSON.parse(translation).departures_layout.sr,
@@ -119,14 +117,12 @@ const LanguageContext = createContext<{
 });
 
 const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [languageFlag, setLanguageFlag] = useState<Language>("SR");
     const [formLanguage, setFormLanguage] = useState(JSON.parse(translation).form.sr);
     const [infoLanguage, setInfoLanguage] = useState(JSON.parse(translation).info.sr);
     const [departuresLayoutLanguage, setDeparturesLayoutLanguage] = useState(JSON.parse(translation).departures_layout.sr);
     const [noDeparturesLanguage, setNoDeparturesLanguage] = useState(JSON.parse(translation).no_departures.sr);
 
     function changeLanguage(l: Language) {
-        setLanguageFlag(l);
         const formTranslation = JSON.parse(translation).form[l.toLowerCase()];
         const infoTranslation = JSON.parse(translation).info[l.toLowerCase()];
         const departuresLayoutTranslation = JSON.parse(translation).departures_layout[l.toLowerCase()];
@@ -138,7 +134,7 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
 
     return (
-        <LanguageContext.Provider value={{ languageFlag, changeLanguage, formLanguage, infoLanguage, departuresLayoutLanguage, noDeparturesLanguage }}>
+        <LanguageContext.Provider value={{ changeLanguage, formLanguage, infoLanguage, departuresLayoutLanguage, noDeparturesLanguage }}>
             {children}
         </LanguageContext.Provider>
     )
