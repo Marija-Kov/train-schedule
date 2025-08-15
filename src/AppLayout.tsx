@@ -38,10 +38,6 @@ function AppLayout() {
   return (
     <div className="container">
       <header>
-        <span>&#10210;</span>
-        <NavLink to="/" data-testid="home-link">
-          <img className="train-icon" src="/train-icon.png" alt="train icon" />
-        </NavLink>
         <span>
           <button
             data-testid="app-info"
@@ -51,10 +47,17 @@ function AppLayout() {
             ?
           </button>
         </span>
-        <select id="language-menu" onChange={handleChange}>
-          <option value="SR">SR</option>
-          <option value="EN">EN</option>
-        </select>
+        <span>
+          <NavLink to="/" data-testid="home-link">
+            <img className="train-icon" src="/train-icon.png" alt="train icon" />
+          </NavLink>
+        </span>
+        <span>
+          <select id="language-menu" onChange={handleChange}>
+            <option value="SR">🇷🇸</option>
+            <option value="EN">🇬🇧</option>
+          </select>
+        </span>
       </header>
       <DeparturesContextProvider>
         <Outlet />
