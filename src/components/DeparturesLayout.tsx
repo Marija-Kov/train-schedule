@@ -4,12 +4,13 @@ import { StationName } from "train-schedule-types";
 import Departure from "./Departure";
 import NoDepartures from "./NoDepartures";
 import { DeparturesContext } from "../context/DeparturesContext";
-
+import { LanguageContext } from "../context/LanguageContext";
 
 function DeparturesLayout() {
   const navigate = useNavigate();
   const params = useParams();
   const { departures, loading } = useContext(DeparturesContext);
+  const { departuresLayoutLanguage } = useContext(LanguageContext);
 
   const stationNamesMap = {
     batajnica: "Batajnica",
@@ -32,16 +33,16 @@ function DeparturesLayout() {
   return (
     <div className="departures--container">
       <h2>
-        <span aria-label="route start">{stationNamesMap[params.from as StationName]}</span>
+        <span data-testid="departure-station-name">{stationNamesMap[params.from as StationName]}</span>
         <span>➞</span>
-        <span aria-label="route end">{stationNamesMap[params.to as StationName]}</span>
+        <span data-testid="arrival-station-name">{stationNamesMap[params.to as StationName]}</span>
       </h2>
       <h3>
-        <span>polazak</span>
-        <span>dolazak</span>
-        <span>br. voza</span>
+        <span data-testid="departure-title">{departuresLayoutLanguage.departure_time_title}</span>
+        <span data-testid="arrival-title">{departuresLayoutLanguage.arrival_time_title}</span>
+        <span data-testid="train-no-title">{departuresLayoutLanguage.train_number_title}</span>
       </h3>
-      {loading ? <h1>Loading...</h1> : <>
+      {loading ? <h1 data-testid="loader">{departuresLayoutLanguage.loading_message}...</h1> : <>
         {departures?.length ?
           departures.map(d => {
             return (
@@ -54,10 +55,10 @@ function DeparturesLayout() {
           }) : <NoDepartures />}
         <button
           onClick={() => navigate(-1)}
-          aria-label="back to search form"
+          data-testid="back-to-form"
           className="back"
         >
-          nazad
+          {departuresLayoutLanguage.back_btn_text}
         </button>
       </>
       }

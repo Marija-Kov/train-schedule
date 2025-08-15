@@ -9,8 +9,8 @@ describe("<AppLayout />", () => {
         <BrowserRouter>
           <AppLayout />
         </BrowserRouter>);
-      const infoBtn = screen.getByLabelText("more info");
-      const homeLink = screen.getByLabelText("home");
+      const infoBtn = screen.getByTestId("app-info");
+      const homeLink = screen.getByTestId("home-link");
       expect(infoBtn).toBeInTheDocument();
       expect(homeLink).toBeInTheDocument();
     });

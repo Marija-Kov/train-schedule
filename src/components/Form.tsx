@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
 import { useNavigate } from "react-router";
+import { LanguageContext } from "../context/LanguageContext";
+import useBrowserStorage from "../hooks/useBrowserStorage/useBrowserStorage";
 
 const Form = () => {
   const navigate = useNavigate();
+  const { browserStorage, session } = useBrowserStorage();
+  const { formLanguage } = useContext(LanguageContext);
 
   const [input, setInput] = useState<FormInputData>({
     from: undefined,
@@ -15,11 +19,11 @@ const Form = () => {
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
   useEffect(() => {
-    const lastQueryJSON = sessionStorage.getItem("lastQuery");
+    const lastQueryJSON = browserStorage(session, "lastQuery");
     if (lastQueryJSON) {
       const lastQuery = JSON.parse(lastQueryJSON);
-      document.querySelectorAll("select")[0].value = lastQuery.from as StationName || "";
-      document.querySelectorAll("select")[1].value = lastQuery.to as StationName || "";
+      document.querySelectorAll("select")[1].value = lastQuery.from as StationName || "";
+      document.querySelectorAll("select")[2].value = lastQuery.to as StationName || "";
       document.querySelectorAll("input")[0].value = lastQuery.date as YyyyMmDd
       document.querySelectorAll("input")[1].value = lastQuery.time as TimeOutput
       setInput({
@@ -48,22 +52,22 @@ const Form = () => {
     if (!input.time) setEmptyFields(prev => ["time", ...prev]);
 
     if (input.from && input.to && input.date && input.time) {
-      sessionStorage.setItem("lastQuery", JSON.stringify(input));
+      browserStorage(session, "lastQuery", JSON.stringify(input));
       navigate(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
       setEmptyFields([]);
     }
   }
 
   return (
-    <form aria-label="form" onSubmit={handleSubmit}>
-      <label htmlFor="from">Od/From:</label>
+    <form data-testid="search-form" onSubmit={handleSubmit}>
+      <label htmlFor="from">{formLanguage.from}:</label>
       <select
         onChange={handleChange}
-        aria-label="select departure station"
+        data-testid="select-departure-station"
         name="from"
         className={emptyFields.includes("from") ? "error" : ""}
       >
-        <option value="">Početna stanica</option>
+        <option value="">{formLanguage.from_title}</option>
         <option value="batajnica">Batajnica</option>
         <option value="kamendin">Kamendin</option>
         <option value="zemunsko polje">Zemunsko polje</option>
@@ -80,14 +84,14 @@ const Form = () => {
         <option value="sebes">Sebeš</option>
         <option value="ovca">Ovča</option>
       </select>
-      <label htmlFor="to">Do/To:</label>
+      <label htmlFor="to">{formLanguage.to}:</label>
       <select
         onChange={handleChange}
-        aria-label="select arrival station"
+        data-testid="select-arrival-station"
         name="to"
         className={emptyFields.includes("to") ? "error" : ""}
       >
-        <option value="">Završna stanica</option>
+        <option value="">{formLanguage.to_title}</option>
         <option value="batajnica">Batajnica</option>
         <option value="kamendin">Kamendin</option>
         <option value="zemunsko polje">Zemunsko polje</option>
@@ -104,29 +108,29 @@ const Form = () => {
         <option value="sebes">Sebeš</option>
         <option value="ovca">Ovča</option>
       </select>
-      <label htmlFor="date">Datum/Date:</label>
+      <label htmlFor="date">{formLanguage.date}:</label>
       <input
         onChange={handleChange}
-        aria-label="select date of departure"
+        data-testid="select-departure-date"
         name="date"
         type="date"
         min="2024-12-15"
         max="2025-12-13"
         className={emptyFields.includes("date") ? "error" : ""}
       ></input>
-      <label htmlFor="time">Vreme/Time:</label>
+      <label htmlFor="time">{formLanguage.time}:</label>
       <input
         onChange={handleChange}
-        aria-label="select time of departure"
+        data-testid="select-departure-time"
         name="time"
         type="time"
         className={emptyFields.includes("time") ? "error" : ""}
       ></input>
       <button
-        aria-label="search departures"
+        data-testid="search-departures-btn"
         className="search"
       >
-        Pretraga
+        {formLanguage.search_btn_text}
       </button>
     </form>
   )

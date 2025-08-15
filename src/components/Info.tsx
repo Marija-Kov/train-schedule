@@ -1,26 +1,26 @@
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+
 const Info = () => {
+  const { infoLanguage } = useContext(LanguageContext);
   return (
     <div className="info--content">
       <p>
-        Ova aplikacija predstavlja pristupačniju verziju
-        <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf"> reda vožnje za BG voz </a>
-        na potezu Batajnica-Ovča (u oba smera) koji važi do 13. decembra 2025.
+        {infoLanguage.intro}
+        <a data-testid="schedule-pdf-link" href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf"> {infoLanguage.schedule_link} </a>
+        {infoLanguage.valid_until}
         <br></br>
         <br></br>
-        Aplikacija je izrađena za lične potrebe fizičkog lica. Autorka
-        aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge
-        izrade aplikacije.
-      <br></br>
-      <br></br>
-       NAPOMENA: 
-       <br></br>
-       Saobraćaj vozova je podložan vanrednim izmenama. 
-       Pogledajte 
-        <a aria-label="schedule change announcements" href="https://srbijavoz.rs/informacije/"><strong> ovu stranicu </strong></a>
-        za informacije.
+        {infoLanguage.personal_use}
+        <br></br>
+        <br></br>
+        <p data-testid="note-on-schedule-changes-title">{infoLanguage.note_title}</p>
+        {infoLanguage.schedule_change_note}
+        <a data-testid="schedule-change-announcements" href="https://srbijavoz.rs/informacije/"><strong> {infoLanguage.schedule_change_announcements_link} </strong></a>
+        {infoLanguage.for_info}
       </p>
 
-      <a aria-label="repo" href="https://github.com/Marija-Kov/train-schedule">
+      <a data-testid="repo-link" href="https://github.com/Marija-Kov/train-schedule">
         <img className="github-icon" src="/github.png" />
       </a>
     </div>

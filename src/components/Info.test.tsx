@@ -5,10 +5,10 @@ import Info from "./Info";
 describe("<Info/>", () => {
   it("should render Info component properly", () => {
     render(<Info />);
-    const linkToPdf = screen.getByText("reda vožnje za BG voz");
-    const linkToRepo = screen.getByLabelText("repo");
-    const note = screen.getByText(/podložan vanrednim izmenama/i);
-    const linkToScheduleChangeAnnouncements = screen.getByLabelText("schedule change announcements");
+    const linkToPdf = screen.getByTestId("schedule-pdf-link");
+    const linkToRepo = screen.getByTestId("repo-link");
+    const note = screen.getByTestId("note-on-schedule-changes-title");
+    const linkToScheduleChangeAnnouncements = screen.getByTestId("schedule-change-announcements");
 
     expect(linkToPdf).toHaveAttribute(
       "href",
