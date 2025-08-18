@@ -30,7 +30,7 @@ label {
 select,
 input {
     margin-bottom: 1.2em;
-    border: solid 3px transparent;
+    border: solid 2px transparent;
     padding: 1px 3px;
     font-size: 1.5em;
     
@@ -50,5 +50,16 @@ select {
 }
 
 .error {
-    border: solid 3px variables.$error-1;
+    border: solid 2px variables.$error-1;
+    border-radius: 3px;
+    transition: 0.5s;
+}
+
+.error-missing-input {
+    &::before {
+        content: "⚠";
+        position: absolute;
+        margin-left: -30px;
+        font-size: 28px;
+    }
 }
