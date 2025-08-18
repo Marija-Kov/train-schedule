@@ -38,6 +38,7 @@ const Form = () => {
   const handleChange = (e: React.FormEvent) => {
     const { name } = e.target as HTMLSelectElement;
     const { value } = e.target as HTMLSelectElement;
+    setEmptyFields(prev => prev.filter(field => field != name));
     return setInput(prev => ({
       ...prev,
       [name]: value
@@ -54,8 +55,9 @@ const Form = () => {
     if (input.from && input.to && input.date && input.time) {
       browserStorage(session, "lastQuery", JSON.stringify(input));
       navigate(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
-      setEmptyFields([]);
     }
+
+    setTimeout(() => setEmptyFields([]), 3000);
   }
 
   const missingInputError = () => {
