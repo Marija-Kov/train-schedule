@@ -62,7 +62,7 @@ const Form = () => {
 
   const missingInputError = () => {
     return (
-      <span className="error-missing-input" data-testid="missing-input-mark">⚠</span>
+      <span className="error-missing-input" data-testid="missing-input-mark"></span>
     )
   }
 

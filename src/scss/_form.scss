@@ -54,10 +54,10 @@ select {
 }
 
 .error-missing-input {
-    position: relative;
-    left: -5px;
-    top: 2px;
-    margin: 0;
-    padding-top: 0;
-    font-size: xx-large;
+    &::before {
+        content: "⚠";
+        position: absolute;
+        margin-left: -30px;
+        font-size: xx-large;
+    }
 }
