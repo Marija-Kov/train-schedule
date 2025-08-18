@@ -58,76 +58,94 @@ const Form = () => {
     }
   }
 
+  const missingInputError = () => {
+    return (
+      <span className="error-missing-input" data-testid="missing-input-mark">⚠</span>
+    )
+  }
+
   return (
     <form data-testid="search-form" onSubmit={handleSubmit}>
       <label htmlFor="from">{formLanguage.from}:</label>
-      <select
-        onChange={handleChange}
-        data-testid="select-departure-station"
-        name="from"
-        className={emptyFields.includes("from") ? "error" : ""}
-      >
-        <option value="">{formLanguage.from_title}</option>
-        <option value="batajnica">Batajnica</option>
-        <option value="kamendin">Kamendin</option>
-        <option value="zemunsko polje">Zemunsko polje</option>
-        <option value="altina">Altina</option>
-        <option value="zemun">Zemun</option>
-        <option value="tosin bunar">Tošin bunar</option>
-        <option value="novi beograd">Novi Beograd</option>
-        <option value="beograd centar">Beograd centar</option>
-        <option value="karadjordjev park">Karađorđev park</option>
-        <option value="vukov spomenik">Vukov spomenik</option>
-        <option value="pancevacki most">Pančevački most</option>
-        <option value="krnjaca most">Krnjača most</option>
-        <option value="krnjaca ukr">Krnjača ukr.</option>
-        <option value="sebes">Sebeš</option>
-        <option value="ovca">Ovča</option>
-      </select>
+      <span>
+        {emptyFields.includes("from") ? missingInputError() : ""}
+        <select
+          onChange={handleChange}
+          data-testid="select-departure-station"
+          name="from"
+          className={emptyFields.includes("from") ? "error" : ""}
+        >
+          <option value="">{formLanguage.from_title}</option>
+          <option value="batajnica">Batajnica</option>
+          <option value="kamendin">Kamendin</option>
+          <option value="zemunsko polje">Zemunsko polje</option>
+          <option value="altina">Altina</option>
+          <option value="zemun">Zemun</option>
+          <option value="tosin bunar">Tošin bunar</option>
+          <option value="novi beograd">Novi Beograd</option>
+          <option value="beograd centar">Beograd centar</option>
+          <option value="karadjordjev park">Karađorđev park</option>
+          <option value="vukov spomenik">Vukov spomenik</option>
+          <option value="pancevacki most">Pančevački most</option>
+          <option value="krnjaca most">Krnjača most</option>
+          <option value="krnjaca ukr">Krnjača ukr.</option>
+          <option value="sebes">Sebeš</option>
+          <option value="ovca">Ovča</option>
+        </select>
+      </span>
       <label htmlFor="to">{formLanguage.to}:</label>
-      <select
-        onChange={handleChange}
-        data-testid="select-arrival-station"
-        name="to"
-        className={emptyFields.includes("to") ? "error" : ""}
-      >
-        <option value="">{formLanguage.to_title}</option>
-        <option value="batajnica">Batajnica</option>
-        <option value="kamendin">Kamendin</option>
-        <option value="zemunsko polje">Zemunsko polje</option>
-        <option value="altina">Altina</option>
-        <option value="zemun">Zemun</option>
-        <option value="tosin bunar">Tošin bunar</option>
-        <option value="novi beograd">Novi Beograd</option>
-        <option value="beograd centar">Beograd centar</option>
-        <option value="karadjordjev park">Karađorđev park</option>
-        <option value="vukov spomenik">Vukov spomenik</option>
-        <option value="pancevacki most">Pančevački most</option>
-        <option value="krnjaca most">Krnjača most</option>
-        <option value="krnjaca ukr">Krnjača ukr.</option>
-        <option value="sebes">Sebeš</option>
-        <option value="ovca">Ovča</option>
-      </select>
+      <span>
+        {emptyFields.includes("to") ? missingInputError() : ""}
+        <select
+          onChange={handleChange}
+          data-testid="select-arrival-station"
+          name="to"
+          className={emptyFields.includes("to") ? "error" : ""}
+        >
+          <option value="">{formLanguage.to_title}</option>
+          <option value="batajnica">Batajnica</option>
+          <option value="kamendin">Kamendin</option>
+          <option value="zemunsko polje">Zemunsko polje</option>
+          <option value="altina">Altina</option>
+          <option value="zemun">Zemun</option>
+          <option value="tosin bunar">Tošin bunar</option>
+          <option value="novi beograd">Novi Beograd</option>
+          <option value="beograd centar">Beograd centar</option>
+          <option value="karadjordjev park">Karađorđev park</option>
+          <option value="vukov spomenik">Vukov spomenik</option>
+          <option value="pancevacki most">Pančevački most</option>
+          <option value="krnjaca most">Krnjača most</option>
+          <option value="krnjaca ukr">Krnjača ukr.</option>
+          <option value="sebes">Sebeš</option>
+          <option value="ovca">Ovča</option>
+        </select>
+      </span>
       <label htmlFor="date">{formLanguage.date}:</label>
-      <input
-        onChange={handleChange}
-        data-testid="select-departure-date"
-        name="date"
-        type="date"
-        value={input.date}
-        min="2024-12-15"
-        max="2025-12-13"
-        className={emptyFields.includes("date") ? "error" : ""}
-      ></input>
+      <span>
+        {emptyFields.includes("date") ? missingInputError() : ""}
+        <input
+          onChange={handleChange}
+          data-testid="select-departure-date"
+          name="date"
+          type="date"
+          value={input.date}
+          min="2024-12-15"
+          max="2025-12-13"
+          className={emptyFields.includes("date") ? "error" : ""}
+        />
+      </span>
       <label htmlFor="time">{formLanguage.time}:</label>
-      <input
-        onChange={handleChange}
-        data-testid="select-departure-time"
-        name="time"
-        type="time"
-        value={input.time}
-        className={emptyFields.includes("time") ? "error" : ""}
-      ></input>
+      <span>
+        {emptyFields.includes("time") ? missingInputError() : ""}
+        <input
+          onChange={handleChange}
+          data-testid="select-departure-time"
+          name="time"
+          type="time"
+          value={input.time}
+          className={emptyFields.includes("time") ? "error" : ""}
+        />
+      </span>
       <button
         data-testid="search-departures-btn"
         className="search"

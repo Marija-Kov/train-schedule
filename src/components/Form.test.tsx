@@ -99,8 +99,10 @@ describe("<Form />", () => {
     );
     const searchBtn = screen.getByTestId("search-departures-btn");
     await user.click(searchBtn);
+    const errorMarks = screen.getAllByTestId("missing-input-mark");
     expect(selectArrivalStation).toHaveAttribute("class", "error");
     expect(selectDepartureStation).toHaveAttribute("class", "error");
+    expect(errorMarks.length).toBe(2);
   });
 
   it("should navigate away when search button is clicked given that all input/selection values are provided", async () => {
