@@ -32,7 +32,6 @@ const translation = JSON.stringify({
             schedule_change_note: "Saobraćaj vozova je podložan vanrednim izmenama. Pogledajte",
             schedule_change_announcements_link: "zvaničnu stranicu SrbijaVoza",
             for_info: "za informacije.",
-            // TODO: aria-label?
         },
         en: {
             intro: "This app is a more usable version of",
@@ -44,6 +43,15 @@ const translation = JSON.stringify({
             schedule_change_announcements_link: "the official Serbian railways info page",
             for_info: "for more information.",
         },
+    },
+    app_layout: {
+        sr: {
+            app_info_label: "Informacije o aplikaciji"
+        },
+        en: {
+            app_info_label: "About this app"
+        },
+
     },
     departures_layout: {
         sr: {
@@ -105,12 +113,14 @@ type DeparturesLayoutContent = {
 const LanguageContext = createContext<{
     formLanguage: FormContent,
     infoLanguage: InfoPageContent,
+    appLayoutLanguage: { app_info_label: string },
     departuresLayoutLanguage: DeparturesLayoutContent,
     noDeparturesLanguage: { no_departures_message: string },
     changeLanguage: (language: Language) => void
 }>({
     formLanguage: JSON.parse(translation).form.sr,
     infoLanguage: JSON.parse(translation).info.sr,
+    appLayoutLanguage: JSON.parse(translation).app_layout.sr,
     departuresLayoutLanguage: JSON.parse(translation).departures_layout.sr,
     noDeparturesLanguage: JSON.parse(translation).no_departures.sr,
     changeLanguage: (_) => { }
@@ -120,21 +130,24 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({ children }
     const [formLanguage, setFormLanguage] = useState(JSON.parse(translation).form.sr);
     const [infoLanguage, setInfoLanguage] = useState(JSON.parse(translation).info.sr);
     const [departuresLayoutLanguage, setDeparturesLayoutLanguage] = useState(JSON.parse(translation).departures_layout.sr);
+    const [appLayoutLanguage, setAppLayoutLanguage] = useState(JSON.parse(translation).app_layout.sr);
     const [noDeparturesLanguage, setNoDeparturesLanguage] = useState(JSON.parse(translation).no_departures.sr);
 
     function changeLanguage(l: Language) {
         const formTranslation = JSON.parse(translation).form[l.toLowerCase()];
         const infoTranslation = JSON.parse(translation).info[l.toLowerCase()];
         const departuresLayoutTranslation = JSON.parse(translation).departures_layout[l.toLowerCase()];
+        const appLayoutTranslation = JSON.parse(translation).app_layout[l.toLowerCase()];
         const noDeparturesTranslation = JSON.parse(translation).no_departures[l.toLowerCase()];
         setFormLanguage(formTranslation);
         setInfoLanguage(infoTranslation);
         setDeparturesLayoutLanguage(departuresLayoutTranslation);
+        setAppLayoutLanguage(appLayoutTranslation);
         setNoDeparturesLanguage(noDeparturesTranslation);
     }
 
     return (
-        <LanguageContext.Provider value={{ changeLanguage, formLanguage, infoLanguage, departuresLayoutLanguage, noDeparturesLanguage }}>
+        <LanguageContext.Provider value={{ changeLanguage, formLanguage, infoLanguage, departuresLayoutLanguage, appLayoutLanguage, noDeparturesLanguage }}>
             {children}
         </LanguageContext.Provider>
     )

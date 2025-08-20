@@ -10,7 +10,7 @@ function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { browserStorage, local } = useBrowserStorage();
-  const { changeLanguage } = useContext(LanguageContext);
+  const { changeLanguage, appLayoutLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const lastPickedLanguage = browserStorage(local, "language");
@@ -40,6 +40,7 @@ function AppLayout() {
       <header>
         <span>
           <button
+            aria-label={appLayoutLanguage.app_info_label}
             data-testid="app-info"
             onClick={handleInfoClick}
             className="info"
