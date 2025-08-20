@@ -53,6 +53,7 @@ function AppLayout() {
           </NavLink>
         </span>
         <span>
+          <label htmlFor="language-menu" className="invisible-label">Language</label>
           <select id="language-menu" onChange={handleChange}>
             <option value="SR">🇷🇸</option>
             <option value="EN">🇬🇧</option>

@@ -58,5 +58,10 @@ h1 {
     color: variables.$primary-2;
 }
 
+.invisible-label {
+    position: absolute;
+    opacity: 0;
+}
+
 
 

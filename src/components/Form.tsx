@@ -73,6 +73,7 @@ const Form = () => {
         {emptyFields.includes("from") ? missingInputError() : ""}
         <select
           onChange={handleChange}
+          id="from"
           data-testid="select-departure-station"
           name="from"
           className={emptyFields.includes("from") ? "error" : ""}
@@ -100,6 +101,7 @@ const Form = () => {
         {emptyFields.includes("to") ? missingInputError() : ""}
         <select
           onChange={handleChange}
+          id="to"
           data-testid="select-arrival-station"
           name="to"
           className={emptyFields.includes("to") ? "error" : ""}
@@ -127,6 +129,7 @@ const Form = () => {
         {emptyFields.includes("date") ? missingInputError() : ""}
         <input
           onChange={handleChange}
+          id="date"
           data-testid="select-departure-date"
           name="date"
           type="date"
@@ -141,6 +144,7 @@ const Form = () => {
         {emptyFields.includes("time") ? missingInputError() : ""}
         <input
           onChange={handleChange}
+          id="time"
           data-testid="select-departure-time"
           name="time"
           type="time"
