@@ -7,6 +7,7 @@ describe("<Info/>", () => {
     render(<Info />);
     const linkToPdf = screen.getByTestId("schedule-pdf-link");
     const linkToRepo = screen.getByTestId("repo-link");
+    const githubLogo = screen.getByAltText(/github/i);
     const note = screen.getByTestId("note-on-schedule-changes-title");
     const linkToScheduleChangeAnnouncements = screen.getByTestId("schedule-change-announcements");
 
@@ -18,6 +19,7 @@ describe("<Info/>", () => {
       "href",
       "https://github.com/Marija-Kov/train-schedule"
     );
+    expect(githubLogo).toBeInTheDocument();
     expect(note).toBeInTheDocument();
     expect(linkToScheduleChangeAnnouncements).toHaveAttribute(
       "href", 

@@ -21,7 +21,7 @@ const Info = () => {
       </div>
 
       <a data-testid="repo-link" href="https://github.com/Marija-Kov/train-schedule">
-        <img className="github-icon" src="/github.png" />
+        <img className="github-icon" src="/github.png" alt="Github logo."/>
       </a>
     </div>
   );
