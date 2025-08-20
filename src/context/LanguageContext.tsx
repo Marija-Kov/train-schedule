@@ -30,7 +30,7 @@ const translation = JSON.stringify({
             personal_use: "Aplikacija je izrađena za lične potrebe fizičkog lica. Autorka aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge izrade aplikacije.",
             note_title: "NAPOMENA:",
             schedule_change_note: "Saobraćaj vozova je podložan vanrednim izmenama. Pogledajte",
-            schedule_change_announcements_link: "ovu stranicu",
+            schedule_change_announcements_link: "zvaničnu stranicu SrbijaVoza",
             for_info: "za informacije.",
             // TODO: aria-label?
         },
@@ -41,7 +41,7 @@ const translation = JSON.stringify({
             personal_use: "The application is built and maintained for personal use. The developer of this application is not affilliated with SrbijaVoz.",
             note_title: "NOTE:",
             schedule_change_note: "Occasionally, some departures may be off schedule or cancelled. See",
-            schedule_change_announcements_link: "this page",
+            schedule_change_announcements_link: "the official Serbian railways info page",
             for_info: "for more information.",
         },
     },
