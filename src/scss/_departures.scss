@@ -1,13 +1,8 @@
 @use 'variables';
 
 .departures--container {
-    position: absolute;
-    z-index: 2;
-    width: variables.$cover-width;
+    width: 100%;
     min-width: variables.$min-width;
-    height: fit-content;
-    min-height: variables.$cover-height;
-    top: variables.$top;
     background: variables.$primary-1;
     color: variables.$primary-2;
     display: flex;

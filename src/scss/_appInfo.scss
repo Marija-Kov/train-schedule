@@ -1,14 +1,8 @@
 @use 'variables';
 
 .info--content {
- z-index: 5;
- position: absolute;
- display: flex;
- flex-direction: column;
  width: 100%;
  min-width: variables.$min-width;
- min-height: variables.$cover-height;
- top: variables.$top;
  background: variables.$primary-1;
  color: variables.$primary-2;
  font-size: 1.2em;
