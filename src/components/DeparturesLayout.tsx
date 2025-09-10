@@ -58,13 +58,12 @@ function DeparturesLayout() {
                 trainId={d.trainId} />
             )
           }) : <NoDepartures />}
-        <h4>NAPOMENE / NOTES:</h4>
         {loadingUpdates ? <p>{departuresLayoutLanguage.loading_message}...</p> :
           updates.length ? updates.map(u => {
             return (
-              <p>{u}</p>
+              <p className="service-update-details">{u}</p>
             )
-          }) : <p>all departures on schedule</p>
+          }) : <p>{departuresLayoutLanguage.on_schedule}</p>
         }
 
         <button
