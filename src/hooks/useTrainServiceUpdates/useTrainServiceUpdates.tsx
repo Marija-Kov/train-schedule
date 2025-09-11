@@ -13,6 +13,8 @@ const useTrainServiceUpdates = () => {
 
         const response = await fetch('https://www.srbvoz.rs/wp-json/wp/v2/info_post?per_page=30');
         if ([500, 404, 403, 401].includes(response.status) || !response.ok) {
+            // TODO: investigate the issue with updates state type
+            // @ts-ignore
             setUpdates("Data not available"); 
             setLoadingUpdates(false);
             return
