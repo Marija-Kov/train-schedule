@@ -60,6 +60,7 @@ const translation = JSON.stringify({
             train_number_title: "br. voza",
             loading_message: "Učitavanje",
             on_schedule: "Nema odstupanja od reda vožnje.",
+            service_updates_not_available: "Informacije o eventualnim izmenama u saobraćaju vozova trenutno su nedostupne.",
             back_btn_text: "nazad"
         },
         en: {
@@ -68,6 +69,7 @@ const translation = JSON.stringify({
             train_number_title: "train no.",
             loading_message: "Loading",
             on_schedule: "All departures on schedule.",
+            service_updates_not_available: "Train service updates not available at the moment.",
             back_btn_text: "back"
         },
     },
@@ -110,6 +112,7 @@ type DeparturesLayoutContent = {
     train_number_title: string,
     loading_message: string,
     on_schedule: string,
+    service_updates_not_available: string,
     back_btn_text: string
 }
 

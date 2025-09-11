@@ -57,11 +57,15 @@ function DeparturesLayout() {
             )
           }) : <NoDepartures />}
         {loadingUpdates ? <p>{departuresLayoutLanguage.loading_message}...</p> :
-          updates.length ? updates.map(u => {
-            return (
-              <p className="service-update-details">{u}</p>
-            )
-          }) : <p>{departuresLayoutLanguage.on_schedule}</p>
+          typeof updates === "string" && updates === "Data not available" ?
+            <p className="service-updates-not-available">
+              {departuresLayoutLanguage.service_updates_not_available}
+            </p> :
+            updates.length ? updates.map(u => {
+              return (
+                <p className="service-update-details">{u}</p>
+              )
+            }) : <p>{departuresLayoutLanguage.on_schedule}</p>
         }
 
         <button

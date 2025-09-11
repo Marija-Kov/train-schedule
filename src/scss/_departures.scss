@@ -61,6 +61,13 @@ h3 {
     }
 }
 
+.service-updates-not-available {
+    padding: 0 2.5em;
+    &::before {
+        content: "⊝ ";
+    }
+}
+
 .back {
     background: variables.$primary-1; 
     color: variables.$primary-2;

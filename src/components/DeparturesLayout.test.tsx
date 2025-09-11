@@ -137,6 +137,42 @@ describe("<DeparturesLayout />", () => {
         expect(serviceUpdate).toHaveClass("service-update-details")
     });
 
+    it("should display correct message when train service updates are not available", async () => {
+        server.use(
+            http.get('https://www.srbvoz.rs/wp-json/wp/v2/info_post', () => {
+                const stream = new ReadableStream({
+                    start(controller) {
+                        controller.enqueue(new TextEncoder().encode(""));
+                        controller.close();
+                    }
+                });
+                return new HttpResponse(stream, {
+                    headers: {},
+                    type: 'cors',
+                    status: 500
+                })
+            })
+        );
+        render(
+            <BrowserRouter>
+                <DeparturesContext.Provider value={{
+                    departures: [
+                        {
+                            departureTime: "0:01",
+                            arrivalTime: "0:02",
+                            trainId: 8003
+                        }
+                    ], loading: false
+                }}>
+                    <DeparturesLayout />
+                </DeparturesContext.Provider>
+            </BrowserRouter>);
+
+        const serviceUpdate = await screen.findByText(/nedostupn/i);
+        expect(serviceUpdate).toBeInTheDocument();
+    });
+
+
 
     /*
      TODO: Investigate further why it's not navigating to form when using

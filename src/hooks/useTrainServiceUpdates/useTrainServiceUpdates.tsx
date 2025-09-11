@@ -12,8 +12,8 @@ const useTrainServiceUpdates = () => {
         const currentTimeNum = parseInt(currentLocalTime.split(":").join(""))
 
         const response = await fetch('https://www.srbvoz.rs/wp-json/wp/v2/info_post?per_page=30');
-        if (!response.ok) {
-            // setUpdates("Service updates unavailable.");
+        if ([500, 404, 403, 401].includes(response.status) || !response.ok) {
+            setUpdates("Data not available"); 
             setLoadingUpdates(false);
             return
         }
