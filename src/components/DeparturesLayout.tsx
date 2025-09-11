@@ -15,8 +15,6 @@ function DeparturesLayout() {
 
   const { updates, loadingUpdates } = useTrainServiceUpdates();
 
-  console.log(updates)
-
   const stationNamesMap = {
     batajnica: "Batajnica",
     kamendin: "Kamendin",

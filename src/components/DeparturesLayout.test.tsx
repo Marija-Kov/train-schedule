@@ -2,8 +2,10 @@ import { describe, it, expect } from "vitest";
 import user from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
+import { server } from '../test/mocks/node';
 import DeparturesLayout from "./DeparturesLayout";
 import { DeparturesContext } from "../context/DeparturesContext";
+import { http, HttpResponse } from "msw";
 
 describe("<DeparturesLayout />", () => {
     it("should render the layout properly", () => {
@@ -64,6 +66,77 @@ describe("<DeparturesLayout />", () => {
         expect(trainId).toBeInTheDocument();
 
     });
+
+    it("should render service updates properly given that all relevant departures are on schedule", async () => {
+        server.use(
+            http.get('https://www.srbvoz.rs/wp-json/wp/v2/info_post', () => {
+                const currentDateTime = new Date().toISOString().split(".")[0];
+                const currentDate = currentDateTime.split("T")[0];
+                const currentLocalTime = new Date().toTimeString().split(" ")[0]
+                const date = currentDate + "T" + currentLocalTime;
+
+                const stream = new ReadableStream({
+                    start(controller) {
+                        controller.enqueue(new TextEncoder().encode(JSON.stringify([
+                            {
+                                date: date,
+                                slug: 'Izmena na barskoj pruzi',
+                                content: {
+                                    rendered: '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>'
+                                }
+                            }
+                        ])));
+
+                        controller.close();
+                    }
+                });
+                return new HttpResponse(stream, {
+                    headers: {},
+                    type: 'cors',
+                    status: 200
+                })
+            })
+        );
+        render(
+            <BrowserRouter>
+                <DeparturesContext.Provider value={{
+                    departures: [
+                        {
+                            departureTime: "0:01",
+                            arrivalTime: "0:02",
+                            trainId: 8003
+                        }
+                    ], loading: false
+                }}>
+                    <DeparturesLayout />
+                </DeparturesContext.Provider>
+            </BrowserRouter>);
+
+        const serviceUpdate = await screen.findByText(/nema odstupanja/i);
+        expect(serviceUpdate).toBeInTheDocument();
+    });
+
+    it("should render service updates properly when a relevant departure is cancelled", async () => {
+        render(
+            <BrowserRouter>
+                <DeparturesContext.Provider value={{
+                    departures: [
+                        {
+                            departureTime: "0:01",
+                            arrivalTime: "0:02",
+                            trainId: 8003
+                        }
+                    ], loading: false
+                }}>
+                    <DeparturesLayout />
+                </DeparturesContext.Provider>
+            </BrowserRouter>);
+
+        const serviceUpdate = await screen.findByText(/nece saobracati/i);
+        expect(serviceUpdate).toBeInTheDocument();
+        expect(serviceUpdate).toHaveClass("service-update-details")
+    });
+
 
     /*
      TODO: Investigate further why it's not navigating to form when using

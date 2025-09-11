@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
-import { beforeAll } from 'vitest';
+import { beforeAll, afterEach, afterAll } from 'vitest';
+import { server } from './mocks/node.ts';
 
 const originalError = console.error
 const actWarnings = [];
@@ -14,4 +15,9 @@ beforeAll(() => {
     }
     originalError.call(console, ...args);
   }
-})
+  server.listen();
+});
+
+afterEach(() => { server.resetHandlers() });
+
+afterAll(() => server.close())

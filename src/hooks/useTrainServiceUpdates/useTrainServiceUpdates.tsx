@@ -12,9 +12,13 @@ const useTrainServiceUpdates = () => {
         const currentTimeNum = parseInt(currentLocalTime.split(":").join(""))
 
         const response = await fetch('https://www.srbvoz.rs/wp-json/wp/v2/info_post?per_page=30');
-
+        if (!response.ok) {
+            // setUpdates("Service updates unavailable.");
+            setLoadingUpdates(false);
+            return
+        }
         const readable = response.body;
-
+        
         async function read(stream: ReadableStream<Uint8Array> | null) {
             const reader = stream?.getReader();
 
@@ -36,16 +40,16 @@ const useTrainServiceUpdates = () => {
 
             return concatenated;
         }
-
+        
         const dataArrayBuffer = await read(readable);
         const data = JSON.parse(new TextDecoder('utf-8').decode(dataArrayBuffer));
-
+        
         const filteredUpdates = data.filter((update: { date: string; slug: string; }) => {
             const updateDate = update.date.split("T")[0];
             const updateTimeNum = parseInt(update.date.split("T")[1].split(":").join(""));
-            return updateDate == currentDate
-                && updateTimeNum >= currentTimeNum
-                && update.slug.match(/bgvoz/i);
+            return updateDate === currentDate
+            && updateTimeNum >= currentTimeNum
+            && update.slug.match(/bgvoz/i);
         }).map((update: { content: { rendered: string; }; }) => update.content.rendered.split('\n')[1].slice(3, -4)
         ).filter((update: string | string[]) => {
             return update.indexOf("Resnik") === -1 && update.indexOf("Mladenov") === -1 && update.indexOf("Lazarev") === -1
