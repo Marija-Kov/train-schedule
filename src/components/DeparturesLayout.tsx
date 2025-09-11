@@ -5,12 +5,15 @@ import Departure from "./Departure";
 import NoDepartures from "./NoDepartures";
 import { DeparturesContext } from "../context/DeparturesContext";
 import { LanguageContext } from "../context/LanguageContext";
+import useTrainServiceUpdates from "../hooks/useTrainServiceUpdates/useTrainServiceUpdates";
 
 function DeparturesLayout() {
   const navigate = useNavigate();
   const params = useParams();
   const { departures, loading } = useContext(DeparturesContext);
   const { departuresLayoutLanguage } = useContext(LanguageContext);
+
+  const { updates, loadingUpdates } = useTrainServiceUpdates();
 
   const stationNamesMap = {
     batajnica: "Batajnica",
@@ -53,6 +56,18 @@ function DeparturesLayout() {
                 trainId={d.trainId} />
             )
           }) : <NoDepartures />}
+        {loadingUpdates ? <p>{departuresLayoutLanguage.loading_message}...</p> :
+          typeof updates === "string" && updates === "Data not available" ?
+            <p className="service-updates-not-available">
+              {departuresLayoutLanguage.service_updates_not_available}
+            </p> :
+            updates.length ? updates.map(u => {
+              return (
+                <p className="service-update-details">{u}</p>
+              )
+            }) : <p>{departuresLayoutLanguage.on_schedule}</p>
+        }
+
         <button
           onClick={() => navigate(-1)}
           data-testid="back-to-form"

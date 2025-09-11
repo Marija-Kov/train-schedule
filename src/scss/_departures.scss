@@ -52,6 +52,23 @@ h3 {
     }
 }
 
+.service-update-details {
+    font-weight: 500;
+    padding: 0 2em;
+    &::before {
+        content:"⦿ ";
+        font-size: large;
+        color: rgb(204, 0, 0);
+    }
+}
+
+.service-updates-not-available {
+    padding: 0 2.5em;
+    &::before {
+        content: "⊝ ";
+    }
+}
+
 .back {
     background: variables.$primary-1; 
     color: variables.$primary-2;
