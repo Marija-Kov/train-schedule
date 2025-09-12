@@ -1,8 +1,7 @@
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router"
-import { DeparturesContextProvider } from "./context/DeparturesContext";
-import { LanguageContext } from "./context/LanguageContext";
+import { DeparturesContextProvider, LanguageContext } from "./context";
 import { useContext, useEffect } from "react";
-import useBrowserStorage from "./hooks/useBrowserStorage/useBrowserStorage";
+import { useBrowserStorage } from "./hooks";
 
 type Language = "SR" | "EN";
 

@@ -6,12 +6,9 @@ import {
 import React from "react";
 import ReactDOM from "react-dom/client";
 import AppLayout from "./AppLayout";
-import Info from "./components/Info";
-import Form from "./components/Form";
-import DeparturesLayout from "./components/DeparturesLayout";
-import PageNotFound from "./components/PageNotFound";
+import { Info, Form, DeparturesLayout, PageNotFound } from "./components";
 import "./scss/main.scss";
-import { LanguageContextProvider } from "./context/LanguageContext";
+import { LanguageContextProvider } from "./context";
 
 const router = createBrowserRouter([
   {

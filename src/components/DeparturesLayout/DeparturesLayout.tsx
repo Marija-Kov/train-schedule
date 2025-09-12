@@ -1,11 +1,9 @@
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router"
 import { StationName } from "train-schedule-types";
-import Departure from "./Departure";
-import NoDepartures from "./NoDepartures";
-import { DeparturesContext } from "../context/DeparturesContext";
-import { LanguageContext } from "../context/LanguageContext";
-import useTrainServiceUpdates from "../hooks/useTrainServiceUpdates/useTrainServiceUpdates";
+import { Departure, NoDepartures } from "../";
+import { DeparturesContext, LanguageContext } from "../../context";
+import { useTrainServiceUpdates } from "../../hooks";
 
 function DeparturesLayout() {
   const navigate = useNavigate();

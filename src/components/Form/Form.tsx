@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
 import { useNavigate } from "react-router";
-import { LanguageContext } from "../context/LanguageContext";
-import useBrowserStorage from "../hooks/useBrowserStorage/useBrowserStorage";
+import { LanguageContext } from "../../context";
+import { useBrowserStorage } from "../../hooks";
 
 const Form = () => {
   const navigate = useNavigate();
