@@ -129,7 +129,7 @@ const LanguageContext = createContext<{
     appLayoutLanguage: JSON.parse(translation).app_layout.sr,
     departuresLayoutLanguage: JSON.parse(translation).departures_layout.sr,
     noDeparturesLanguage: JSON.parse(translation).no_departures.sr,
-    changeLanguage: (_) => { }
+    changeLanguage: (_) => _
 });
 
 const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

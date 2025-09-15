@@ -6,7 +6,7 @@ const useBrowserStorage = () => {
     const browserStorage = (
         type: string,
         key: string,
-        value?: any
+        value?: string
     ) => {
         if (type === "local") {
             if (value) {
