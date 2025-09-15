@@ -19,16 +19,14 @@ const useTrainServiceUpdates = () => {
         }
 
         const data = await response.json();
-        
+
         const filteredUpdates: { id: number, content: string }[] = data.filter((update: { date: string; slug: string; }) => {
             const updateDate = update.date.split("T")[0];
-            return updateDate === currentDate
-                && update.slug.match(/bgvoz/i);
-        }).map((update: { id: number, content: { rendered: string; }; }) => {
+            return updateDate === currentDate && update.slug.match(/bgvoz/i);
+        }).map((update: { id: number, content: { rendered: string } }) => {
             return { id: update.id, content: update.content.rendered.split('\n')[1].slice(3, -4) }
-        }
-        ).filter((update: { id: number, content: string }) => {
-            return update.content.indexOf("Resnik") === -1 && update.content.indexOf("Mladenov") === -1 && update.content.indexOf("Lazarev") === -1
+        }).filter((update: { id: number, content: string }) => {
+            return !update.content.match(/(Resnik|Mladenov|Lazarev)/i);
         });
 
         setUpdates(filteredUpdates);
