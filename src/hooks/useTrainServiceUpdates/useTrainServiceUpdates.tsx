@@ -19,32 +19,8 @@ const useTrainServiceUpdates = () => {
             setLoadingUpdates(false);
             return
         }
-        const readable = response.body;
-        
-        async function read(stream: ReadableStream<Uint8Array> | null) {
-            const reader = stream?.getReader();
 
-            const chunks: Uint8Array[] = [];
-            let result;
-            do {
-                result = await reader?.read();
-                if (result?.value !== undefined) chunks.push(result.value);
-            } while (!result?.done);
-
-            const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
-            const concatenated = new Uint8Array(totalLength);
-
-            let offset = 0;
-            for (const chunk of chunks) {
-                concatenated.set(chunk, offset);
-                offset += chunk.length;
-            }
-
-            return concatenated;
-        }
-        
-        const dataArrayBuffer = await read(readable);
-        const data = JSON.parse(new TextDecoder('utf-8').decode(dataArrayBuffer));
+        const data = await response.json();
         
         const filteredUpdates = data.filter((update: { date: string; slug: string; }) => {
             const updateDate = update.date.split("T")[0];
