@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useTrainServiceUpdates = () => {
-    const [updates, setUpdates] = useState([]);
+    const [updates, setUpdates] = useState<{ id: number, content: string }[]>([]);
     const [loadingUpdates, setLoadingUpdates] = useState(false);
 
     const trainServiceUpdates = async () => {
@@ -20,15 +20,15 @@ const useTrainServiceUpdates = () => {
 
         const data = await response.json();
         
-        const filteredUpdates = data.filter((update: { date: string; slug: string; }) => {
+        const filteredUpdates: { id: number, content: string }[] = data.filter((update: { date: string; slug: string; }) => {
             const updateDate = update.date.split("T")[0];
             return updateDate === currentDate
-            && update.slug.match(/bgvoz/i);
-        }).map((update: { content: { rendered: string; }; }) => {
-            return update.content.rendered.split('\n')[1].slice(3, -4)
+                && update.slug.match(/bgvoz/i);
+        }).map((update: { id: number, content: { rendered: string; }; }) => {
+            return { id: update.id, content: update.content.rendered.split('\n')[1].slice(3, -4) }
         }
-        ).filter((update: string | string[]) => {
-            return update.indexOf("Resnik") === -1 && update.indexOf("Mladenov") === -1 && update.indexOf("Lazarev") === -1
+        ).filter((update: { id: number, content: string }) => {
+            return update.content.indexOf("Resnik") === -1 && update.content.indexOf("Mladenov") === -1 && update.content.indexOf("Lazarev") === -1
         });
 
         setUpdates(filteredUpdates);

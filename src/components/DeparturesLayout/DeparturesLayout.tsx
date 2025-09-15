@@ -61,7 +61,7 @@ function DeparturesLayout() {
             </p> :
             updates.length ? updates.map(u => {
               return (
-                <p className="service-update-details">{u}</p>
+                <p className="service-update-details" key={u.id}>{u.content}</p>
               )
             }) : <p>{departuresLayoutLanguage.on_schedule}</p>
         }
