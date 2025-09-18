@@ -1,10 +1,6 @@
-export { default as Departure } from "./Departure/Departure";
-export { default as DeparturesLayout } from "./DeparturesLayout/DeparturesLayout";
-export { default as Form } from "./Form/Form";
-export { default as Info } from "./Info/Info";
-export { default as NoDepartures } from "./NoDepartures/NoDepartures";
-export { default as PageNotFound } from "./PageNotFound/PageNotFound";
-
-
-
-
+export { default as Departure } from './Departure/Departure'
+export { default as DeparturesLayout } from './DeparturesLayout/DeparturesLayout'
+export { default as Form } from './Form/Form'
+export { default as Info } from './Info/Info'
+export { default as NoDepartures } from './NoDepartures/NoDepartures'
+export { default as PageNotFound } from './PageNotFound/PageNotFound'

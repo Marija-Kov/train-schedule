@@ -1,4 +1,11 @@
-import { TimeOutput, YyyyMmDd, DepartureOutput, StationDepartureDetails, Station, StationName } from "train-schedule-types";
+import {
+  TimeOutput,
+  YyyyMmDd,
+  DepartureOutput,
+  StationDepartureDetails,
+  Station,
+  StationName,
+} from 'train-schedule-types'
 
 /**
  * Creates an array out of departure objects with found arrival matches; filters out the undefined.
@@ -8,11 +15,11 @@ export function getResult(
   possibleDepartures: DepartureOutput[],
   possibleArrivals: StationDepartureDetails[]
 ) {
-  const result: DepartureOutput[] = [];
+  const result: DepartureOutput[] = []
   for (const departure of possibleDepartures) {
-    result.push(matchADepartureWithAnArrival(departure, possibleArrivals));
+    result.push(matchADepartureWithAnArrival(departure, possibleArrivals))
   }
-  return result.filter((r) => r !== undefined);
+  return result.filter((r) => r !== undefined)
 }
 
 /**
@@ -28,8 +35,8 @@ function matchADepartureWithAnArrival(
   const matchingArrival = possibleArrivals.filter(
     (arrival: StationDepartureDetails) =>
       arrival.trainDetails.id === departure.trainId
-  )[0];
-  return matchingArrival && writeArrivalTime(departure, matchingArrival);
+  )[0]
+  return matchingArrival && writeArrivalTime(departure, matchingArrival)
 }
 
 /**
@@ -40,8 +47,8 @@ function writeArrivalTime(
   departure: DepartureOutput,
   arrival: StationDepartureDetails
 ) {
-  departure.arrivalTime = timeToString(arrival.time);
-  return departure;
+  departure.arrivalTime = timeToString(arrival.time)
+  return departure
 }
 
 /**
@@ -58,12 +65,12 @@ export function transformToReturnFormat(
   return departures.map((departure: StationDepartureDetails) => {
     return {
       departureTime: timeToString(departure.time),
-      arrivalTime: "0:10", // placeholder
+      arrivalTime: '0:10', // placeholder
       trainId: departure.trainDetails.id,
       from: formatName(stations, departureStationIndex),
       to: formatName(stations, arrivalStationIndex),
-    } as DepartureOutput;
-  });
+    } as DepartureOutput
+  })
 }
 
 /**
@@ -81,22 +88,22 @@ export function filterDepartures(
       departure.time >= time &&
       departure.trainDetails.directionId === direction &&
       frequency.includes(departure.trainDetails.activeOnWeekendsAndHolidays)
-    );
-  });
+    )
+  })
 }
 
 /**
  * Converts a number into a time string.
  */
 function timeToString(time: number) {
-  return time.toFixed(2).split(".").join(":") as TimeOutput;
+  return time.toFixed(2).split('.').join(':') as TimeOutput
 }
 
 /**
  * Converts time string into a number.
  */
 export function timeToNumber(time: TimeOutput) {
-  return Number(time.split(":").join("."));
+  return Number(time.split(':').join('.'))
 }
 
 /**
@@ -106,29 +113,26 @@ export function timeToNumber(time: TimeOutput) {
  * They serve as departure filtering criteria.
  */
 export function frequencyOnDate(date: YyyyMmDd, holidays: YyyyMmDd[]) {
-  const day = new Date(date).getDay();
+  const day = new Date(date).getDay()
   return day === 0 || day === 6 || holidays.includes(date)
-    ? [true, "w&h_only"]
-    : [true, false];
+    ? [true, 'w&h_only']
+    : [true, false]
 }
 
 /**
  * @returns Index of station in the list of stations (starting with Batajnica, ending with Ovca).
  */
-export function stationIndex(
-  stations: Station[],
-  endpoint: StationName
-) {
+export function stationIndex(stations: Station[], endpoint: StationName) {
   return stations
     .filter((station: Station) => station.name === endpoint)
-    .map((station: Station) => stations.indexOf(station))[0];
+    .map((station: Station) => stations.indexOf(station))[0]
 }
 
 /**
  * @returns A station name with correct spacing and capitalization.
  */
 function formatName(stations: Station[], stationIndex: number) {
-  return stations[stationIndex].nameFormatted;
+  return stations[stationIndex].nameFormatted
 }
 
 /**
@@ -139,5 +143,5 @@ export function direction(
   departureStationIndex: number,
   arrivalStationIndex: number
 ) {
-  return departureStationIndex > arrivalStationIndex ? 2 : 1;
+  return departureStationIndex > arrivalStationIndex ? 2 : 1
 }

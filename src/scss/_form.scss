@@ -1,63 +1,61 @@
 @use 'variables';
 
 form {
-    margin-top: 0.8em;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    align-items: center;
-    color: variables.$primary-2;
-    
+  margin-top: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  color: variables.$primary-2;
 }
 
 .search {
-    width: 10em;
-    height: 2em;
-    background: variables.$primary-1;
-    border-radius: 2em;
-    border: solid 3px variables.$primary-2;
-    color: variables.$primary-2;
-    font-size: 1.5em;
-    margin: 0.5em;
+  width: 10em;
+  height: 2em;
+  background: variables.$primary-1;
+  border-radius: 2em;
+  border: solid 3px variables.$primary-2;
+  color: variables.$primary-2;
+  font-size: 1.5em;
+  margin: 0.5em;
 }
 
 label {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 select,
 input {
-    margin-bottom: 1.2em;
-    border: solid 2px transparent;
-    padding: 1px 3px;
-    font-size: 1.5em;
-    
+  margin-bottom: 1.2em;
+  border: solid 2px transparent;
+  padding: 1px 3px;
+  font-size: 1.5em;
 }
 
 select,
 button,
 input {
-    cursor: pointer;
-    transition: 0.1s;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 select {
-    option {
-      font-size: 1em;  
-    }  
+  option {
+    font-size: 1em;
+  }
 }
 
 .error {
-    border: solid 2px variables.$error-1;
-    border-radius: 3px;
-    transition: 0.5s;
+  border: solid 2px variables.$error-1;
+  border-radius: 3px;
+  transition: 0.5s;
 }
 
 .error-missing-input {
-    &::before {
-        content: "⚠";
-        position: absolute;
-        margin-left: -30px;
-        font-size: 28px;
-    }
+  &::before {
+    content: '⚠';
+    position: absolute;
+    margin-left: -30px;
+    font-size: 28px;
+  }
 }

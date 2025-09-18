@@ -1,28 +1,27 @@
 @use 'variables';
 
 .info--content {
- width: 100%;
- min-width: variables.$min-width;
- background: variables.$primary-1;
- color: variables.$primary-2;
- font-size: 1.2em;
- padding: 10% 15%;
- text-align: center;
- p {
-     margin-bottom: 5%;
-     &:nth-child(2) {
-        margin-top: 10%;
-     }
- }
- a {
-     color: variables.$primary-2;
- }
- img {
-     height: 40px;
-     margin-top: 50px;
- }
- button {
+  width: 100%;
+  min-width: variables.$min-width;
+  background: variables.$primary-1;
+  color: variables.$primary-2;
+  font-size: 1.2em;
+  padding: 10% 15%;
+  text-align: center;
+  p {
+    margin-bottom: 5%;
+    &:nth-child(2) {
+      margin-top: 10%;
+    }
+  }
+  a {
+    color: variables.$primary-2;
+  }
+  img {
+    height: 40px;
+    margin-top: 50px;
+  }
+  button {
     font-size: 1em;
- }
+  }
 }
-

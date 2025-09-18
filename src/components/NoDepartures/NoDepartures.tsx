@@ -1,12 +1,14 @@
-import { useContext } from "react"
-import { LanguageContext } from "../../context"
+import { useContext } from 'react'
+import { LanguageContext } from '../../context'
 
 const NoDepartures = () => {
-  const { noDeparturesLanguage } = useContext(LanguageContext);
+  const { noDeparturesLanguage } = useContext(LanguageContext)
   return (
     <>
       <p>⚠</p>
-      <p data-testid="no-departures-message">{noDeparturesLanguage.no_departures_message}</p>
+      <p data-testid="no-departures-message">
+        {noDeparturesLanguage.no_departures_message}
+      </p>
     </>
   )
 }

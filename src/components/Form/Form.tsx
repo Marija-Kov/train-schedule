@@ -1,68 +1,80 @@
-import { useContext, useEffect, useState } from "react";
-import { FormInputData, StationName, TimeOutput, YyyyMmDd } from "train-schedule-types";
-import { useNavigate } from "react-router";
-import { LanguageContext } from "../../context";
-import { useBrowserStorage } from "../../hooks";
+import { useContext, useEffect, useState } from 'react'
+import {
+  FormInputData,
+  StationName,
+  TimeOutput,
+  YyyyMmDd,
+} from 'train-schedule-types'
+import { useNavigate } from 'react-router'
+import { LanguageContext } from '../../context'
+import { useBrowserStorage } from '../../hooks'
 
 const Form = () => {
-  const navigate = useNavigate();
-  const { browserStorage, session } = useBrowserStorage();
-  const { formLanguage } = useContext(LanguageContext);
+  const navigate = useNavigate()
+  const { browserStorage, session } = useBrowserStorage()
+  const { formLanguage } = useContext(LanguageContext)
 
   const [input, setInput] = useState<FormInputData>({
     from: undefined,
     to: undefined,
-    date: (new Date()).toISOString().split('T')[0] as YyyyMmDd,
-    time: (new Date()).toTimeString().split(' ')[0].substring(0, 5) as TimeOutput
+    date: new Date().toISOString().split('T')[0] as YyyyMmDd,
+    time: new Date().toTimeString().split(' ')[0].substring(0, 5) as TimeOutput,
   })
 
-  const [emptyFields, setEmptyFields] = useState<string[]>([]);
+  const [emptyFields, setEmptyFields] = useState<string[]>([])
 
   useEffect(() => {
-    const lastQueryJSON = browserStorage(session, "lastQuery");
+    const lastQueryJSON = browserStorage(session, 'lastQuery')
     if (lastQueryJSON) {
-      const lastQuery = JSON.parse(lastQueryJSON);
-      document.querySelectorAll("select")[1].value = lastQuery.from as StationName || "";
-      document.querySelectorAll("select")[2].value = lastQuery.to as StationName || "";
-      document.querySelectorAll("input")[0].value = lastQuery.date as YyyyMmDd
-      document.querySelectorAll("input")[1].value = lastQuery.time as TimeOutput
+      const lastQuery = JSON.parse(lastQueryJSON)
+      document.querySelectorAll('select')[1].value =
+        (lastQuery.from as StationName) || ''
+      document.querySelectorAll('select')[2].value =
+        (lastQuery.to as StationName) || ''
+      document.querySelectorAll('input')[0].value = lastQuery.date as YyyyMmDd
+      document.querySelectorAll('input')[1].value = lastQuery.time as TimeOutput
       setInput({
         from: lastQuery.from as StationName,
         to: lastQuery.to as StationName,
         date: lastQuery.date as YyyyMmDd,
-        time: lastQuery.time as TimeOutput
+        time: lastQuery.time as TimeOutput,
       })
     }
   }, [])
 
   const handleChange = (e: React.FormEvent) => {
-    const { name } = e.target as HTMLSelectElement;
-    const { value } = e.target as HTMLSelectElement;
-    setEmptyFields(prev => prev.filter(field => field != name));
-    return setInput(prev => ({
+    const { name } = e.target as HTMLSelectElement
+    const { value } = e.target as HTMLSelectElement
+    setEmptyFields((prev) => prev.filter((field) => field != name))
+    return setInput((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }))
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.from) setEmptyFields(prev => ["from", ...prev]);
-    if (!input.to) setEmptyFields(prev => ["to", ...prev]);
-    if (!input.date) setEmptyFields(prev => ["date", ...prev]);
-    if (!input.time) setEmptyFields(prev => ["time", ...prev]);
+    e.preventDefault()
+    if (!input.from) setEmptyFields((prev) => ['from', ...prev])
+    if (!input.to) setEmptyFields((prev) => ['to', ...prev])
+    if (!input.date) setEmptyFields((prev) => ['date', ...prev])
+    if (!input.time) setEmptyFields((prev) => ['time', ...prev])
 
     if (input.from && input.to && input.date && input.time) {
-      browserStorage(session, "lastQuery", JSON.stringify(input));
-      navigate(`/departures/${input.from}/${input.to}/${input.date}/${input.time}`);
+      browserStorage(session, 'lastQuery', JSON.stringify(input))
+      navigate(
+        `/departures/${input.from}/${input.to}/${input.date}/${input.time}`
+      )
     }
 
-    setTimeout(() => setEmptyFields([]), 3000);
+    setTimeout(() => setEmptyFields([]), 3000)
   }
 
   const missingInputError = () => {
     return (
-      <span className="error-missing-input" data-testid="missing-input-mark"></span>
+      <span
+        className="error-missing-input"
+        data-testid="missing-input-mark"
+      ></span>
     )
   }
 
@@ -70,13 +82,13 @@ const Form = () => {
     <form data-testid="search-form" onSubmit={handleSubmit}>
       <label htmlFor="from">{formLanguage.from}:</label>
       <span>
-        {emptyFields.includes("from") ? missingInputError() : ""}
+        {emptyFields.includes('from') ? missingInputError() : ''}
         <select
           onChange={handleChange}
           id="from"
           data-testid="select-departure-station"
           name="from"
-          className={emptyFields.includes("from") ? "error" : ""}
+          className={emptyFields.includes('from') ? 'error' : ''}
         >
           <option value="">{formLanguage.from_title}</option>
           <option value="batajnica">Batajnica</option>
@@ -98,13 +110,13 @@ const Form = () => {
       </span>
       <label htmlFor="to">{formLanguage.to}:</label>
       <span>
-        {emptyFields.includes("to") ? missingInputError() : ""}
+        {emptyFields.includes('to') ? missingInputError() : ''}
         <select
           onChange={handleChange}
           id="to"
           data-testid="select-arrival-station"
           name="to"
-          className={emptyFields.includes("to") ? "error" : ""}
+          className={emptyFields.includes('to') ? 'error' : ''}
         >
           <option value="">{formLanguage.to_title}</option>
           <option value="batajnica">Batajnica</option>
@@ -126,7 +138,7 @@ const Form = () => {
       </span>
       <label htmlFor="date">{formLanguage.date}:</label>
       <span>
-        {emptyFields.includes("date") ? missingInputError() : ""}
+        {emptyFields.includes('date') ? missingInputError() : ''}
         <input
           onChange={handleChange}
           id="date"
@@ -136,12 +148,12 @@ const Form = () => {
           value={input.date}
           min="2024-12-15"
           max="2025-12-13"
-          className={emptyFields.includes("date") ? "error" : ""}
+          className={emptyFields.includes('date') ? 'error' : ''}
         />
       </span>
       <label htmlFor="time">{formLanguage.time}:</label>
       <span>
-        {emptyFields.includes("time") ? missingInputError() : ""}
+        {emptyFields.includes('time') ? missingInputError() : ''}
         <input
           onChange={handleChange}
           id="time"
@@ -149,13 +161,10 @@ const Form = () => {
           name="time"
           type="time"
           value={input.time}
-          className={emptyFields.includes("time") ? "error" : ""}
+          className={emptyFields.includes('time') ? 'error' : ''}
         />
       </span>
-      <button
-        data-testid="search-departures-btn"
-        className="search"
-      >
+      <button data-testid="search-departures-btn" className="search">
         {formLanguage.search_btn_text}
       </button>
     </form>

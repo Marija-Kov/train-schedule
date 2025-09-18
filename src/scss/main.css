@@ -120,7 +120,7 @@ h2 span {
 }
 h2 span:nth-child(1)::after {
   position: absolute;
-  content: "➞";
+  content: '➞';
   left: 49%;
 }
 
@@ -156,7 +156,7 @@ h3 span {
   margin: 2em auto;
 }
 .back::before {
-  content: "< ";
+  content: '< ';
   font-weight: 600;
   position: relative;
   top: 1px;
@@ -244,4 +244,4 @@ body {
 }
 .no-departures p:nth-child(1) {
   font-size: 2.5em;
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */

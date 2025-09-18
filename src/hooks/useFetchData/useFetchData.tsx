@@ -1,44 +1,43 @@
 const useFetchData = () => {
-  const url =
-    "https://marija-kov.github.io/train-schedule-23-api/stations.json";
+  const url = 'https://marija-kov.github.io/train-schedule-23-api/stations.json'
 
-  const version = 2;
-  const cacheName = `/trainScheduleBgd-${version}`;   
-  
-  const fetchData = async () => { 
-    if (process.env.NODE_ENV === "test") {
+  const version = 2
+  const cacheName = `/trainScheduleBgd-${version}`
+
+  const fetchData = async () => {
+    if (process.env.NODE_ENV === 'test') {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url)
         if (!response.ok) {
-          console.error(`Could not fetch from url: ${url}`);
-          return;
+          console.error(`Could not fetch from url: ${url}`)
+          return
         }
-        return await response.json();  
+        return await response.json()
       } catch (error) {
-        console.error(error);
-        return;
+        console.error(error)
+        return
       }
     }
-    
-    const cache = await caches.open(cacheName);
-    let data = await cache.match(cacheName);
+
+    const cache = await caches.open(cacheName)
+    let data = await cache.match(cacheName)
     if (data) {
-      return await data.json();
+      return await data.json()
     } else {
-      const response = await fetch(url);
+      const response = await fetch(url)
       if (!response.ok) {
-        console.error(`Could not fetch from url: ${url}`);
-        return "Data not available";
+        console.error(`Could not fetch from url: ${url}`)
+        return 'Data not available'
       }
-      const oldVersions = await caches.keys();
-      oldVersions.forEach(v => v !== cacheName && caches.delete(v));
-      cache.put(cacheName, response.clone());
-      data = await response.json();
+      const oldVersions = await caches.keys()
+      oldVersions.forEach((v) => v !== cacheName && caches.delete(v))
+      cache.put(cacheName, response.clone())
+      data = await response.json()
 
-      return data;
+      return data
     }
-  };
-  return { fetchData };
-};
+  }
+  return { fetchData }
+}
 
-export default useFetchData;
+export default useFetchData

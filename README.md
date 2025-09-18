@@ -14,9 +14,11 @@
 6. [Author](#author)
 
 ---
+
 <br>
 
 ## Motivation <a name = "motivation"></a>
+
  <div align="center"> 
   <p align="left">
    This app was built out of need for a more accessible and readable alternative to the official <a href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf">local train schedule in PDF</a>. 
@@ -38,6 +40,7 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
 <br>
 
 ## App Features <a name = "features"></a>
+
 <p> 
  As a User, you simply select departure station, arrival station, date and time and you'll get a list of departures/arrivals with train id-s.
 </p>
@@ -57,23 +60,18 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
 - [Vitest](https://vitest.dev/) - Testing
 - [Sass](https://sass-lang.com/) - Style
 
-
 <br>
 
 ## Local Usage <a name = "localUsage"></a>
 
 In the root folder of the cloned repo, run:
-1. ```npm install``` to install the dependencies;
-2. ```npm run dev``` to run the app in development mode;
-3. ```npm run test``` to test;
-            
+
+1. `npm install` to install the dependencies;
+2. `npm run dev` to run the app in development mode;
+3. `npm run test` to test;
+
 <br>
 
 ## Author <a name = "author"></a>
 
-[@marija-kov](https://github.com/Marija-Kov) 
-
-
-
-
-
+[@marija-kov](https://github.com/Marija-Kov)

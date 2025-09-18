@@ -11,6 +11,6 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
-    css: true // disable if no tests rely on css
-  }
+    css: true, // disable if no tests rely on css
+  },
 })
