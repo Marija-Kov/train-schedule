@@ -81,13 +81,22 @@ function DeparturesLayout() {
               {departuresLayoutLanguage.service_updates_not_available}
             </p>
           ) : updates.length ? (
-            updates.map((u) => {
-              return (
-                <p className="service-update-details" key={u.id}>
-                  {u.content}
-                </p>
-              )
-            })
+            <>
+              <strong>
+                <u>
+                  {departuresLayoutLanguage.service_updates_today},{' '}
+                  {departuresLayoutLanguage.date_today},{' '}
+                  {departuresLayoutLanguage.except_otherwise_specified}!
+                </u>
+              </strong>
+              {updates.map((u) => {
+                return (
+                  <p className="service-update-details" key={u.id}>
+                    {u.content}
+                  </p>
+                )
+              })}
+            </>
           ) : (
             <p>{departuresLayoutLanguage.on_schedule}</p>
           )}

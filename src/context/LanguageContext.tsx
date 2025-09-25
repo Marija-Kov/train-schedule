@@ -65,6 +65,13 @@ const translation = JSON.stringify({
       arrival_time_title: 'dolazak',
       train_number_title: 'br. voza',
       loading_message: 'Učitavanje',
+      service_updates_today: 'Sve izmene važe danas',
+      date_today: (() => {
+        const dateArray = new Date().toLocaleDateString().split('/')
+        const dateSerbianFormat = `${dateArray[1]}.0${dateArray[0]}.${dateArray[2]}`
+        return dateSerbianFormat
+      })(),
+      except_otherwise_specified: 'osim ako je drugačije naglašeno',
       on_schedule: 'Nema odstupanja od reda vožnje.',
       service_updates_not_available:
         'Informacije o eventualnim izmenama u saobraćaju vozova trenutno su nedostupne.',
@@ -75,6 +82,9 @@ const translation = JSON.stringify({
       arrival_time_title: 'arrival',
       train_number_title: 'train no.',
       loading_message: 'Loading',
+      service_updates_today: 'All service updates are valid today',
+      date_today: new Date().toDateString().slice(4), // remove the day of the week
+      except_otherwise_specified: 'unless otherwise specified',
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
         'Train service updates not available at the moment.',
@@ -119,6 +129,9 @@ type DeparturesLayoutContent = {
   arrival_time_title: string
   train_number_title: string
   loading_message: string
+  service_updates_today: string
+  date_today: string
+  except_otherwise_specified: string
   on_schedule: string
   service_updates_not_available: string
   back_btn_text: string
