@@ -66,11 +66,7 @@ const translation = JSON.stringify({
       train_number_title: 'br. voza',
       loading_message: 'Učitavanje',
       service_updates_today: 'Sve izmene važe danas',
-      date_today: (() => {
-        const dateArray = new Date().toLocaleDateString().split('/')
-        const dateSerbianFormat = `${dateArray[1]}.0${dateArray[0]}.${dateArray[2]}`
-        return dateSerbianFormat
-      })(),
+      date_today: new Date().toLocaleDateString().split('/').join('.'),
       except_otherwise_specified: 'osim ako je drugačije naglašeno',
       on_schedule: 'Nema odstupanja od reda vožnje.',
       service_updates_not_available:
