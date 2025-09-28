@@ -152,7 +152,7 @@ describe('<DeparturesLayout />', () => {
     )
 
     const serviceUpdate = await screen.findByText(/nece saobracati/i)
-    const validTodayMessage = await screen.findByText(/sve izmene važe danas/i)
+    const validTodayMessage = await screen.findByText(/izmene za danas/i)
     expect(serviceUpdate).toBeInTheDocument()
     expect(serviceUpdate).toHaveClass('service-update-details')
     expect(validTodayMessage).toBeInTheDocument()

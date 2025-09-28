@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { StationName } from 'train-schedule-types'
-import { Departure, NoDepartures } from '../'
+import { Departure, NoDepartures, TrainServiceUpdates } from '../'
 import { DeparturesContext, LanguageContext } from '../../context'
 import { useTrainServiceUpdates } from '../../hooks'
 
@@ -81,22 +81,7 @@ function DeparturesLayout() {
               {departuresLayoutLanguage.service_updates_not_available}
             </p>
           ) : updates.length ? (
-            <>
-              <strong>
-                <u>
-                  {departuresLayoutLanguage.service_updates_today},{' '}
-                  {departuresLayoutLanguage.date_today},{' '}
-                  {departuresLayoutLanguage.except_otherwise_specified}!
-                </u>
-              </strong>
-              {updates.map((u) => {
-                return (
-                  <p className="service-update-details" key={u.id}>
-                    {u.content}
-                  </p>
-                )
-              })}
-            </>
+            <TrainServiceUpdates updates={updates} />
           ) : (
             <p>{departuresLayoutLanguage.on_schedule}</p>
           )}
