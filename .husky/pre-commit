@@ -1,6 +1,10 @@
 #!/bin/bash
 
-npm run lint
+git stash push --staged -m "staged changes only"
+git stash push -u -m "non-staged changes only"
+git stash pop stash@{1}
+npm run lint -- --fix
 npm run format
+git add .
 npm run test
 npm run build
