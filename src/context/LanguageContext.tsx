@@ -66,7 +66,7 @@ const translation = JSON.stringify({
       train_number_title: 'br. voza',
       loading_message: 'Učitavanje',
       service_updates_today: 'Izmene za danas',
-      date_today: new Date().toLocaleDateString().split('/').join('.'),
+      date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'osim ako je drugačije naglašeno',
       on_schedule: 'Nema odstupanja od reda vožnje.',
       service_updates_not_available:
@@ -79,7 +79,7 @@ const translation = JSON.stringify({
       train_number_title: 'train no.',
       loading_message: 'Loading',
       service_updates_today: 'Service updates for today',
-      date_today: new Date().toDateString().slice(4), // remove the day of the week
+      date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'unless otherwise specified',
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
