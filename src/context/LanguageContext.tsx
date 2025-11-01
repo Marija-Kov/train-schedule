@@ -68,6 +68,8 @@ const translation = JSON.stringify({
       service_updates_today: 'Izmene za danas',
       date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'osim ako je drugačije naglašeno',
+      external_link_to_service_update:
+        'objava o izmeni na zvaničnom sajtu SrbijaVoza',
       on_schedule: 'Nema odstupanja od reda vožnje.',
       service_updates_not_available:
         'Informacije o eventualnim izmenama u saobraćaju vozova trenutno su nedostupne.',
@@ -81,6 +83,8 @@ const translation = JSON.stringify({
       service_updates_today: 'Service updates for today',
       date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'unless otherwise specified',
+      external_link_to_service_update:
+        'read the update on the official Serbian railways page',
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
         'Train service updates not available at the moment.',
@@ -128,6 +132,7 @@ type DeparturesLayoutContent = {
   service_updates_today: string
   date_today: string
   except_otherwise_specified: string
+  external_link_to_service_update: string
   on_schedule: string
   service_updates_not_available: string
   back_btn_text: string

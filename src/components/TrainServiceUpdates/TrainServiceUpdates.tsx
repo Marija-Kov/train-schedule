@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LanguageContext } from '../../context'
 
 const TrainServiceUpdates = (props: {
-  updates: { id: number; content: string }[]
+  updates: { id: number; link: string; content: string }[]
 }) => {
   const { departuresLayoutLanguage } = useContext(LanguageContext)
   const { updates } = props
@@ -17,6 +17,16 @@ const TrainServiceUpdates = (props: {
         return (
           <p className="service-update-details" key={u.id}>
             {u.content}
+            <a
+              href={u.link}
+              className="service-update-external-link"
+              aria-label={
+                departuresLayoutLanguage.external_link_to_service_update
+              }
+              data-testid="service-update-external-link"
+            >
+              [link🡵]
+            </a>
           </p>
         )
       })}

@@ -152,9 +152,13 @@ describe('<DeparturesLayout />', () => {
     )
 
     const serviceUpdate = await screen.findByText(/nece saobracati/i)
+    const serviceUpdateExternalLink = await screen.findByTestId(
+      'service-update-external-link'
+    )
     const validTodayMessage = await screen.findByText(/izmene za danas/i)
     expect(serviceUpdate).toBeInTheDocument()
     expect(serviceUpdate).toHaveClass('service-update-details')
+    expect(serviceUpdateExternalLink).toBeInTheDocument()
     expect(validTodayMessage).toBeInTheDocument()
   })
 
