@@ -2,10 +2,10 @@
 
 header {
   display: flex;
-  gap: 1.5em;
+  gap: 1.5rem;
   align-items: center;
   color: variables.$primary-2;
-  margin: 10px auto;
+  margin: 0.8rem auto;
   width: 85%;
   span {
     flex: 1;
@@ -16,23 +16,23 @@ header {
 .info {
   z-index: 5;
   background: variables.$primary-1;
-  border: solid 2px variables.$primary-2;
+  border: solid 0.15rem variables.$primary-2;
   color: variables.$primary-2;
-  font-size: 1.2em;
-  border-radius: 2em;
-  width: 1.7em;
-  height: 1.7em;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .train-icon {
   text-align: center;
-  width: 30px;
+  width: 2rem;
 }
 
 #language-menu {
   position: relative;
-  top: 8px;
+  top: 0.5rem;
   font-size: 1.2em;
-  border: solid 1px variables.$primary-2;
-  border-radius: 3px;
+  border: solid 0.1rem variables.$primary-2;
+  border-radius: 0.2rem;
 }

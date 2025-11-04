@@ -7,7 +7,7 @@
   color: variables.$primary-2;
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -22,9 +22,9 @@ h3 {
 
 h2 {
   justify-content: center;
-  font-size: 1.3em;
-  margin-bottom: 0.5em;
-  gap: 1em;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
 
   span {
     flex: 1;
@@ -32,7 +32,7 @@ h2 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    max-width: 8em;
+    max-width: 8rem;
   }
 }
 
@@ -40,7 +40,7 @@ h3 {
   justify-content: center;
 
   span {
-    border: solid 1px variables.$primary-2;
+    border: solid 0.1rem variables.$primary-2;
     flex: 1;
     text-align: center;
   }
@@ -57,11 +57,11 @@ h3 {
 .service-updates--container {
   width: 100%;
   min-width: variables.$min-width;
-  padding: 0.5em 2em;
+  padding: 0.5rem 2rem;
 }
 
 .service-updates--title {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 }
 
 .service-update-details {
@@ -90,8 +90,9 @@ h3 {
   display: flex;
   font-size: 0.8rem;
   font-weight: 600;
-  max-width: 410px;
-  border: solid 1px variables.$primary-2;
+  max-width: 25.6rem;
+  border: solid 0.1rem variables.$primary-2;
+  margin-top: 1rem;
   a {
     color: variables.$primary-2;
   }
@@ -103,22 +104,22 @@ h3 {
 .warning-sign {
   font-size: 1.2rem;
   padding: 0.35rem;
-  border-right: solid 1px variables.$primary-2;
+  border-right: solid 0.1rem variables.$primary-2;
 }
 
 .back {
   background: variables.$primary-1;
   color: variables.$primary-2;
-  font-size: 1.2em;
-  border: solid 2px variables.$primary-2;
-  border-radius: 2em;
-  padding: 4px 8px;
-  margin: 2em auto;
+  font-size: 1rem;
+  border: solid 0.15rem variables.$primary-2;
+  border-radius: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin: 1rem auto;
 
   &::before {
     content: '< ';
     font-weight: 600;
     position: relative;
-    top: 1px;
+    top: 0.1rem;
   }
 }
