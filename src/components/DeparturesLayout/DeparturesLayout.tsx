@@ -86,6 +86,17 @@ function DeparturesLayout() {
             <p>{departuresLayoutLanguage.on_schedule}</p>
           )}
 
+          <div className="service-updates-note">
+            <div className="warning-sign">⚠</div>
+            <p>
+              {departuresLayoutLanguage.service_updates_note}{' '}
+              <a href="https://srbijavoz.rs/informacije/">
+                {departuresLayoutLanguage.please_check}
+              </a>
+              .
+            </p>
+          </div>
+
           <button
             onClick={() => navigate(-1)}
             data-testid="back-to-form"

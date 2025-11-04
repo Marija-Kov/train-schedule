@@ -201,6 +201,32 @@ describe('<DeparturesLayout />', () => {
     expect(serviceUpdate).toBeInTheDocument()
   })
 
+  it('should display note on train service updates feature flaws', async () => {
+    render(
+      <BrowserRouter>
+        <DeparturesContext.Provider
+          value={{
+            departures: [
+              {
+                departureTime: '0:01',
+                arrivalTime: '0:02',
+                trainId: 8003,
+              },
+            ],
+            loading: false,
+          }}
+        >
+          <DeparturesLayout />
+        </DeparturesContext.Provider>
+      </BrowserRouter>
+    )
+
+    const serviceUpdatesNote = await screen.findByText(
+      /informacije o izmenama u saobraćaju mogu biti nepotpune/i
+    )
+    expect(serviceUpdatesNote).toBeInTheDocument()
+  })
+
   /*
      TODO: Investigate further why it's not navigating to form when using
      data-testid selector then fix and uncomment the test.

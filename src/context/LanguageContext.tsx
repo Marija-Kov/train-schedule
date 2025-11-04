@@ -73,6 +73,9 @@ const translation = JSON.stringify({
       on_schedule: 'Nema odstupanja od reda vožnje.',
       service_updates_not_available:
         'Informacije o eventualnim izmenama u saobraćaju vozova trenutno su nedostupne.',
+      service_updates_note:
+        'Prikazane informacije o izmenama u saobraćaju mogu biti nepotpune.',
+      please_check: 'Molimo proverite na zvaničnoj stranici SrbijaVoza',
       back_btn_text: 'nazad',
     },
     en: {
@@ -88,6 +91,9 @@ const translation = JSON.stringify({
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
         'Train service updates not available at the moment.',
+      service_updates_note:
+        'The service updates feature may fail to convey important information.',
+      please_check: 'Please refer to the official Serbian railways page',
       back_btn_text: 'back',
     },
   },
@@ -135,6 +141,8 @@ type DeparturesLayoutContent = {
   external_link_to_service_update: string
   on_schedule: string
   service_updates_not_available: string
+  service_updates_note: string
+  please_check: string
   back_btn_text: string
 }
 
