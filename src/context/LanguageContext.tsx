@@ -91,8 +91,7 @@ const translation = JSON.stringify({
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
         'Train service updates not available at the moment.',
-      service_updates_note:
-        'The service updates feature may fail to convey important information.',
+      service_updates_note: 'Service updates shown here may not be thorough.',
       please_check: 'Please refer to the official Serbian railways page',
       back_btn_text: 'back',
     },
