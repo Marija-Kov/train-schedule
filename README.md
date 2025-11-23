@@ -1,7 +1,7 @@
 <h1 align="center"><a href="https://bgdvoz1.web.app/">Local train schedule</a></h1>
 <h3 align="center">Find Belgrade(RS) train departures by time, date and station</h3>
 <br>
-<div align="center"><img src="https://i.imgur.com/Qwv798j.gif" alt="Belgrade train schedule app" /></div> 
+<div align="center"><img src="https://i.imgur.com/AvTJHCA.gif" alt="Belgrade train schedule app" width="250px"/></div> 
 <br>
 
 ## Table of Contents
@@ -10,8 +10,7 @@
 2. [App Features](#features)
 3. [Tools and Dependencies](#tools)
 4. [Local Usage](#localUsage)
-5. [Todos](#todos)
-6. [Author](#author)
+5. [Author](#author)
 
 ---
 
@@ -46,9 +45,9 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
 </p>
 <p>
  Weekday and weekend schedule differs and national holidays are taken into account automatically. 
- If the departures don't exist for the entered criteria, a message will pop up.
+ If departures don't exist for the entered criteria, a message will pop up.
  Tapping on the question mark in the header, you will find more info about the app.
- Tapping on train icon will refresh the page. Diamond icon is just a placeholder.
+ Tapping on train icon will refresh the page. Language menu switches the language with the exception of live schedule updates which are currently only in Serbian.
 </p>
 
 <br>
@@ -56,9 +55,11 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
 ## Tools and Dependencies <a name = "tools"></a>
 
 - [React](https://reactjs.org/) - User interface
+- [React router](https://reactrouter.com/start/data/installation) - Client routing
 - [Vite](https://vitejs.dev/) - Build tooling
 - [Vitest](https://vitest.dev/) - Testing
 - [Sass](https://sass-lang.com/) - Style
+- [Husky](https://github.com/typicode/husky) - Git hooks management
 
 <br>
 
