@@ -31,9 +31,9 @@
   <br>
  </div>
 <p> 
-The app uses data from a <a href="https://github.com/Marija-Kov/train-schedule-23-api/blob/main/stations.json">JSON file</a> that was created specifically for the app by running a <a href="https://github.com/Marija-Kov/train-schedule-23-api/blob/main/helpers/runFunctions.ts">program</a>.
+The app uses data from a <a href="https://github.com/Marija-Kov/train-schedule-23-api/blob/main/stations.json">JSON file</a> that was created specifically for the app by running a sequence of procedures on the data extracted from the PDF file.
  <br>
-The JSON file can be easily updated after the schedule becomes obsolete - which usually happens once a year - by reusing the helper functions with most recent data passed in.
+The JSON file can be easily updated after the schedule becomes obsolete - which usually happens once a year - by reusing the helper functions with the most recent data.
 </p>
 
 <br>
@@ -41,13 +41,14 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
 ## App Features <a name = "features"></a>
 
 <p> 
- As a User, you simply select departure station, arrival station, date and time and you'll get a list of departures/arrivals with train id-s.
+ As a user, you simply select departure and arrival stations, date and time and you'll get a list of departures/arrivals with train id-s as well as active schedule updates for the current day, if any. 
 </p>
 <p>
- Weekday and weekend schedule differs and national holidays are taken into account automatically. 
+ Weekday and weekend schedules differ and national holidays are taken into account automatically. 
  If departures don't exist for the entered criteria, a message will pop up.
  Tapping on the question mark in the header, you will find more info about the app.
- Tapping on train icon will refresh the page. Language menu switches the language with the exception of live schedule updates which are currently only in Serbian.
+ Tapping on the train icon will refresh the page. 
+ The language menu switches the language of the app (with the exception of live schedule updates which are currently only in Serbian).
 </p>
 
 <br>
