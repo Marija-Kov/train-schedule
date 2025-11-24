@@ -47,7 +47,7 @@ const translation = JSON.stringify({
       schedule_change_note:
         'Occasionally, some departures may be off schedule or cancelled. See',
       schedule_change_announcements_link:
-        'the official Serbian railways info page',
+        'the official Serbian railway info page',
       for_info: 'for more information.',
     },
   },
@@ -87,12 +87,12 @@ const translation = JSON.stringify({
       date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'unless otherwise specified',
       external_link_to_service_update:
-        'read the update on the official Serbian railways page',
+        'read the update on the official Serbian railway page',
       on_schedule: 'All departures on schedule.',
       service_updates_not_available:
         'Train service updates not available at the moment.',
       service_updates_note: 'Service updates shown here may not be thorough.',
-      please_check: 'Please refer to the official Serbian railways page',
+      please_check: 'Please refer to the official Serbian railway page',
       back_btn_text: 'back',
     },
   },
