@@ -25,7 +25,7 @@ const TrainServiceUpdates = (props: {
               }
               data-testid="service-update-external-link"
             >
-              [link🡵]
+              [{departuresLayoutLanguage.info_source}]
             </a>
           </p>
         )
