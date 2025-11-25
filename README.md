@@ -48,7 +48,7 @@ The JSON file can be easily updated after the schedule becomes obsolete - which 
  If departures don't exist for the entered criteria, a message will pop up.
  Tapping on the question mark in the header, you will find more info about the app.
  Tapping on the train icon will refresh the page. 
- The language menu switches the language of the app (with the exception of live schedule updates which are currently only in Serbian).
+ The language menu switches the language of the app (with the exception of train service updates which are currently only in Serbian).
 </p>
 
 <br>
