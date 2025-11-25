@@ -25,10 +25,20 @@ const useTrainServiceUpdates = () => {
 
     const filteredUpdates: { id: number; link: string; content: string }[] =
       data
-        .filter((update: { date: string; slug: string }) => {
-          const updateDate = update.date.split('T')[0]
-          return updateDate === currentDate && update.slug.match(/bgvoz/i)
-        })
+        .filter(
+          (update: {
+            date: string
+            slug: string
+            content: { rendered: string }
+          }) => {
+            const updateDate = update.date.split('T')[0]
+            return (
+              updateDate === currentDate &&
+              update.slug.match(/bgvoz/i) &&
+              !update.content.rendered.match(/(Resnik|Mladenov|Lazarev)/i)
+            )
+          }
+        )
         .map(
           (update: {
             id: number
@@ -42,9 +52,6 @@ const useTrainServiceUpdates = () => {
             }
           }
         )
-        .filter((update: { id: number; content: string }) => {
-          return !update.content.match(/(Resnik|Mladenov|Lazarev)/i)
-        })
 
     setUpdates(filteredUpdates)
     setLoadingUpdates(false)
