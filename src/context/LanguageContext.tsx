@@ -76,6 +76,10 @@ const translation = JSON.stringify({
       service_updates_note:
         'Prikazane informacije o izmenama u saobraćaju mogu biti nepotpune.',
       please_check: 'Molimo proverite na zvaničnoj stranici SrbijaVoza',
+      departure_from: 'Polazak sa stanice',
+      to: 'do stanice',
+      at_time: 'u',
+      has_been_cancelled: 'nece saobracati iz tehnickih razloga',
       info_source: 'izvor',
       back_btn_text: 'nazad',
     },
@@ -94,8 +98,51 @@ const translation = JSON.stringify({
         'Train service updates not available at the moment.',
       service_updates_note: 'Service updates shown here may not be thorough.',
       please_check: 'Please refer to the official Serbian railway page',
+      departure_from: 'Departure from',
+      to: 'to',
+      at_time: 'at',
+      has_been_cancelled: 'has been cancelled for technical reasons',
       info_source: 'source',
       back_btn_text: 'back',
+    },
+  },
+  train_service_updates: {
+    sr: {
+      loading_message: 'Učitavanje',
+      service_updates_today: 'Izmene važe danas',
+      date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
+      except_otherwise_specified: 'osim ako je drugačije naglašeno',
+      external_link_to_service_update:
+        'objava o izmeni na zvaničnom sajtu SrbijaVoza',
+      on_schedule: 'Nema odstupanja od reda vožnje.',
+      service_updates_not_available:
+        'Informacije o eventualnim izmenama u saobraćaju vozova trenutno su nedostupne.',
+      service_updates_note:
+        'Prikazane informacije o izmenama u saobraćaju mogu biti nepotpune.',
+      please_check: 'Molimo proverite na zvaničnoj stranici SrbijaVoza',
+      departure_from: 'Polazak sa stanice',
+      to: 'do stanice',
+      at_time: 'u',
+      has_been_cancelled: 'nece saobracati iz tehnickih razloga',
+      info_source: 'izvor',
+    },
+    en: {
+      loading_message: 'Loading',
+      service_updates_today: 'Service updates for today',
+      date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
+      except_otherwise_specified: 'unless otherwise specified',
+      external_link_to_service_update:
+        'read the update on the official Serbian railway page',
+      on_schedule: 'All departures on schedule.',
+      service_updates_not_available:
+        'Train service updates not available at the moment.',
+      service_updates_note: 'Service updates shown here may not be thorough.',
+      please_check: 'Please refer to the official Serbian railway page',
+      departure_from: 'Departure from',
+      to: 'to',
+      at_time: 'at',
+      has_been_cancelled: 'has been cancelled for technical reasons',
+      info_source: 'source',
     },
   },
   no_departures: {
@@ -144,8 +191,29 @@ type DeparturesLayoutContent = {
   service_updates_not_available: string
   service_updates_note: string
   please_check: string
+  departure_from: string
+  to: string
+  at_time: string
+  has_been_cancelled: string
   info_source: string
   back_btn_text: string
+}
+
+type TrainServiceUpdatesContent = {
+  loading_message: string
+  service_updates_today: string
+  date_today: string
+  except_otherwise_specified: string
+  external_link_to_service_update: string
+  on_schedule: string
+  service_updates_not_available: string
+  service_updates_note: string
+  please_check: string
+  departure_from: string
+  to: string
+  at_time: string
+  has_been_cancelled: string
+  info_source: string
 }
 
 const LanguageContext = createContext<{
@@ -153,6 +221,7 @@ const LanguageContext = createContext<{
   infoLanguage: InfoPageContent
   appLayoutLanguage: { app_info_label: string }
   departuresLayoutLanguage: DeparturesLayoutContent
+  trainServiceUpdatesLanguage: TrainServiceUpdatesContent
   noDeparturesLanguage: { no_departures_message: string }
   changeLanguage: (language: Language) => void
 }>({
@@ -160,6 +229,7 @@ const LanguageContext = createContext<{
   infoLanguage: JSON.parse(translation).info.sr,
   appLayoutLanguage: JSON.parse(translation).app_layout.sr,
   departuresLayoutLanguage: JSON.parse(translation).departures_layout.sr,
+  trainServiceUpdatesLanguage: JSON.parse(translation).train_service_updates.sr,
   noDeparturesLanguage: JSON.parse(translation).no_departures.sr,
   changeLanguage: (_) => _,
 })
@@ -176,6 +246,8 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({
   const [departuresLayoutLanguage, setDeparturesLayoutLanguage] = useState(
     JSON.parse(translation).departures_layout.sr
   )
+  const [trainServiceUpdatesLanguage, setTrainServiceUpdatesLanguage] =
+    useState(JSON.parse(translation).train_service_updates.sr)
   const [appLayoutLanguage, setAppLayoutLanguage] = useState(
     JSON.parse(translation).app_layout.sr
   )
@@ -188,6 +260,8 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({
     const infoTranslation = JSON.parse(translation).info[l.toLowerCase()]
     const departuresLayoutTranslation =
       JSON.parse(translation).departures_layout[l.toLowerCase()]
+    const trainServiceUpdatesTranslation =
+      JSON.parse(translation).train_service_updates[l.toLowerCase()]
     const appLayoutTranslation =
       JSON.parse(translation).app_layout[l.toLowerCase()]
     const noDeparturesTranslation =
@@ -195,6 +269,7 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({
     setFormLanguage(formTranslation)
     setInfoLanguage(infoTranslation)
     setDeparturesLayoutLanguage(departuresLayoutTranslation)
+    setTrainServiceUpdatesLanguage(trainServiceUpdatesTranslation)
     setAppLayoutLanguage(appLayoutTranslation)
     setNoDeparturesLanguage(noDeparturesTranslation)
   }
@@ -206,6 +281,7 @@ const LanguageContextProvider: React.FC<{ children: ReactNode }> = ({
         formLanguage,
         infoLanguage,
         departuresLayoutLanguage,
+        trainServiceUpdatesLanguage,
         appLayoutLanguage,
         noDeparturesLanguage,
       }}

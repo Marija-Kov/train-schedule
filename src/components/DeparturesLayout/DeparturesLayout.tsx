@@ -3,15 +3,12 @@ import { useNavigate, useParams } from 'react-router'
 import { StationName } from 'train-schedule-types'
 import { Departure, NoDepartures, TrainServiceUpdates } from '../'
 import { DeparturesContext, LanguageContext } from '../../context'
-import { useTrainServiceUpdates } from '../../hooks'
 
 function DeparturesLayout() {
   const navigate = useNavigate()
   const params = useParams()
   const { departures, loading } = useContext(DeparturesContext)
   const { departuresLayoutLanguage } = useContext(LanguageContext)
-
-  const { updates, loadingUpdates } = useTrainServiceUpdates()
 
   const stationNamesMap = {
     batajnica: 'Batajnica',
@@ -73,30 +70,7 @@ function DeparturesLayout() {
           ) : (
             <NoDepartures />
           )}
-          {loadingUpdates ? (
-            <p>{departuresLayoutLanguage.loading_message}...</p>
-          ) : typeof updates === 'string' &&
-            updates === 'Data not available' ? (
-            <p className="service-updates-not-available">
-              {departuresLayoutLanguage.service_updates_not_available}
-            </p>
-          ) : updates.length ? (
-            <TrainServiceUpdates updates={updates} />
-          ) : (
-            <p>{departuresLayoutLanguage.on_schedule}</p>
-          )}
-
-          <div className="service-updates-note">
-            <div className="warning-sign">⚠</div>
-            <p>
-              {departuresLayoutLanguage.service_updates_note}{' '}
-              <a href="https://srbijavoz.rs/informacije/">
-                {departuresLayoutLanguage.please_check}
-              </a>
-              .
-            </p>
-          </div>
-
+          <TrainServiceUpdates />
           <button
             onClick={() => navigate(-1)}
             data-testid="back-to-form"
