@@ -120,10 +120,11 @@ const translation = JSON.stringify({
       service_updates_note:
         'Prikazane informacije o izmenama u saobraćaju mogu biti nepotpune.',
       please_check: 'Molimo proverite na zvaničnoj stranici SrbijaVoza',
-      departure_from: 'Polazak sa stanice',
+      departure_from: 'Voz koji ide od stanice',
       to: 'do stanice',
       at_time: 'u',
-      has_been_cancelled: 'nece saobracati iz tehnickih razloga',
+      has_been_cancelled: 'neće saobraćati',
+      missing_section: 'na relaciji',
       info_source: 'izvor',
     },
     en: {
@@ -138,10 +139,11 @@ const translation = JSON.stringify({
         'Train service updates not available at the moment.',
       service_updates_note: 'Service updates shown here may not be thorough.',
       please_check: 'Please refer to the official Serbian railway page',
-      departure_from: 'Departure from',
+      departure_from: 'Train that goes from',
       to: 'to',
       at_time: 'at',
-      has_been_cancelled: 'has been cancelled for technical reasons',
+      has_been_cancelled: 'has been cancelled',
+      missing_section: 'on section',
       info_source: 'source',
     },
   },
@@ -213,6 +215,7 @@ type TrainServiceUpdatesContent = {
   to: string
   at_time: string
   has_been_cancelled: string
+  missing_section: string
   info_source: string
 }
 

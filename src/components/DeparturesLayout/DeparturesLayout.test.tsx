@@ -151,7 +151,7 @@ describe('<DeparturesLayout />', () => {
       </BrowserRouter>
     )
 
-    const serviceUpdate = await screen.findByText(/nece saobracati/i)
+    const serviceUpdate = await screen.findByText(/neće saobraćati/i)
     const serviceUpdateExternalLink = await screen.findByTestId(
       'service-update-external-link'
     )

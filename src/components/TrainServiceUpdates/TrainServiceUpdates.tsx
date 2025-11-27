@@ -23,7 +23,18 @@ const TrainServiceUpdates = () => {
           {updates.map((u) => {
             return (
               <p className="service-update-details" key={u.id}>
-                {u.content}
+                {trainServiceUpdatesLanguage.departure_from} {u.segments.from}{' '}
+                {trainServiceUpdatesLanguage.to} {u.segments.to}{' '}
+                {trainServiceUpdatesLanguage.at_time} {u.segments.time}h{' '}
+                {trainServiceUpdatesLanguage.has_been_cancelled}
+                {u.segments.missing && (
+                  <>
+                    {' '}
+                    {trainServiceUpdatesLanguage.missing_section}{' '}
+                    {u.segments.missing}
+                  </>
+                )}
+                .
                 <a
                   href={u.link}
                   className="service-update-external-link"
