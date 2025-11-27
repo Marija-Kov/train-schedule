@@ -108,7 +108,7 @@ const translation = JSON.stringify({
   },
   train_service_updates: {
     sr: {
-      loading_message: 'Učitavanje',
+      loading_message: 'Učitavanje izmena u saobraćaju',
       service_updates_today: 'Izmene važe danas',
       date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'osim ako je drugačije naglašeno',
@@ -127,7 +127,7 @@ const translation = JSON.stringify({
       info_source: 'izvor',
     },
     en: {
-      loading_message: 'Loading',
+      loading_message: 'Checking for service updates',
       service_updates_today: 'Service updates for today',
       date_today: new Intl.DateTimeFormat('en-GB').format(new Date()),
       except_otherwise_specified: 'unless otherwise specified',
