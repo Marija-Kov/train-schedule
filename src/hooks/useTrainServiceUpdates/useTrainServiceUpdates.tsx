@@ -64,12 +64,20 @@ const useTrainServiceUpdates = () => {
         }
       )
     function extractSegments(string: string) {
-      const from = string.split(' za ')[0].split(' polazi iz ')[1]
-      const to = string.split(' u ')[0].split(' za ')[1]
+      const from =
+        (string.includes('polazi iz') &&
+          string.split(' za ')[0].split(' polazi iz ')[1]) ||
+        string.split(' za ')[0].split(' iz ')[1]
+      const to =
+        (string.includes('polazi iz') &&
+          string.split(' u ')[0].split(' za ')[1]) ||
+        string.split('polazi u')[0].split(' za ')[1]
       const time = string.split(' časova')[0].split(' u ')[1]
       const missing =
-        string.includes('izostaje na delu relacije') &&
-        string.split('izostaje na delu relacije')[1].split('.')[0]
+        (string.includes('izostaje na delu relacije') &&
+          string.split('izostaje na delu relacije')[1].split('.')[0]) ||
+        (string.includes('neće saobraćati na delu relacije') &&
+          string.split('neće saobraćati na delu relacije')[1].split('.')[0])
 
       return {
         from,
