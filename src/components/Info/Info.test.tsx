@@ -15,7 +15,7 @@ describe('<Info/>', () => {
 
     expect(linkToPdf).toHaveAttribute(
       'href',
-      'https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf'
+      'https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2025.pdf'
     )
     expect(linkToRepo).toHaveAttribute(
       'href',

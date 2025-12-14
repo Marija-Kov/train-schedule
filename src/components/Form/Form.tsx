@@ -146,8 +146,8 @@ const Form = () => {
           name="date"
           type="date"
           value={input.date}
-          min="2024-12-15"
-          max="2025-12-13"
+          min="2022-12-14"
+          max="2026-12-12"
           className={emptyFields.includes('date') ? 'error' : ''}
         />
       </span>
