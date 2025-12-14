@@ -27,7 +27,7 @@ const translation = JSON.stringify({
       intro: 'Ova aplikacija predstavlja pristupačniju verziju',
       schedule_link: 'reda vožnje za BG voz',
       valid_until:
-        'na potezu Batajnica-Ovča (u oba smera) koji važi do 13. decembra 2025.',
+        'na potezu Batajnica-Ovča (u oba smera) koji važi do 12. decembra 2026.',
       personal_use:
         'Aplikacija je izrađena za lične potrebe fizičkog lica. Autorka aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge izrade aplikacije.',
       note_title: 'NAPOMENA:',
@@ -40,7 +40,7 @@ const translation = JSON.stringify({
       intro: 'This app is a more usable version of',
       schedule_link: 'the Belgrade train schedule',
       valid_until:
-        'on the relation Batajnica-Ovča (in both directions) valid until December 13th 2025.',
+        'on the relation Batajnica-Ovča (in both directions) valid until December 12th 2026.',
       personal_use:
         'The application is built and maintained for personal use. The developer of this application is not affilliated with SrbijaVoz.',
       note_title: 'NOTE:',

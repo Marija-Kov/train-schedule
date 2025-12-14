@@ -9,7 +9,7 @@ const Info = () => {
         {infoLanguage.intro}
         <a
           data-testid="schedule-pdf-link"
-          href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2022.pdf"
+          href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2025.pdf"
         >
           {' '}
           {infoLanguage.schedule_link}{' '}
