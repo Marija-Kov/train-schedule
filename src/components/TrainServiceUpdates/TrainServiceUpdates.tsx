@@ -23,15 +23,15 @@ const TrainServiceUpdates = () => {
           {updates.map((u) => {
             return (
               <p className="service-update-details" key={u.id}>
-                {trainServiceUpdatesLanguage.departure_from} {u.segments.from}{' '}
-                {trainServiceUpdatesLanguage.to} {u.segments.to}{' '}
-                {trainServiceUpdatesLanguage.at_time} {u.segments.time}h{' '}
+                {trainServiceUpdatesLanguage.departure_from} {u.tokens.from}{' '}
+                {trainServiceUpdatesLanguage.to} {u.tokens.to}{' '}
+                {trainServiceUpdatesLanguage.at_time} {u.tokens.time}h{' '}
                 {trainServiceUpdatesLanguage.has_been_cancelled}
-                {u.segments.missing && (
+                {u.tokens.omitsARouteSegment && (
                   <>
                     {' '}
                     {trainServiceUpdatesLanguage.missing_section}{' '}
-                    {u.segments.missing}
+                    {u.tokens.omitsARouteSegment}
                   </>
                 )}
                 .

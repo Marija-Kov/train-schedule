@@ -87,7 +87,7 @@ describe('<DeparturesLayout />', () => {
               slug: 'Izmena na barskoj pruzi',
               content: {
                 rendered:
-                  '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>',
+                  '<p>Doslo je do izmene</p>\n<p>Voz iz Zemuna za Bar u 20:01 nece saobracati iz tehnickih razloga</p>',
               },
             },
           ],

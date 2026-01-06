@@ -16,7 +16,7 @@ export const server = setupServer(
             slug: 'Izmena bgvoz',
             content: {
               rendered:
-                '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>',
+                '<p>Doslo je do izmene</p>\n<p>Voz iz Batajnice za Zemun u 12:00 nece saobracati iz tehnickih razloga</p>',
             },
           },
           {
@@ -24,7 +24,7 @@ export const server = setupServer(
             slug: 'Izmena bgvoz',
             content: {
               rendered:
-                '<p>Doslo je do izmene</p>\n<p>Voz za Resnik nece saobracati iz tehnickih razloga</p>',
+                '<p>Doslo je do izmene</p>\n<p>Voz iz Ovče za Resnik u 10:00 nece saobracati iz tehnickih razloga</p>',
             },
           },
           {
@@ -32,7 +32,7 @@ export const server = setupServer(
             slug: 'Izmena na barskoj pruzi',
             content: {
               rendered:
-                '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>',
+                '<p>Doslo je do izmene</p>\n<p>Voz iz Zemuna za Bar u 22:01 nece saobracati iz tehnickih razloga</p>',
             },
           },
         ],
