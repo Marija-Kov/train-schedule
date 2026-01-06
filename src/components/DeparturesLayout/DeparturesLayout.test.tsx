@@ -80,32 +80,23 @@ describe('<DeparturesLayout />', () => {
         const currentDate = currentDateTime.split('T')[0]
         const currentLocalTime = new Date().toTimeString().split(' ')[0]
         const date = currentDate + 'T' + currentLocalTime
-
-        const stream = new ReadableStream({
-          start(controller) {
-            controller.enqueue(
-              new TextEncoder().encode(
-                JSON.stringify([
-                  {
-                    date: date,
-                    slug: 'Izmena na barskoj pruzi',
-                    content: {
-                      rendered:
-                        '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>',
-                    },
-                  },
-                ])
-              )
-            )
-
-            controller.close()
-          },
-        })
-        return new HttpResponse(stream, {
-          headers: {},
-          type: 'cors',
-          status: 200,
-        })
+        return HttpResponse.json(
+          [
+            {
+              date: date,
+              slug: 'Izmena na barskoj pruzi',
+              content: {
+                rendered:
+                  '<p>Doslo je do izmene</p>\n<p>Voz nece saobracati iz tehnickih razloga</p>',
+              },
+            },
+          ],
+          {
+            headers: {},
+            type: 'cors',
+            status: 200,
+          }
+        )
       })
     )
     render(
@@ -165,13 +156,7 @@ describe('<DeparturesLayout />', () => {
   it('should display correct message when train service updates are not available', async () => {
     server.use(
       http.get('https://www.srbvoz.rs/wp-json/wp/v2/info_post', () => {
-        const stream = new ReadableStream({
-          start(controller) {
-            controller.enqueue(new TextEncoder().encode(''))
-            controller.close()
-          },
-        })
-        return new HttpResponse(stream, {
+        return HttpResponse.json('', {
           headers: {},
           type: 'cors',
           status: 500,
