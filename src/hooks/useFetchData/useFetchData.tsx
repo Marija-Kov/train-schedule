@@ -1,7 +1,7 @@
 const useFetchData = () => {
   const url = 'https://marija-kov.github.io/train-schedule-23-api/stations.json'
 
-  const version = 2
+  const version = 3
   const cacheName = `/trainScheduleBgd-${version}`
 
   const fetchData = async () => {
