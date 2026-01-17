@@ -24,12 +24,13 @@ const translation = JSON.stringify({
   },
   info: {
     sr: {
-      intro: 'Ova aplikacija predstavlja pristupačniju verziju',
+      intro:
+        'Cilj ove aplikacije je da omogući jednostavniji i brži pristup podacima iz',
       schedule_link: 'reda vožnje za BG voz',
       valid_until:
         'na potezu Batajnica-Ovča (u oba smera) koji važi do 12. decembra 2026.',
       personal_use:
-        'Aplikacija je izrađena za lične potrebe fizičkog lica. Autorka aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge izrade aplikacije.',
+        'Aplikacija je izrađena i održava se za lične potrebe fizičkog lica. Autor aplikacije nema veze sa SrbijaVozom niti je SrbijaVoz naručilac usluge izrade aplikacije. Podaci o redu vožnje prikazani u aplikaciji mogu sadržati greške i ne postoji garancija za njihovu tačnost.',
       note_title: 'NAPOMENA:',
       schedule_change_note:
         'Saobraćaj vozova je podložan vanrednim izmenama. Pogledajte',
@@ -37,12 +38,12 @@ const translation = JSON.stringify({
       for_info: 'za informacije.',
     },
     en: {
-      intro: 'This app is a more usable version of',
-      schedule_link: 'the Belgrade train schedule',
+      intro: 'This app aims to enable a simple and efficient access to',
+      schedule_link: 'Belgrade train schedule',
       valid_until:
-        'on the relation Batajnica-Ovča (in both directions) valid until December 12th 2026.',
+        'for relation Batajnica-Ovča (in both directions) valid until December 12th 2026.',
       personal_use:
-        'The application is built and maintained for personal use. The developer of this application is not affilliated with SrbijaVoz.',
+        'The app is built and maintained for personal use. The developer is not affiliated with SrbijaVoz. Schedule-related data shown in the app may contain errors and there is no guarantee for its correctness.',
       note_title: 'NOTE:',
       schedule_change_note:
         'Occasionally, some departures may be off schedule or cancelled. See',
