@@ -6,14 +6,13 @@ const Info = () => {
   return (
     <div className="info--content">
       <div>
-        {infoLanguage.intro}
+        {infoLanguage.intro}{' '}
         <a
           data-testid="schedule-pdf-link"
           href="https://www.srbvoz.rs/wp-content/redvoznje/rv_bg_voza_za_2025.pdf"
         >
-          {' '}
-          {infoLanguage.schedule_link}{' '}
-        </a>
+          {infoLanguage.schedule_link}
+        </a>{' '}
         {infoLanguage.valid_until}
         <br></br>
         <br></br>
@@ -23,13 +22,13 @@ const Info = () => {
         <h4 data-testid="note-on-schedule-changes-title">
           {infoLanguage.note_title}
         </h4>
-        {infoLanguage.schedule_change_note}
+        {infoLanguage.schedule_change_note}{' '}
         <a
           data-testid="schedule-change-announcements"
           href="https://srbijavoz.rs/informacije/"
         >
-          <strong> {infoLanguage.schedule_change_announcements_link} </strong>
-        </a>
+          <strong>{infoLanguage.schedule_change_announcements_link}</strong>
+        </a>{' '}
         {infoLanguage.for_info}
       </div>
 
