@@ -30,14 +30,12 @@ const useGetDepartures = () => {
     )[]
     const indexFrom = stationIndex(stations, input.from)
     const indexTo = stationIndex(stations, input.to)
-    console.log(frequency)
     const possibleDepartures = filterDepartures(
       stations[indexFrom].departures,
       timeToNumber(input.time),
       direction(indexFrom, indexTo),
       frequency
     )
-    console.log(possibleDepartures)
     if (!possibleDepartures.length) return []
 
     const possibleDeparturesEnriched = transformToReturnFormat(
