@@ -84,7 +84,6 @@ export function filterDepartures(
   frequency: ('ed' | 'wd' | 'wh')[]
 ) {
   return departures.filter((departure: StationDepartureDetails) => {
-    console.log(departure)
     return (
       departure.time >= time &&
       departure.trainDetails.directionId === direction &&
