@@ -23,17 +23,21 @@ const useGetDepartures = () => {
 
     const data = await fetchData()
     const stations = data.stations
-    const frequency = frequencyOnDate(input.date, data.holidays)
+    const frequency = frequencyOnDate(input.date, data.holidays) as (
+      | 'ed'
+      | 'wd'
+      | 'wh'
+    )[]
     const indexFrom = stationIndex(stations, input.from)
     const indexTo = stationIndex(stations, input.to)
-
+    console.log(frequency)
     const possibleDepartures = filterDepartures(
       stations[indexFrom].departures,
       timeToNumber(input.time),
       direction(indexFrom, indexTo),
       frequency
     )
-
+    console.log(possibleDepartures)
     if (!possibleDepartures.length) return []
 
     const possibleDeparturesEnriched = transformToReturnFormat(
@@ -47,7 +51,7 @@ const useGetDepartures = () => {
       stations[indexTo].departures,
       timeToNumber(input.time),
       direction(indexFrom, indexTo),
-      frequency
+      frequency as ('ed' | 'wd' | 'wh')[]
     )
 
     return getResult(possibleDeparturesEnriched, possibleArrivals)
