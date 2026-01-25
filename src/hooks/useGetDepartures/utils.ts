@@ -67,8 +67,8 @@ export function transformToReturnFormat(
       departureTime: timeToString(departure.time),
       arrivalTime: '0:10', // placeholder
       trainId: departure.trainDetails.id,
-      from: formatName(stations, departureStationIndex),
-      to: formatName(stations, arrivalStationIndex),
+      from: getStationNameDisplay(stations, departureStationIndex),
+      to: getStationNameDisplay(stations, arrivalStationIndex),
     } as DepartureOutput
   })
 }
@@ -81,13 +81,14 @@ export function filterDepartures(
   departures: StationDepartureDetails[],
   time: number,
   direction: 1 | 2,
-  frequency: (boolean | string)[]
+  frequency: ('ed' | 'wd' | 'wh')[]
 ) {
   return departures.filter((departure: StationDepartureDetails) => {
+    console.log(departure)
     return (
       departure.time >= time &&
       departure.trainDetails.directionId === direction &&
-      frequency.includes(departure.trainDetails.activeOnWeekendsAndHolidays)
+      frequency.includes(departure.trainDetails.serviceFrequency)
     )
   })
 }
@@ -115,8 +116,8 @@ export function timeToNumber(time: TimeOutput) {
 export function frequencyOnDate(date: YyyyMmDd, holidays: YyyyMmDd[]) {
   const day = new Date(date).getDay()
   return day === 0 || day === 6 || holidays.includes(date)
-    ? [true, 'w&h_only']
-    : [true, false]
+    ? ['ed', 'wh']
+    : ['ed', 'wd']
 }
 
 /**
@@ -131,8 +132,8 @@ export function stationIndex(stations: Station[], endpoint: StationName) {
 /**
  * @returns A station name with correct spacing and capitalization.
  */
-function formatName(stations: Station[], stationIndex: number) {
-  return stations[stationIndex].nameFormatted
+function getStationNameDisplay(stations: Station[], stationIndex: number) {
+  return stations[stationIndex].nameDisplay
 }
 
 /**
