@@ -9,7 +9,7 @@ type TrainServiceUpdateTokens = {
 }
 
 type TrainServiceUpdateObject = {
-  id: number
+  id: string
   tokens: TrainServiceUpdateTokens
   link: string
 }
@@ -220,7 +220,7 @@ const useTrainServiceUpdates = () => {
             // Create a service update object for every time token in the group:
             for (let y = 0; y < timeTokens.length; y++) {
               const aServiceUpdateObject = {
-                id: updateId + Math.random(),
+                id: String(updateId) + String(Math.random()),
                 tokens: {
                   from: tokenGroups[j][i],
                   to: tokenGroups[j][i + 1],
