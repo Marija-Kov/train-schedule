@@ -16,7 +16,7 @@ export const server = setupServer(
             slug: 'Izmena bgvoz',
             content: {
               rendered:
-                '<p>Doslo je do izmene</p>\n<p>Voz iz Batajnice za Zemun u 12:00 nece saobracati iz tehnickih razloga</p>',
+                '<p>Doslo je do izmene</p>\n<p>Voz iz Batajnice za Zemun u 12:00 i 13:00 nece saobracati iz tehnickih razloga</p>',
             },
           },
           {
@@ -35,6 +35,23 @@ export const server = setupServer(
                 '<p>Doslo je do izmene</p>\n<p>Voz iz Zemuna za Bar u 22:01 nece saobracati iz tehnickih razloga</p>',
             },
           },
+          {
+            date: date,
+            slug: 'Izmena bgvoz',
+            content: {
+              rendered:
+                '<p>Doslo je do izmene</p>\n<p>Voz iz Zemuna za Ovču u 13:00 kao i iz Ovče za Zemun u 15:00 nece saobracati iz tehnickih razloga</p>',
+            },
+          },
+          // TODO: this should be split into 2 updates with a reference to the missing route segment.
+          // {
+          //   date: date,
+          //   slug: 'Izmena bgvoz',
+          //   content: {
+          //     rendered:
+          //       '<p>Doslo je do izmene</p>\n<p>Voz iz Ovče za Batajnicu sa polaskom u 16:20 časova,kao i voz iz Batajnice za Ovču u 17:30 časova neće saobraćati na delu relacije Zemun-Batajnica-Zemun./p>',
+          //   },
+          // },
         ],
         {
           headers: {},

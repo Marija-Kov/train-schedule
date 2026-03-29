@@ -141,15 +141,14 @@ describe('<DeparturesLayout />', () => {
         </DeparturesContext.Provider>
       </BrowserRouter>
     )
-
-    const serviceUpdate = await screen.findByText(/neće saobraćati/i)
-    const serviceUpdateExternalLink = await screen.findByTestId(
+    const serviceUpdate = await screen.findAllByText(/neće saobraćati/i)
+    const serviceUpdateExternalLink = await screen.findAllByTestId(
       'service-update-external-link'
     )
     const validTodayMessage = await screen.findByText(/izmene važe danas/i)
-    expect(serviceUpdate).toBeInTheDocument()
-    expect(serviceUpdate).toHaveClass('service-update-details')
-    expect(serviceUpdateExternalLink).toBeInTheDocument()
+    expect(serviceUpdate.length).toBe(4)
+    expect(serviceUpdate[0]).toHaveClass('service-update-details')
+    expect(serviceUpdateExternalLink.length).toBeGreaterThan(0)
     expect(validTodayMessage).toBeInTheDocument()
   })
 

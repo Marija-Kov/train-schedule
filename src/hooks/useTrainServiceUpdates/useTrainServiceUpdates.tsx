@@ -219,6 +219,13 @@ const useTrainServiceUpdates = () => {
             }
             // Create a service update object for every time token in the group:
             for (let y = 0; y < timeTokens.length; y++) {
+              // Prevent "to" from being something other than a station name
+              if (
+                !tokenGroups[j][i + 1].match(
+                  new RegExp(`\\b(${stationNamesCaseVariations.join('|')})\\b`)
+                )
+              )
+                break
               const aServiceUpdateObject = {
                 id: String(updateId) + String(Math.random()),
                 tokens: {
