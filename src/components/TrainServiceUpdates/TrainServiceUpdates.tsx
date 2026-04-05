@@ -1,10 +1,44 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { LanguageContext } from '../../context'
 import { useTrainServiceUpdates } from '../../hooks'
+import { TimeOutput } from 'train-schedule-types'
+
+type TrainServiceUpdateTokens = {
+  from: string
+  to: string
+  time: TimeOutput
+  omitsARouteSegment?: null | string
+}
+
+type TrainServiceUpdateObject = {
+  id: string
+  tokens: TrainServiceUpdateTokens
+  link: string
+}
 
 const TrainServiceUpdates = () => {
-  const { updates, loadingUpdates } = useTrainServiceUpdates()
+  const { trainServiceUpdates } = useTrainServiceUpdates()
+  const [updates, setUpdates] = useState<
+    TrainServiceUpdateObject[] | 'Data not available'
+  >([])
+  const [loadingUpdates, setLoadingUpdates] = useState(false)
   const { trainServiceUpdatesLanguage } = useContext(LanguageContext)
+
+  useEffect(() => {
+    setLoadingUpdates(true)
+    async function load() {
+      try {
+        const updates = await trainServiceUpdates()
+        setUpdates(updates)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoadingUpdates(false)
+      }
+    }
+    load()
+  }, [])
+
   return (
     <>
       {loadingUpdates ? (
