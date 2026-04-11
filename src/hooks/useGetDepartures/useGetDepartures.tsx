@@ -22,12 +22,11 @@ const useGetDepartures = () => {
     if (input.from === input.to) return []
 
     const data = await fetchData()
-    const stations = data.stations
-    const frequency = frequencyOnDate(input.date, data.holidays) as (
-      | 'ed'
-      | 'wd'
-      | 'wh'
-    )[]
+    const stations = data?.stationsJSON.stations
+    const frequency = frequencyOnDate(
+      input.date,
+      data?.stationsJSON.holidays
+    ) as ('ed' | 'wd' | 'wh')[]
     const indexFrom = stationIndex(stations, input.from)
     const indexTo = stationIndex(stations, input.to)
     const possibleDepartures = filterDepartures(
