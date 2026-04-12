@@ -1,57 +1,35 @@
-import { DepartureOutput, FormInputData } from 'train-schedule-types'
+import { FormInputData, TimeInput } from 'train-schedule-types'
 import useFetchData from '../useFetchData/useFetchData'
-import {
-  frequencyOnDate,
-  stationIndex,
-  filterDepartures,
-  timeToNumber,
-  direction,
-  transformToReturnFormat,
-  getResult,
-} from './utils'
+import { frequencyOnDate, timeToNumber, getDeparturesInternal } from './utils'
 
 const useGetDepartures = () => {
   const { fetchData } = useFetchData()
 
-  const getDepartures = async (
-    input: FormInputData
-  ): Promise<DepartureOutput[] | string> => {
+  const getDepartures = async (input: FormInputData) => {
     if (!input.from || !input.to || !input.date || !input.time)
       return 'All fields must be filled'
 
     if (input.from === input.to) return []
 
     const data = await fetchData()
-    const stations = data?.stationsJSON.stations
+
     const frequency = frequencyOnDate(
       input.date,
       data?.stationsJSON.holidays
     ) as ('ed' | 'wd' | 'wh')[]
-    const indexFrom = stationIndex(stations, input.from)
-    const indexTo = stationIndex(stations, input.to)
-    const possibleDepartures = filterDepartures(
-      stations[indexFrom].departures,
-      timeToNumber(input.time),
-      direction(indexFrom, indexTo),
-      frequency
-    )
-    if (!possibleDepartures.length) return []
 
-    const possibleDeparturesEnriched = transformToReturnFormat(
-      possibleDepartures,
-      stations,
-      indexFrom,
-      indexTo
+    const timeInput = timeToNumber(input.time).toString()
+
+    const newResult = await getDeparturesInternal(
+      data?.stationsJSON.stations,
+      data?.trainsJSON,
+      input.from,
+      input.to,
+      frequency,
+      timeInput as TimeInput
     )
 
-    const possibleArrivals = filterDepartures(
-      stations[indexTo].departures,
-      timeToNumber(input.time),
-      direction(indexFrom, indexTo),
-      frequency as ('ed' | 'wd' | 'wh')[]
-    )
-
-    return getResult(possibleDeparturesEnriched, possibleArrivals)
+    return newResult.departures
   }
 
   return { getDepartures }

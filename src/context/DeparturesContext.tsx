@@ -2,15 +2,26 @@ import { createContext, useState, ReactNode, useEffect } from 'react'
 import { useParams } from 'react-router'
 import {
   DepartureOutput,
-  DepartureProps,
   StationName,
+  TimeInput,
   TimeOutput,
+  TrainId,
   YyyyMmDd,
 } from 'train-schedule-types'
 import useGetDepartures from '../hooks/useGetDepartures/useGetDepartures'
 
+type NewDepartureOutput = DepartureOutput & {
+  layover: {
+    station: StationName
+    arrivalTime: TimeInput
+    departureTime: TimeInput
+    waitTime: string | undefined
+    trainId: TrainId
+  } | null
+}
+
 const DeparturesContext = createContext<{
-  departures: DepartureOutput[]
+  departures: NewDepartureOutput[]
   loading: boolean
 }>({
   departures: [],
@@ -22,13 +33,14 @@ const DeparturesContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const params = useParams()
   const { getDepartures } = useGetDepartures()
-  const [departures, setDepartures] = useState<DepartureProps[]>([])
+  const [departures, setDepartures] = useState<NewDepartureOutput[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     async function handleGetDepartures() {
       setLoading(true)
-      let result
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let result: any = null
       try {
         result = await getDepartures({
           from: params.from?.toLowerCase() as StationName,
