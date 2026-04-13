@@ -1,7 +1,24 @@
-import { DepartureProps } from 'train-schedule-types'
+import {
+  DepartureProps,
+  StationName,
+  TimeInput,
+  TrainId,
+} from 'train-schedule-types'
 
-const Departure = (props: DepartureProps) => {
-  const { departureTime, arrivalTime, trainId } = props
+type NewDepartureProps = DepartureProps & {
+  layover: {
+    station: StationName
+    arrivalTime: TimeInput
+    departureTime: TimeInput
+    waitTime: string | undefined
+    trainId: TrainId
+  } | null
+}
+
+const Departure = (props: NewDepartureProps) => {
+  const { departureTime, arrivalTime, trainId, layover } = props
+  console.log(trainId, layover)
+
   return (
     <div data-testid="search-result-row" className="departure">
       <span data-testid="departure-time-cell">{departureTime}</span>

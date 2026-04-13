@@ -84,6 +84,7 @@ function DeparturesLayout() {
                   departureTime={d.departureTime}
                   arrivalTime={d.arrivalTime}
                   trainId={d.trainId}
+                  layover={d.layover}
                 />
               )
             })
