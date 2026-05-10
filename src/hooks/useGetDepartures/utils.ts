@@ -306,6 +306,17 @@ export const getDeparturesInternal = async (
     }
   })
 
+  // Remove redundant indirect arrivals:
+  const checkedLayoverTrainIds: TrainId[] = []
+
+  for (let j = indirectArrivals.length - 1; j >= 0; j--) {
+    if (checkedLayoverTrainIds.includes(indirectArrivals[j].layover.trainId)) {
+      indirectArrivals.splice(j, 1)
+    } else {
+      checkedLayoverTrainIds.push(indirectArrivals[j].layover.trainId)
+    }
+  }
+
   return {
     departureStation: stationNamesDisplayMap[from],
     arrivalStation: stationNamesDisplayMap[to],
