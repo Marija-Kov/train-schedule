@@ -32,33 +32,33 @@ const Departure = (props: NewDepartureProps) => {
     <>
       <div
         data-testid="search-result-row"
-        className="departure"
+        className={
+          layover
+            ? layoverDetails
+              ? 'departure layover-details-shown'
+              : 'departure layover-details-hidden'
+            : 'departure'
+        }
         onClick={toggleLayoverDetails}
       >
-        {layover && (
-          <button data-testid="layover-toggle-button">Layover!</button>
-        )}
         <span data-testid="departure-time-cell">{departureTime}</span>
         <span data-testid="arrival-time-cell">{arrivalTime}</span>
         <span data-testid="train-no-cell">
           {trainId}
-          {layover && `->${layover.trainId}`}
+          {layover && ` ➞ ${layover.trainId}`}
         </span>
       </div>
       {layoverDetails && (
-        <div data-testid="layover-details" className="layover-details">
+        <div
+          data-testid="layover-details"
+          className="layover-details"
+          onClick={toggleLayoverDetails}
+        >
           <p>
-            take {trainId} from departure st. to {layover?.station}
+            {layover?.arrivalTime} - dolazak na stanicu presedanja (
+            {layover!.station})
           </p>
-          <p>
-            arrive to {layover?.station} at {layover?.arrivalTime}
-          </p>
-          <p>wait {layover?.waitTime}</p>
-          <p>
-            take {layover?.trainId} from {layover?.station} at{' '}
-            {layover?.departureTime}
-          </p>
-          <p>arrive to destination st. at {arrivalTime}</p>
+          <p>{layover?.departureTime} - polazak sa stanice presedanja</p>
         </div>
       )}
     </>
