@@ -36,3 +36,23 @@ header {
   border: solid 0.1rem variables.$primary-2;
   border-radius: 0.2rem;
 }
+
+#beta {
+  position: relative;
+  bottom: 0.9rem;
+  height: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: fit-content;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: variables.$primary-2;
+  background-color: orangered;
+}

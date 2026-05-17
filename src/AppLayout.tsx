@@ -50,6 +50,7 @@ function AppLayout() {
           </button>
         </span>
         <span>
+          <p id="beta">BETA</p>
           <NavLink to="/" data-testid="home-link">
             <img
               className="train-icon"
@@ -71,6 +72,14 @@ function AppLayout() {
       <DeparturesContextProvider>
         <Outlet />
       </DeparturesContextProvider>
+      <footer>
+        <p>
+          Aplikacija je u fazi testiranja/usavršavanja i može sadržati zastarele
+          podatke. (Saobraćaj vozova od i do Mladenovca je obustavljen od
+          februara 2026.)
+        </p>
+        <p>Poslednja izmena aplikacije: 17. Maj 2026.</p>
+      </footer>
     </div>
   )
 }
