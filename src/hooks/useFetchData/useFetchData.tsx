@@ -3,7 +3,7 @@ const useFetchData = () => {
     'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/expand-schedule/stations.json'
   const trainsUrl =
     'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/expand-schedule/trains.json'
-  const version = 5
+  const version = 6
   const stationsCacheName = `/trainScheduleBgd/stations-${version}`
   const trainsCacheName = `/trainScheduleBgd/trains-${version}`
 
