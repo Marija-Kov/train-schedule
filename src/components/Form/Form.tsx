@@ -110,22 +110,14 @@ const Form = () => {
           <option value="knezevac">Kneževac</option>
           <option value="kijevo">Kijevo</option>
           <option value="resnik">Resnik</option>
-          <option value="lazarevac">Lazarevac</option>
-          <option value="vreoci">Vreoci</option>
-          <option value="stepojevac">Stepojevac</option>
-          <option value="leskovac kolubarski">Leskovac Kolubarski</option>
-          <option value="veliki borak">Veliki Borak</option>
-          <option value="barajevo centar">Barajevo Centar</option>
-          <option value="barajevo ukr">Barajevo ukr.</option>
           <option value="bela reka">Bela reka</option>
-          <option value="mladenovac">Mladenovac</option>
-          <option value="ripanj">Ripanj</option>
-          <option value="ripanj kolonija">Ripanj kolonija</option>
-          <option value="ripanj tunel">Ripanj tunel</option>
-          <option value="klenje">Klenje</option>
-          <option value="ralja">Ralja</option>
-          <option value="sopot kosmajski">Sopot Kosmajski</option>
-          <option value="vlasko polje">Vlaško polje</option>
+          <option value="barajevo ukr">Barajevo ukr.</option>
+          <option value="barajevo centar">Barajevo Centar</option>
+          <option value="veliki borak">Veliki Borak</option>
+          <option value="leskovac kolubarski">Leskovac Kolubarski</option>
+          <option value="stepojevac">Stepojevac</option>
+          <option value="vreoci">Vreoci</option>
+          <option value="lazarevac">Lazarevac</option>
         </select>
       </span>
       <label htmlFor="to">{formLanguage.to}:</label>
@@ -158,22 +150,14 @@ const Form = () => {
           <option value="knezevac">Kneževac</option>
           <option value="kijevo">Kijevo</option>
           <option value="resnik">Resnik</option>
-          <option value="lazarevac">Lazarevac</option>
-          <option value="vreoci">Vreoci</option>
-          <option value="stepojevac">Stepojevac</option>
-          <option value="leskovac kolubarski">Leskovac Kolubarski</option>
-          <option value="veliki borak">Veliki Borak</option>
-          <option value="barajevo centar">Barajevo Centar</option>
-          <option value="barajevo ukr">Barajevo ukr.</option>
           <option value="bela reka">Bela reka</option>
-          <option value="mladenovac">Mladenovac</option>
-          <option value="ripanj">Ripanj</option>
-          <option value="ripanj kolonija">Ripanj kolonija</option>
-          <option value="ripanj tunel">Ripanj tunel</option>
-          <option value="klenje">Klenje</option>
-          <option value="ralja">Ralja</option>
-          <option value="sopot kosmajski">Sopot Kosmajski</option>
-          <option value="vlasko polje">Vlaško polje</option>
+          <option value="barajevo ukr">Barajevo ukr.</option>
+          <option value="barajevo centar">Barajevo Centar</option>
+          <option value="veliki borak">Veliki Borak</option>
+          <option value="leskovac kolubarski">Leskovac Kolubarski</option>
+          <option value="stepojevac">Stepojevac</option>
+          <option value="vreoci">Vreoci</option>
+          <option value="lazarevac">Lazarevac</option>
         </select>
       </span>
       <label htmlFor="date">{formLanguage.date}:</label>
