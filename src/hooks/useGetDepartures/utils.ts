@@ -66,7 +66,7 @@ const getDirectArrivals = (
   departureTime: TimeInput
   arrivalTime: TimeInput
   trainId: TrainId
-  layover: {
+  transfer: {
     station: StationName
     arrivalTime: TimeInput
     departureTime: TimeInput // TODO: should probably return TimeOutput
@@ -98,7 +98,7 @@ const getDirectArrivals = (
             departureTime: d.time,
             arrivalTime: i.time,
             trainId: trainId,
-            layover: null, // for all direct arrivals
+            transfer: null, // for all direct arrivals
           }
         }),
     ]
@@ -108,7 +108,7 @@ const getDirectArrivals = (
   )
 }
 
-const getLayoverStationAndArrivalTimes = (
+const getTransferStationAndArrivalTimes = (
   stations: { [key in StationName]: Station },
   trains: { [key in TrainId]: Train },
   from: StationName,
@@ -134,7 +134,7 @@ const getLayoverStationAndArrivalTimes = (
     result = [
       ...result,
       ...trains[trainId].itinerary
-        .filter((i) => i.station === 'karadjordjev park') // karadjordjev park is a layover station for all train lines
+        .filter((i) => i.station === 'karadjordjev park') // karadjordjev park is a transfer station for all train lines
         .map((i) => {
           checkedTrainsArray.push(trainId)
           return {
@@ -235,8 +235,8 @@ export const getDeparturesInternal = async (
   if (!directArrivals.length) {
     checkedTrainsArray = []
   }
-  // departures form the layover to destination station in the specified time frame
-  const possibleLayovers = getLayoverStationAndArrivalTimes(
+  // departures form the transfer to destination station in the specified time frame
+  const possibleTransfers = getTransferStationAndArrivalTimes(
     stations,
     trains,
     from,
@@ -246,7 +246,7 @@ export const getDeparturesInternal = async (
     checkedTrainsArray
   )
 
-  if (!possibleLayovers.length) {
+  if (!possibleTransfers.length) {
     return {
       departureStation: stationNamesDisplayMap[from],
       arrivalStation: stationNamesDisplayMap[to],
@@ -254,15 +254,15 @@ export const getDeparturesInternal = async (
     }
   }
 
-  const firstLayoverRecord = possibleLayovers[0]
+  const firstTransferRecord = possibleTransfers[0]
 
-  const layoverDepartures = getDirectArrivals(
+  const transferDepartures = getDirectArrivals(
     stations,
     trains,
-    firstLayoverRecord.station,
+    firstTransferRecord.station,
     to,
     serviceFrequency,
-    firstLayoverRecord.arrivalTime,
+    firstTransferRecord.arrivalTime,
     checkedTrainsArray
   )
 
@@ -270,7 +270,7 @@ export const getDeparturesInternal = async (
     departureTime: TimeInput
     arrivalTime: TimeInput
     trainId: TrainId
-    layover: {
+    transfer: {
       station: StationName
       arrivalTime: TimeInput
       departureTime: TimeInput
@@ -279,41 +279,43 @@ export const getDeparturesInternal = async (
     }
   }[] = []
 
-  possibleLayovers.forEach((l) => {
-    for (let j = 0; j <= layoverDepartures.length; j++) {
+  possibleTransfers.forEach((l) => {
+    for (let j = 0; j <= transferDepartures.length; j++) {
       // this ensures that we only get the trains in the right direction
       if (
-        layoverDepartures[j] &&
-        layoverDepartures[j].departureTime > l.arrivalTime
+        transferDepartures[j] &&
+        transferDepartures[j].departureTime > l.arrivalTime
       ) {
         indirectArrivals.push({
           departureTime: l.departureTime,
-          arrivalTime: layoverDepartures[j].arrivalTime,
+          arrivalTime: transferDepartures[j].arrivalTime,
           trainId: l.trainId,
-          layover: {
+          transfer: {
             station: l.station,
             arrivalTime: l.arrivalTime,
-            departureTime: layoverDepartures[j].departureTime,
+            departureTime: transferDepartures[j].departureTime,
             waitTime: subtractHHMM(
-              layoverDepartures[j].departureTime,
+              transferDepartures[j].departureTime,
               l.arrivalTime
             ),
-            trainId: layoverDepartures[j].trainId,
+            trainId: transferDepartures[j].trainId,
           },
         })
-        break // we only need the shortest layover duration
+        break // we only need the shortest transfer duration
       }
     }
   })
 
   // Remove redundant indirect arrivals:
-  const checkedLayoverTrainIds: TrainId[] = []
+  const checkedTransferTrainIds: TrainId[] = []
 
   for (let j = indirectArrivals.length - 1; j >= 0; j--) {
-    if (checkedLayoverTrainIds.includes(indirectArrivals[j].layover.trainId)) {
+    if (
+      checkedTransferTrainIds.includes(indirectArrivals[j].transfer.trainId)
+    ) {
       indirectArrivals.splice(j, 1)
     } else {
-      checkedLayoverTrainIds.push(indirectArrivals[j].layover.trainId)
+      checkedTransferTrainIds.push(indirectArrivals[j].transfer.trainId)
     }
   }
 

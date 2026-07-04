@@ -10,7 +10,7 @@ describe('<Departure />', () => {
         departureTime={'12:0'}
         arrivalTime={'12:15'}
         trainId={8000}
-        layover={null}
+        transfer={null}
       />
     )
     const departureTime = screen.getByTestId('departure-time-cell')

@@ -7,7 +7,7 @@ import {
 } from 'train-schedule-types'
 
 type NewDepartureProps = DepartureProps & {
-  layover: {
+  transfer: {
     station: StationName
     arrivalTime: TimeInput
     departureTime: TimeInput
@@ -17,15 +17,15 @@ type NewDepartureProps = DepartureProps & {
 }
 
 const Departure = (props: NewDepartureProps) => {
-  const { departureTime, arrivalTime, trainId, layover } = props
-  const [layoverDetails, setLayoverDetails] = useState(false)
+  const { departureTime, arrivalTime, trainId, transfer } = props
+  const [transferDetails, setTransferDetails] = useState(false)
 
-  function toggleLayoverDetails() {
-    if (!layover) return
-    if (!layoverDetails) {
-      setLayoverDetails(true)
+  function toggleTransferDetails() {
+    if (!transfer) return
+    if (!transferDetails) {
+      setTransferDetails(true)
     } else {
-      setLayoverDetails(false)
+      setTransferDetails(false)
     }
   }
 
@@ -34,32 +34,32 @@ const Departure = (props: NewDepartureProps) => {
       <div
         data-testid="search-result-row"
         className={
-          layover
-            ? layoverDetails
-              ? 'departure layover-details-shown'
-              : 'departure layover-details-hidden'
+          transfer
+            ? transferDetails
+              ? 'departure transfer-details-shown'
+              : 'departure transfer-details-hidden'
             : 'departure'
         }
-        onClick={toggleLayoverDetails}
+        onClick={toggleTransferDetails}
       >
         <span data-testid="departure-time-cell">{departureTime}</span>
         <span data-testid="arrival-time-cell">{arrivalTime}</span>
         <span data-testid="train-no-cell">
           {trainId}
-          {layover && ` ➞ ${layover.trainId}`}
+          {transfer && ` ➞ ${transfer.trainId}`}
         </span>
       </div>
-      {layoverDetails && (
+      {transferDetails && (
         <div
-          data-testid="layover-details"
-          className="layover-details"
-          onClick={toggleLayoverDetails}
+          data-testid="transfer-details"
+          className="transfer-details"
+          onClick={toggleTransferDetails}
         >
           <p>
-            {layover?.arrivalTime} - dolazak na stanicu presedanja (
-            {layover!.station})
+            {transfer?.arrivalTime} - dolazak na stanicu presedanja (
+            {transfer!.station})
           </p>
-          <p>{layover?.departureTime} - polazak sa stanice presedanja</p>
+          <p>{transfer?.departureTime} - polazak sa stanice presedanja</p>
         </div>
       )}
     </>

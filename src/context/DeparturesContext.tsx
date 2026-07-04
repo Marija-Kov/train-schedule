@@ -11,7 +11,7 @@ import {
 import useGetDepartures from '../hooks/useGetDepartures/useGetDepartures'
 
 type NewDepartureOutput = DepartureOutput & {
-  layover: {
+  transfer: {
     station: StationName
     arrivalTime: TimeInput
     departureTime: TimeInput
