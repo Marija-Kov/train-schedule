@@ -21,6 +21,7 @@ const Departure = (props: NewDepartureProps) => {
   const [layoverDetails, setLayoverDetails] = useState(false)
 
   function toggleLayoverDetails() {
+    if (!layover) return
     if (!layoverDetails) {
       setLayoverDetails(true)
     } else {
