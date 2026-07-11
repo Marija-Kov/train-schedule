@@ -75,7 +75,7 @@ function AppLayout() {
       <footer>
         <p className="under-construction">
           🚧Aplikacija je u fazi testiranja/usavršavanja. Poslednja izmena i
-          ažuriranje reda vožnje: 28. jun 2026.🚧
+          ažuriranje reda vožnje: 11. jul 2026.🚧
         </p>
       </footer>
     </div>
