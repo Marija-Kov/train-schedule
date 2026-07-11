@@ -63,13 +63,13 @@ const getDirectArrivals = (
 ): {
   departureSt: StationName
   arrivalSt: StationName
-  departureTime: TimeInput
-  arrivalTime: TimeInput
+  departureTime: TimeOutput
+  arrivalTime: TimeOutput
   trainId: TrainId
   transfer: {
     station: StationName
-    arrivalTime: TimeInput
-    departureTime: TimeInput // TODO: should probably return TimeOutput
+    arrivalTime: TimeOutput
+    departureTime: TimeOutput
     waitTime: string
     trainId: TrainId
   }
@@ -95,8 +95,8 @@ const getDirectArrivals = (
         .map((i) => {
           checkedTrainsArray.push(trainId)
           return {
-            departureTime: d.time,
-            arrivalTime: i.time,
+            departureTime: timeToString(d.time),
+            arrivalTime: timeToString(i.time),
             trainId: trainId,
             transfer: null, // for all direct arrivals
           }
@@ -104,7 +104,9 @@ const getDirectArrivals = (
     ]
   })
   return result.filter(
-    (e) => e !== undefined && e.departureTime < e.arrivalTime
+    (e) =>
+      e !== undefined &&
+      timeToNumber(e.departureTime) < timeToNumber(e.arrivalTime)
   )
 }
 
@@ -139,15 +141,17 @@ const getTransferStationAndArrivalTimes = (
           checkedTrainsArray.push(trainId)
           return {
             station: i.station,
-            departureTime: d.time,
-            arrivalTime: i.time,
+            departureTime: timeToString(d.time),
+            arrivalTime: timeToString(i.time),
             trainId: trainId,
           }
         }),
     ]
   })
   return result.filter(
-    (e) => e !== undefined && e.departureTime < e.arrivalTime
+    (e) =>
+      e !== undefined &&
+      timeToNumber(e.departureTime) < timeToNumber(e.arrivalTime)
   )
 }
 
@@ -262,18 +266,18 @@ export const getDeparturesInternal = async (
     firstTransferRecord.station,
     to,
     serviceFrequency,
-    firstTransferRecord.arrivalTime,
+    timeToNumber(firstTransferRecord.arrivalTime).toString() as TimeInput,
     checkedTrainsArray
   )
 
   const indirectArrivals: {
-    departureTime: TimeInput
-    arrivalTime: TimeInput
+    departureTime: TimeOutput
+    arrivalTime: TimeOutput
     trainId: TrainId
     transfer: {
       station: StationName
-      arrivalTime: TimeInput
-      departureTime: TimeInput
+      arrivalTime: TimeOutput
+      departureTime: TimeOutput
       waitTime: string | undefined
       trainId: TrainId
     }
@@ -284,7 +288,8 @@ export const getDeparturesInternal = async (
       // this ensures that we only get the trains in the right direction
       if (
         transferDepartures[j] &&
-        transferDepartures[j].departureTime > l.arrivalTime
+        timeToNumber(transferDepartures[j].departureTime) >
+          timeToNumber(l.arrivalTime)
       ) {
         indirectArrivals.push({
           departureTime: l.departureTime,
@@ -295,8 +300,10 @@ export const getDeparturesInternal = async (
             arrivalTime: l.arrivalTime,
             departureTime: transferDepartures[j].departureTime,
             waitTime: subtractHHMM(
-              transferDepartures[j].departureTime,
-              l.arrivalTime
+              timeToNumber(
+                transferDepartures[j].departureTime
+              ).toString() as TimeInput,
+              timeToNumber(l.arrivalTime).toString() as TimeInput
             ),
             trainId: transferDepartures[j].trainId,
           },
