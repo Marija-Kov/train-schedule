@@ -3,25 +3,13 @@ import { useParams } from 'react-router'
 import {
   DepartureOutput,
   StationName,
-  TimeInput,
   TimeOutput,
-  TrainId,
   YyyyMmDd,
 } from 'train-schedule-types'
 import useGetDepartures from '../hooks/useGetDepartures/useGetDepartures'
 
-type NewDepartureOutput = DepartureOutput & {
-  transfer: {
-    station: StationName
-    arrivalTime: TimeInput
-    departureTime: TimeInput
-    waitTime: string | undefined
-    trainId: TrainId
-  } | null
-}
-
 const DeparturesContext = createContext<{
-  departures: NewDepartureOutput[]
+  departures: DepartureOutput[]
   loading: boolean
 }>({
   departures: [],
@@ -33,7 +21,7 @@ const DeparturesContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const params = useParams()
   const { getDepartures } = useGetDepartures()
-  const [departures, setDepartures] = useState<NewDepartureOutput[]>([])
+  const [departures, setDepartures] = useState<DepartureOutput[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {

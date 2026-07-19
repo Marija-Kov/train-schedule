@@ -1,22 +1,7 @@
 import { useState } from 'react'
-import {
-  DepartureProps,
-  StationName,
-  TimeInput,
-  TrainId,
-} from 'train-schedule-types'
+import { DepartureProps } from 'train-schedule-types'
 
-type NewDepartureProps = DepartureProps & {
-  transfer: {
-    station: StationName
-    arrivalTime: TimeInput
-    departureTime: TimeInput
-    waitTime: string | undefined
-    trainId: TrainId
-  } | null
-}
-
-const Departure = (props: NewDepartureProps) => {
+const Departure = (props: DepartureProps) => {
   const { departureTime, arrivalTime, trainId, transfer } = props
   const [transferDetails, setTransferDetails] = useState(false)
 

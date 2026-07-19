@@ -42,7 +42,7 @@
     "msw": "^2.11.6",
     "prettier": "3.6.2",
     "sass": "^1.93.2",
-    "train-schedule-types": "^2.3.0",
+    "train-schedule-types": "^3.1.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
     "vite": "^7.1.5",
