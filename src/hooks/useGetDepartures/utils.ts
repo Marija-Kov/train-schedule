@@ -237,7 +237,7 @@ export const getDeparturesInternal = async (
   if (!directArrivals.length) {
     checkedTrainsArray = []
   }
-  // departures form the transfer to destination station in the specified time frame
+  // departures from the transfer to destination station in the specified time frame
   const possibleTransfers = getTransferStationAndArrivalTimes(
     stations,
     trains,
@@ -352,10 +352,10 @@ export function timeToNumber(time: TimeOutput) {
 }
 
 /**
- * @returns An array with 2 values of booleans or 1 boolean and 1 string denoting
- * whether a train is active every day (true), Monday to Friday only (false)
- * or weekends and holidays only ("w&h_only");
- * They serve as departure filtering criteria.
+ * @returns An array of 2 strings: ['ed', 'wh'] or ['ed', 'wd'].
+ * Meanings of abbreviations: 'ed' - 'every day'; 'wd' - 'weekday'; 'wh' - 'weekend and holiday';
+ * ['ed', 'wh'] - denotes a set of trains that are active every day and those that are active only on weekends and holidays.
+ * ['ed', 'wd'] - denotes a set of trains that are active every day and those that are active only on weekdays.
  */
 export function frequencyOnDate(date: YyyyMmDd, holidays: YyyyMmDd[]) {
   const day = new Date(date).getDay()
