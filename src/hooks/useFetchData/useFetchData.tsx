@@ -49,6 +49,7 @@ const useFetchData = () => {
           v.match(/stations/i) && v !== stationsCacheName && caches.delete(v)
       )
       stationsCache.put(stationsCacheName, responseStations.clone())
+      stationsJSON = await responseStations.json()
     }
 
     const trainsCache = await caches.open(trainsCacheName)
@@ -67,6 +68,7 @@ const useFetchData = () => {
         (v) => v.match(/trains/i) && v !== trainsCacheName && caches.delete(v)
       )
       trainsCache.put(trainsCacheName, responseTrains.clone())
+      trainsJSON = await responseTrains.json()
     }
 
     return { stationsJSON, trainsJSON }
