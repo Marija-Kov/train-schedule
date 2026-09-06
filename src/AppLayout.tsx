@@ -50,7 +50,6 @@ function AppLayout() {
           </button>
         </span>
         <span>
-          <p id="beta">BETA</p>
           <NavLink to="/" data-testid="home-link">
             <img
               className="train-icon"
@@ -72,12 +71,6 @@ function AppLayout() {
       <DeparturesContextProvider>
         <Outlet />
       </DeparturesContextProvider>
-      <footer>
-        <p className="under-construction">
-          🚧Aplikacija je u fazi testiranja/usavršavanja. Poslednja izmena i
-          ažuriranje reda vožnje: 27. jul 2026.🚧
-        </p>
-      </footer>
     </div>
   )
 }
