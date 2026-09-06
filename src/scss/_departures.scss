@@ -138,8 +138,9 @@ h3 {
   &::before {
     position: relative;
     left: 1rem;
+    top: -0.1rem;
     width: 0;
-    content: '(...)';
+    content: '∇';
   }
 }
 
@@ -149,6 +150,6 @@ h3 {
     position: relative;
     left: 1rem;
     width: 0;
-    content: '';
+    content: '∆';
   }
 }

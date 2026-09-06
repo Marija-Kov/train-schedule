@@ -78,6 +78,9 @@ const translation = JSON.stringify({
       departure_from: 'Polazak sa stanice',
       to: 'do stanice',
       at_time: 'u',
+      transfer: 'presedanje',
+      transfer_arrival: 'dolazak na stanicu presedanja',
+      transfer_departure: 'polazak sa stanice presedanja',
       has_been_cancelled: 'nece saobracati iz tehnickih razloga',
       info_source: 'izvor',
       back_btn_text: 'nazad',
@@ -100,6 +103,9 @@ const translation = JSON.stringify({
       departure_from: 'Departure from',
       to: 'to',
       at_time: 'at',
+      transfer: 'transfer',
+      transfer_arrival: 'arrival to the station of transfer',
+      transfer_departure: 'departure from the station of transfer',
       has_been_cancelled: 'has been cancelled for technical reasons',
       info_source: 'source',
       back_btn_text: 'back',
@@ -193,6 +199,9 @@ type DeparturesLayoutContent = {
   departure_from: string
   to: string
   at_time: string
+  transfer: string
+  transfer_arrival: string
+  transfer_departure: string
   has_been_cancelled: string
   info_source: string
   back_btn_text: string

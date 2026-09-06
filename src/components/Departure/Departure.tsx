@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { DepartureProps } from 'train-schedule-types'
+import { LanguageContext } from '../../context'
 
 const Departure = (props: DepartureProps) => {
   const { departureTime, arrivalTime, trainId, transfer } = props
   const [transferDetails, setTransferDetails] = useState(false)
+  const { departuresLayoutLanguage } = useContext(LanguageContext)
 
   function toggleTransferDetails() {
     if (!transfer) return
@@ -41,10 +43,13 @@ const Departure = (props: DepartureProps) => {
           onClick={toggleTransferDetails}
         >
           <p>
-            {transfer?.arrivalTime} - dolazak na stanicu presedanja (
-            {transfer!.station})
+            {transfer?.arrivalTime} -{' '}
+            {departuresLayoutLanguage.transfer_arrival} ({transfer!.station})
           </p>
-          <p>{transfer?.departureTime} - polazak sa stanice presedanja</p>
+          <p>
+            {transfer?.departureTime} -{' '}
+            {departuresLayoutLanguage.transfer_departure}
+          </p>
         </div>
       )}
     </>
