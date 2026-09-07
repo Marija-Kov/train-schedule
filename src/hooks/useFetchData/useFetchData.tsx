@@ -1,8 +1,8 @@
 const useFetchData = () => {
   const stationsUrl =
-    'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/expand-schedule/stations.json'
+    'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/main/stations.json'
   const trainsUrl =
-    'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/expand-schedule/trains.json'
+    'https://raw.githubusercontent.com/marija-kov/train-schedule-23-api/main/trains.json'
   const version = 6
   const stationsCacheName = `/trainScheduleBgd/stations-${version}`
   const trainsCacheName = `/trainScheduleBgd/trains-${version}`
