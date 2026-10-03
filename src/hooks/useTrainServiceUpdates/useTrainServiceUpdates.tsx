@@ -32,11 +32,7 @@ const useTrainServiceUpdates = () => {
             content: { rendered: string }
           }) => {
             const updateDate = update.date.split('T')[0]
-            return (
-              updateDate === currentDate &&
-              update.slug.match(/bgvoz/i) &&
-              !update.content.rendered.match(/(Resnik|Mladenov|Lazarev)/i)
-            )
+            return updateDate === currentDate && update.slug.match(/bgvoz/i)
           }
         )
         .map(
