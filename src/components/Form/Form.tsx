@@ -97,7 +97,9 @@ const Form = () => {
           <option value="altina">Altina</option>
           <option value="zemun">Zemun</option>
           <option value="tosin bunar">Tošin bunar</option>
-          <option value="novi beograd">Novi Beograd</option>
+          <option value="novi beograd" disabled>
+            🚧Novi Beograd🚧
+          </option>
           <option value="beograd centar">Beograd centar</option>
           <option value="karadjordjev park">Karađorđev park</option>
           <option value="vukov spomenik">Vukov spomenik</option>
@@ -137,7 +139,9 @@ const Form = () => {
           <option value="altina">Altina</option>
           <option value="zemun">Zemun</option>
           <option value="tosin bunar">Tošin bunar</option>
-          <option value="novi beograd">Novi Beograd</option>
+          <option value="novi beograd" disabled>
+            🚧Novi Beograd🚧
+          </option>
           <option value="beograd centar">Beograd centar</option>
           <option value="karadjordjev park">Karađorđev park</option>
           <option value="vukov spomenik">Vukov spomenik</option>
